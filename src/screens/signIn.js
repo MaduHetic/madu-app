@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Button, Alert } from "react-native";
-import { includes, remove } from "lodash";
+import { View, StyleSheet, Button } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import Input from "@components/input";
@@ -43,20 +42,16 @@ const SignIn = () => {
   const navigation = useNavigation();
   const signIn = User.signIn();
   const loggedIn = User.loggedIn();
-  const errors = User.errors();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   useEffect(() => {
     if (loggedIn) {
       navigation.navigate("home");
-    } else if (includes(errors, "wrong_credentials")) {
-      Alert.alert("alert wrong creds", "something");
-      remove(errors, "wrong_credentials");
     } else {
       navigation.navigate("login");
     }
-  }, [loggedIn, navigation, errors]);
+  }, [loggedIn, navigation]);
 
   return (
     <View style={styles.container}>

@@ -71,5 +71,5 @@ export const Poi = {
   poiTypes: useGetAllPoiType,
   isLoading: useIsLoading,
   sagas: rootSagas,
-  reducer: poiReducer
+  reducer: poiReducer,
 };

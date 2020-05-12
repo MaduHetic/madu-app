@@ -16,7 +16,6 @@ function useSignOut() {
 function useSignIn() {
   const dispatch = useDispatch();
   return (creds) => {
-    dispatch(Actions.signIn.request(true));
     dispatch(Events.signIn(creds));
   };
 }
@@ -24,7 +23,6 @@ function useSignIn() {
 function useGetCurrentUser() {
   const dispatch = useDispatch();
   return () => {
-    dispatch(Actions.getCurrentUser.request(true));
     dispatch(Events.getCurrentUser());
   };
 }

@@ -5,6 +5,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { Color } from "@glossy/colors";
 
 import Home from "./home";
+import Map from "./map";
 
 const styles = StyleSheet.create({
   navigationContainer: {
@@ -98,7 +99,7 @@ const Tab = createBottomTabNavigator();
 const HomeNagivation = () => (
   <Tab.Navigator tabBar={(props) => <MyTabBar {...props} />}>
     <Tab.Screen name="Home" component={Home} options={{ tabBarIcon: "home" }} />
-    <Tab.Screen name="Carte" component={Home} options={{ tabBarIcon: "map" }} />
+    <Tab.Screen name="Carte" component={Map} options={{ tabBarIcon: "map" }} />
     <Tab.Screen name="Liste" component={Home} options={{ tabBarIcon: "list" }} />
     <Tab.Screen name="Compte" component={Home} options={{ tabBarIcon: "user-circle" }} />
   </Tab.Navigator>
