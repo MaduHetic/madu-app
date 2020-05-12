@@ -7,14 +7,13 @@ import SplashScreen from "react-native-splash-screen";
 import { User } from "@core/user";
 import SignIn from "./signIn";
 import HomeNagivation from "./homeNavigation";
-import Header from "@components/header";
 
 const Stack = createStackNavigator();
 
-const StackOptions = ({ height = 100, displayMenuIcon = false, ...otherProps } = {}) => ({
+const StackOptions = ({ height = 0, ...otherProps } = {}) => ({
   headerTitleAlign: "center",
-  headerTitle: (args) => <Header />,
-  headerLeft: () => (displayMenuIcon ? <View /> : <View />),
+  headerTitle: () => <View />,
+  headerLeft: () => <View />,
   headerRight: () => <View />,
   headerStyle: {
     height,
@@ -23,14 +22,12 @@ const StackOptions = ({ height = 100, displayMenuIcon = false, ...otherProps } =
 });
 
 const Navigation = () => {
-  const user = User.user();
+  const loggedIn = User.loggedIn();
   useEffect(() => {
-    if (user) {
+    if (loggedIn) {
       SplashScreen.hide();
     }
-  }, [user]);
-
-  const loggedIn = true;
+  }, [loggedIn]);
 
   return (
     <NavigationContainer>

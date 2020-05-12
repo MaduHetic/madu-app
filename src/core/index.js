@@ -1,13 +1,13 @@
 import { combineReducers } from "redux";
 
-import { User } from './user';
-import { Company } from './company';
-import { Poi } from './poi';
-import { Tags } from './tags';
-import { GreenScoreTypes } from './greenScoreTypes';
-import { Stats } from './statsDashboard';
+import { User } from "./user";
+import { Company } from "./company";
+import { Poi } from "./poi";
+import { Tags } from "./tags";
+import { GreenScoreTypes } from "./greenScoreTypes";
+import { Stats } from "./statsDashboard";
 
-const createRootReducer = history =>
+const createRootReducer = () =>
   combineReducers({
     user: User.reducer,
     company: Company.reducer,
