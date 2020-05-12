@@ -1,6 +1,6 @@
 export const Color = {
   // blue
-  CeruleanBlue: "#1e629f",
+  Blue: "#738BFF",
   Pelorous: "#2380c1",
   PelorousLight: "#23a2c1",
   TurquoiseBlue: "#6de8d7",
@@ -14,7 +14,7 @@ export const Color = {
   Citrus: "#4CAF50",
   // White & Gray
   White: "#fafafa",
-  NightRider: "#333333",
+  NightRider: "#B8B8C9",
   WhiteSmoke: "#eaeaea",
   ShadyLady: "#969696",
   DimGray: "#646464",

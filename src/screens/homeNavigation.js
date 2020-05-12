@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Icon from "react-native-vector-icons";
+import Icon from "react-native-vector-icons/FontAwesome";
 import { Color } from "@glossy/colors";
 
 import Home from "./home";
@@ -23,6 +23,11 @@ const styles = StyleSheet.create({
     shadowRadius: 4.65,
     elevation: 14,
     backgroundColor: "#fff",
+  },
+  tabs: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 
@@ -68,15 +73,17 @@ function MyTabBar({ state, descriptors, navigation }) {
             testID={options.tabBarTestID}
             onPress={onPress}
             onLongPress={onLongPress}
-            style={{ flex: 1 }}
+            style={styles.tabs}
           >
-            {/* <Icon
-              name="home"
+            <Icon
+              name={options.tabBarIcon}
               size={30}
-              style={{ color: isFocused ? Color.CeruleanBlue : Color.NightRider }}
-              getImageSource
-            /> */}
-            <Text style={{ color: isFocused ? Color.CeruleanBlue : Color.NightRider }}>
+              style={{
+                color: isFocused ? Color.Blue : Color.NightRider,
+                padding: 5,
+              }}
+            />
+            <Text style={{ color: isFocused ? Color.Blue : Color.NightRider }}>
               {label}
             </Text>
           </TouchableOpacity>
@@ -90,10 +97,10 @@ const Tab = createBottomTabNavigator();
 
 const HomeNagivation = () => (
   <Tab.Navigator tabBar={(props) => <MyTabBar {...props} />}>
-    <Tab.Screen name="Home" component={Home} />
-    <Tab.Screen name="Carte" component={Home} />
-    <Tab.Screen name="Liste" component={Home} />
-    <Tab.Screen name="Compte" component={Home} />
+    <Tab.Screen name="Home" component={Home} options={{ tabBarIcon: "home" }} />
+    <Tab.Screen name="Carte" component={Home} options={{ tabBarIcon: "map" }} />
+    <Tab.Screen name="Liste" component={Home} options={{ tabBarIcon: "list" }} />
+    <Tab.Screen name="Compte" component={Home} options={{ tabBarIcon: "user-circle" }} />
   </Tab.Navigator>
 );
 
