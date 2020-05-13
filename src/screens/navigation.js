@@ -23,6 +23,7 @@ const StackOptions = ({ height = 0, ...otherProps } = {}) => ({
 });
 
 const Navigation = () => {
+  const isLoading = User.isLoading();
   const loggedIn = User.loggedIn();
   const getCurrentUser = User.getCurrentUser();
 
@@ -31,10 +32,10 @@ const Navigation = () => {
   }, []);
 
   useEffect(() => {
-    if (loggedIn) {
+    if (isLoading) {
       SplashScreen.hide();
     }
-  }, [loggedIn]);
+  }, [isLoading]);
 
   return (
     <NavigationContainer>
