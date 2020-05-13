@@ -12,26 +12,22 @@ export const Actions = {
   registerPoi: createAsyncAction(
     "poi/register/request",
     "poi/register/success",
-    "poi/register/failure"
+    "poi/register/failure",
   )(),
-  getPoi: createAsyncAction(
-    "poi/get/request",
-    "poi/get/success",
-    "poi/get/failure"
-  )(),
+  getPoi: createAsyncAction("poi/get/request", "poi/get/success", "poi/get/failure")(),
   updatePoi: createAsyncAction(
     "poi/update/request",
     "poi/update/success",
-    "poi/update/failure"
+    "poi/update/failure",
   )(),
   deletePoi: createAsyncAction(
     "poi/delete/request",
     "poi/delete/success",
-    "poi/delete/failure"
+    "poi/delete/failure",
   )(),
   getAllPoi: createAsyncAction(
     "poi/get/all/request",
     "poi/get/all/success",
-    "poi/get/all/failure"
+    "poi/get/all/failure",
   )(),
 };

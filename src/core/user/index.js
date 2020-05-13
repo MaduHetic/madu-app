@@ -15,9 +15,7 @@ function useSignOut() {
 
 function useSignIn() {
   const dispatch = useDispatch();
-  return (creds) => {
-    dispatch(Events.signIn(creds));
-  };
+  return (creds) => dispatch(Events.signIn(creds));
 }
 
 function useGetCurrentUser() {

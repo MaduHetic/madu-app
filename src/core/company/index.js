@@ -71,5 +71,5 @@ export const Company = {
   companyTypes: useGetAllCompaniesType,
   isLoading: useIsLoading,
   sagas: rootSagas,
-  reducer: companyReducer
+  reducer: companyReducer,
 };

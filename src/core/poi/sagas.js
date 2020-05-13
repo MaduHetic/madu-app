@@ -14,7 +14,6 @@ function* registerPoi(action) {
   }
 }
 
-
 function* getPoi(action) {
   try {
     yield put(Actions.getPoi.request(true));
@@ -27,7 +26,6 @@ function* getPoi(action) {
   }
 }
 
-
 function* updatePoi(action) {
   try {
     yield put(Actions.updatePoi.request(true));
@@ -39,7 +37,6 @@ function* updatePoi(action) {
     yield put(Actions.updatePoi.failure(false));
   }
 }
-
 
 function* deletePoi(action) {
   try {

@@ -44,7 +44,6 @@ function useAllTags() {
   return useSelector(allTags);
 }
 
-
 export const Tags = {
   createTag: useCreateTag,
   getTags: useGetTags,
@@ -53,5 +52,5 @@ export const Tags = {
   tags: useAllTags,
   isLoading: useIsLoading,
   sagas: rootSagas,
-  reducer: tagsReducer
+  reducer: tagsReducer,
 };

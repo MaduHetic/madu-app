@@ -14,7 +14,6 @@ function* createTag(action) {
   }
 }
 
-
 function* getTags() {
   try {
     yield put(Actions.getTags.request(true));
@@ -27,7 +26,6 @@ function* getTags() {
   }
 }
 
-
 function* deleteTag(action) {
   try {
     yield put(Actions.deleteTag.request(true));
@@ -39,7 +37,6 @@ function* deleteTag(action) {
     yield put(Actions.deleteTag.failure(false));
   }
 }
-
 
 function* getTag(action) {
   try {

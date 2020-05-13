@@ -14,7 +14,6 @@ function* getCompany(action) {
   }
 }
 
-
 function* updateCompany(action) {
   try {
     yield put(Actions.updateCompany.request(true));
@@ -26,7 +25,6 @@ function* updateCompany(action) {
     yield put(Actions.updateCompany.failure(false));
   }
 }
-
 
 function* deleteCompany(action) {
   try {

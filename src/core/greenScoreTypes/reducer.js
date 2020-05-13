@@ -1,8 +1,6 @@
-
 import { ActionType, getType } from "typesafe-actions";
 import produce from "immer";
 import { Actions } from "./actions";
-
 
 const initialState = {
   greenScoreType: {},
@@ -18,9 +16,9 @@ export type GreenScoreTypeAction =
 
 export const greenScoreTypeReducer = (
   state = initialState,
-  action: GreenScoreTypeAction
+  action: GreenScoreTypeAction,
 ) => {
-  return produce(state, draft => {
+  return produce(state, (draft) => {
     switch (action.type) {
       case getType(Actions.createGreenScoreType.request):
         draft.isLoading = true;

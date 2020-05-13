@@ -11,21 +11,17 @@ export const Actions = {
   createTag: createAsyncAction(
     "tag/create/request",
     "tag/create/success",
-    "tag/create/failure"
+    "tag/create/failure",
   )(),
   getTags: createAsyncAction(
     "tags/get/request",
     "tags/get/success",
-    "tags/get/failure"
+    "tags/get/failure",
   )(),
   deleteTag: createAsyncAction(
     "tag/delete/request",
     "tag/delete/success",
-    "tag/delete/failure"
+    "tag/delete/failure",
   )(),
-  getTag: createAsyncAction(
-    "tag/get/request",
-    "tag/get/success",
-    "tag/get/failure"
-  )(),
+  getTag: createAsyncAction("tag/get/request", "tag/get/success", "tag/get/failure")(),
 };

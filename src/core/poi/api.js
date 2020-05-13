@@ -1,5 +1,5 @@
-import { client } from "@helpers/api";
-import apiRoutes from "@helpers/apiRoutes";
+import { client } from "../../helpers/api";
+import apiRoutes from "../../helpers/apiRoutes";
 
 function registerPoi(data) {
   console.log(data);
@@ -18,14 +18,14 @@ function registerPoi(data) {
       typeGreenScore: data.typeGreenScore,
       type: data.type,
       price: data.price,
-    }
+    },
   });
 }
 
 function getPoi(id) {
   return client.request({
     method: "get",
-    url: apiRoutes.getPoi(id)
+    url: apiRoutes.getPoi(id),
   });
 }
 
@@ -45,22 +45,22 @@ function updatePoi(data) {
       typeGreenScore: data.typeGreenScore, // [{ id: 'string', percent: 'numberString' }]
       type: data.type,
       price: data.price,
-    }
+    },
   });
 }
 
 function deletePoi(id) {
   return client.request({
     method: "delete",
-    url: apiRoutes.deletePoi(id)
-  })
+    url: apiRoutes.deletePoi(id),
+  });
 }
 
 function getAllPoi() {
   return client.request({
     method: "get",
-    url: apiRoutes.getAllPoi()
-  })
+    url: apiRoutes.getAllPoi(),
+  });
 }
 
 export const Api = {

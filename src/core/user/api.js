@@ -5,24 +5,21 @@ function signIn(data) {
   return client.request({
     method: "post",
     url: apiRoutes.signIn(),
-    data: {
-      username: data.email,
-      password: data.password,
-    }
+    data,
   });
 }
 
 function signUp() {
   return client.request({
     method: "post",
-    url: apiRoutes.signUp()
+    url: apiRoutes.signUp(),
   });
 }
 
 function getCurrentUser() {
   return client.request({
     method: "get",
-    url: apiRoutes.getProfile()
+    url: apiRoutes.getProfile(),
   });
 }
 
