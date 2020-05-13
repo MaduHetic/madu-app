@@ -44,7 +44,6 @@ function useAllGreenScoreTypes() {
   return useSelector(allGreenScoreTypes);
 }
 
-
 export const GreenScoreTypes = {
   createGreenScoreType: useCreateGreenScoreType,
   getGreenScoreTypes: useGetGreenScoreTypes,
@@ -53,5 +52,5 @@ export const GreenScoreTypes = {
   AllGreenScoreTypes: useAllGreenScoreTypes,
   isLoading: useIsLoading,
   sagas: rootSagas,
-  reducer: greenScoreTypeReducer
+  reducer: greenScoreTypeReducer,
 };

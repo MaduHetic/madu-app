@@ -17,14 +17,14 @@ function registerCompany(data) {
       beginDeal: data.beginDeal,
       endDeal: data.endDeal,
       domaineMail: data.domaineMail,
-    }
+    },
   });
 }
 
 function getCompany(id) {
   return client.request({
     method: "get",
-    url: apiRoutes.getCompany(id)
+    url: apiRoutes.getCompany(id),
   });
 }
 
@@ -44,22 +44,22 @@ function updateCompany(data) {
       beginDeal: data.beginDeal,
       endDeal: data.endDeal,
       domaineMail: data.domaineMail,
-    }
+    },
   });
 }
 
 function deleteCompany(id) {
   return client.request({
     method: "delete",
-    url: apiRoutes.deleteCompany(id)
-  })
+    url: apiRoutes.deleteCompany(id),
+  });
 }
 
 function getAllCompanies() {
   return client.request({
     method: "get",
-    url: apiRoutes.getAllCompanies()
-  })
+    url: apiRoutes.getAllCompanies(),
+  });
 }
 
 export const Api = {

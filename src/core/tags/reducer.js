@@ -1,8 +1,6 @@
-
 import { ActionType, getType } from "typesafe-actions";
 import produce from "immer";
 import { Actions } from "./actions";
-
 
 const initialState = {
   tag: {},
@@ -16,17 +14,14 @@ export type TagsAction =
   | ActionType<typeof Actions.deleteTag>
   | ActionType<typeof Actions.getTag>;
 
-export const tagsReducer = (
-  state = initialState,
-  action: TagsAction
-) => {
-  return produce(state, draft => {
+export const tagsReducer = (state = initialState, action: TagsAction) => {
+  return produce(state, (draft) => {
     switch (action.type) {
       case getType(Actions.createTag.request):
         draft.isLoading = true;
         break;
       case getType(Actions.createTag.success):
-        draft.tags = [...draft.tags, action.payload]
+        draft.tags = [...draft.tags, action.payload];
         draft.isLoading = false;
         break;
       case getType(Actions.createTag.failure):

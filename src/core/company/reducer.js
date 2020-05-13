@@ -1,8 +1,6 @@
-
 import { ActionType, getType } from "typesafe-actions";
 import produce from "immer";
 import { Actions } from "./actions";
-
 
 const initialState = {
   companies: [],
@@ -19,11 +17,8 @@ export type CompanyAction =
   | ActionType<typeof Actions.deleteCompany>
   | ActionType<typeof Actions.getAllCompanies>;
 
-export const companyReducer = (
-  state = initialState,
-  action: CompanyAction
-) => {
-  return produce(state, draft => {
+export const companyReducer = (state = initialState, action: CompanyAction) => {
+  return produce(state, (draft) => {
     switch (action.type) {
       case getType(Actions.registerCompany.request):
         draft.isLoading = true;

@@ -25,5 +25,5 @@ export const Stats = {
   stats: useAllStats,
   isLoading: useIsLoading,
   sagas: rootSagas,
-  reducer: statsReducer
+  reducer: statsReducer,
 };

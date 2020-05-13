@@ -11,21 +11,21 @@ export const Actions = {
   createGreenScoreType: createAsyncAction(
     "greenScoreType/create/request",
     "greenScoreType/create/success",
-    "greenScoreType/create/failure"
+    "greenScoreType/create/failure",
   )(),
   getGreenScoreTypes: createAsyncAction(
     "greenScoreTypes/get/request",
     "greenScoreTypes/get/success",
-    "greenScoreTypes/get/failure"
+    "greenScoreTypes/get/failure",
   )(),
   deleteGreenScoreType: createAsyncAction(
     "greenScoreType/delete/request",
     "greenScoreType/delete/success",
-    "greenScoreType/delete/failure"
+    "greenScoreType/delete/failure",
   )(),
   getGreenScoreType: createAsyncAction(
     "greenScoreType/get/request",
     "greenScoreType/get/success",
-    "greenScoreType/get/failure"
+    "greenScoreType/get/failure",
   )(),
 };

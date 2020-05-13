@@ -1,8 +1,6 @@
-
 import { ActionType, getType } from "typesafe-actions";
 import produce from "immer";
 import { Actions } from "./actions";
-
 
 const initialState = {
   allPoi: [],
@@ -18,11 +16,8 @@ export type PoiAction =
   | ActionType<typeof Actions.deletePoi>
   | ActionType<typeof Actions.getAllPoi>;
 
-export const poiReducer = (
-  state = initialState,
-  action: PoiAction
-) => {
-  return produce(state, draft => {
+export const poiReducer = (state = initialState, action: PoiAction) => {
+  return produce(state, (draft) => {
     switch (action.type) {
       case getType(Actions.registerPoi.request):
         draft.isLoading = true;

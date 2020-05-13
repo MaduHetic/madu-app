@@ -2,7 +2,6 @@ import { call, put, takeLatest } from "redux-saga/effects";
 import { Api } from "./api";
 import { Actions, Events } from "./actions";
 
-
 function* getStats() {
   try {
     yield put(Actions.getStats.request());

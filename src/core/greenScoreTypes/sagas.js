@@ -14,7 +14,6 @@ function* createGreenScoreType(action) {
   }
 }
 
-
 function* getGreenScoreTypes() {
   try {
     yield put(Actions.getGreenScoreTypes.request(true));
@@ -27,7 +26,6 @@ function* getGreenScoreTypes() {
   }
 }
 
-
 function* deleteGreenScoreType(action) {
   try {
     yield put(Actions.deleteGreenScoreType.request(true));
@@ -39,7 +37,6 @@ function* deleteGreenScoreType(action) {
     yield put(Actions.deleteGreenScoreType.failure(false));
   }
 }
-
 
 function* getGreenScoreType(action) {
   try {
