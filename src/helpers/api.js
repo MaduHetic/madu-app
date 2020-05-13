@@ -1,8 +1,8 @@
 import axios from "axios";
 import { getCredsFromStorage } from "../middlewares/saveCredentials";
-import apiRoute from "../helpers/apiRoutes";
+import apiRoute from "./apiRoutes";
 
-const client = axios.create({
+export const client = axios.create({
   baseURL: "http://18.130.166.247:3000",
   responseType: "json",
   xsrfCookieName: false,
@@ -11,6 +11,7 @@ const client = axios.create({
     "Content-Type": "application/json",
     "Cache-Control": "no-cache",
   },
+  Authorization: `Bearer `,
 });
 
 client.interceptors.request.use(
@@ -21,7 +22,7 @@ client.interceptors.request.use(
 
     const credentials = await getCredsFromStorage();
     console.debug(`[authentified request] url: ${config.url}`);
-    console.log(credentials);
+
     config.headers.Authorization = `Bearer ${credentials}`;
     return config;
   },

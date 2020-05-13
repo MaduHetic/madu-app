@@ -1,12 +1,16 @@
 import React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, Button } from "react-native";
 import moment from "moment";
 import "moment/locale/fr";
 import Card from "@components/card";
 
+import { User } from "@core/user";
+import { getCredsFromStorage } from "../middlewares/saveCredentials";
+
 moment.locale("fr");
 
 import { Color } from "@glossy/colors";
+import Input from "@components/input";
 
 const styles = StyleSheet.create({
   container: {
@@ -30,6 +34,9 @@ const styles = StyleSheet.create({
 
 const Home = () => {
   const name = "John";
+  const signOut = User.signOut();
+  const credentials = getCredsFromStorage();
+  console.log(credentials);
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
@@ -65,6 +72,8 @@ const Home = () => {
           ultrices.
         </Text>
       </Card>
+      <Input />
+      <Button title="signout" onPress={() => signOut()} />
     </View>
   );
 };

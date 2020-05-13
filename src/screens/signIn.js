@@ -3,7 +3,7 @@ import { View, StyleSheet, Button } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import Input from "@components/input";
-import { User } from "@core/user";
+import { User } from "../core/user";
 
 const styles = StyleSheet.create({
   container: {
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
 const SignIn = () => {
   const navigation = useNavigation();
   const signIn = User.signIn();
-  const loggedIn = false;
+  const loggedIn = User.loggedIn();
   const [email, setEmail] = useState("admin@admin.com");
   const [password, setPassword] = useState("admin");
 
@@ -70,7 +70,7 @@ const SignIn = () => {
         <View style={styles.inputContainer}>
           <Button
             title="Submit"
-            onPress={() => signIn({ email, password })}
+            onPress={() => signIn({ username: email, password })}
             style={styles.btn}
           />
         </View>
