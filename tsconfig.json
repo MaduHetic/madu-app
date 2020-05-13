@@ -21,16 +21,13 @@
     "baseUrl": "./",
     "paths": {
       "@components/*": ["src/components/*"],
-      "@constants/*": ["src/constants/*"],
       "@assets/*": ["src/assets/*"],
       "@helpers/*": ["src/helpers/*"],
       "@reducers/*": ["src/reducers/*"],
       "@models/*": ["src/models/*"],
       "@core/*": ["src/core/*"],
-      "@kommon/*": ["src/kommon/*"],
       "@store/*": ["src/store/*"],
-      "@hooks/*": ["src/hooks/*"],
-      "@glossy/*": ["src/glossy/*"],
+      "@glossy/*": ["src/glossy/*"]
     }
   },
   "include": ["./src/**/*"],

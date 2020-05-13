@@ -3,7 +3,7 @@ import createSagaMiddleware from "redux-saga";
 import axiosMiddleware from "redux-axios-middleware";
 import { client } from "@helpers/api";
 import rootSaga from "./rootSagas";
-import createRootReducer from "../core";
+import createRootReducer from "@core";
 
 const sagaMiddleware = createSagaMiddleware();
 

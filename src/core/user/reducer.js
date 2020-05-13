@@ -3,15 +3,12 @@ import produce from "immer";
 import { Actions } from "./actions";
 
 const initialState: UserState = {
-  loggedIn: true,
+  loggedIn: false,
   errors: [],
   isLoading: false,
 };
 
-export type UserAction =
-  | ActionType<typeof Actions.signIn>
-  | ActionType<typeof Actions.signUp>
-  | ActionType<typeof Actions.signOut>;
+export type UserAction = ActionType<typeof Actions.signIn>;
 
 export const userReducer = (state = initialState, action: UserAction) => {
   return produce(state, (draft) => {
@@ -26,30 +23,6 @@ export const userReducer = (state = initialState, action: UserAction) => {
         break;
       case getType(Actions.signIn.failure):
         draft.isLoading = action.payload;
-        break;
-      case getType(Actions.signUp.request):
-        draft.isLoading = action.payload;
-        break;
-      case getType(Actions.signUp.success):
-        draft.isLoading = action.payload;
-        break;
-      case getType(Actions.signUp.failure):
-        draft.isLoading = action.payload;
-        break;
-      case getType(Actions.signOut):
-        draft.isLoading = false;
-        draft.loggedIn = false;
-        break;
-      case getType(Actions.getCurrentUser.request):
-        draft.isLoading = action.payload;
-        break;
-      case getType(Actions.getCurrentUser.success):
-        draft.isLoading = false;
-        draft.user = action.payload;
-        draft.loggedIn = true;
-        break;
-      case getType(Actions.getCurrentUser.failure):
-        draft.isLoading = false;
         break;
       default:
         return state;

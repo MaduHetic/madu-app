@@ -41,9 +41,9 @@ const styles = StyleSheet.create({
 const SignIn = () => {
   const navigation = useNavigation();
   const signIn = User.signIn();
-  const loggedIn = User.loggedIn();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const loggedIn = false;
+  const [email, setEmail] = useState("admin@admin.com");
+  const [password, setPassword] = useState("admin");
 
   useEffect(() => {
     if (loggedIn) {

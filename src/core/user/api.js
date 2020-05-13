@@ -1,33 +1,15 @@
-import { client } from "@helpers/api";
-import apiRoutes from "@helpers/apiRoutes";
+import { client } from "../../helpers/api";
+import apiRoutes from "../../helpers/apiRoutes";
 
 function signIn(data) {
+  console.log("api", data);
   return client.request({
     method: "post",
     url: apiRoutes.signIn(),
-    data: {
-      username: data.email,
-      password: data.password,
-    }
-  });
-}
-
-function signUp() {
-  return client.request({
-    method: "post",
-    url: apiRoutes.signUp()
-  });
-}
-
-function getCurrentUser() {
-  return client.request({
-    method: "get",
-    url: apiRoutes.getProfile()
+    data,
   });
 }
 
 export const Api = {
   signIn,
-  signUp,
-  getCurrentUser,
 };

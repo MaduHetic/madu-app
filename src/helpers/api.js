@@ -1,6 +1,6 @@
 import axios from "axios";
 import { getCredsFromStorage } from "../middlewares/saveCredentials";
-import apiRoute from "@helpers/apiRoutes";
+import apiRoute from "../helpers/apiRoutes";
 
 const client = axios.create({
   baseURL: "http://18.130.166.247:3000",
@@ -21,7 +21,7 @@ client.interceptors.request.use(
 
     const credentials = await getCredsFromStorage();
     console.debug(`[authentified request] url: ${config.url}`);
-
+    console.log(credentials);
     config.headers.Authorization = `Bearer ${credentials}`;
     return config;
   },

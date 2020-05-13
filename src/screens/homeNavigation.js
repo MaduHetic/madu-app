@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Platform } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Color } from "@glossy/colors";
@@ -12,9 +12,9 @@ const styles = StyleSheet.create({
     borderTopEndRadius: 30,
     borderTopStartRadius: 30,
     flexDirection: "row",
-    height: 150,
+    height: Platform.Os === "ios" ? 150 : 100,
     alignItems: "center",
-    padding: 40,
+    padding: Platform.Os === "ios" ? 40 : 20,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
