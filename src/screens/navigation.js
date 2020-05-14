@@ -5,7 +5,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import SplashScreen from "react-native-splash-screen";
 
 import { User } from "@core/user";
-import SignIn from "./signIn";
+import LoginRegisterNavigator from "../screens/loginRegister/navigation";
 import HomeNagivation from "./homeNavigation";
 import Header from "@components/header";
 
@@ -54,8 +54,8 @@ const Navigation = () => {
         ) : (
           <Stack.Screen
             name="login"
-            component={SignIn}
-            options={({ navigation }) => StackOptions({ height: 180, navigation })}
+            component={LoginRegisterNavigator}
+            options={({ navigation }) => StackOptions({ height: 0, navigation })}
           />
         )}
       </Stack.Navigator>
