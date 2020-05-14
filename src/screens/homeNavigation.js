@@ -80,11 +80,11 @@ function MyTabBar({ state, descriptors, navigation }) {
               name={options.tabBarIcon}
               size={30}
               style={{
-                color: isFocused ? Color.Blue : Color.NightRider,
+                color: isFocused ? Color.primary : Color.mediumGrey,
                 padding: 5,
               }}
             />
-            <Text style={{ color: isFocused ? Color.Blue : Color.NightRider }}>
+            <Text style={{ color: isFocused ? Color.primary : Color.mediumGrey }}>
               {label}
             </Text>
           </TouchableOpacity>

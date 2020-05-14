@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   },
   date: {
     fontSize: 13,
-    color: Color.nightRider,
+    color: Color.mediumGrey,
   },
 });
 
