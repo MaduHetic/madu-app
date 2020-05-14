@@ -34,7 +34,7 @@ function Item({ title, selected, onSelect }) {
       <Text 
         style={[
           styles.title,
-          { color: selected ? Color.Blue : Color.NightRider },
+          { color: selected ? Color.primary : Color.mediumGrey },
         ]}
       >
         {title}
@@ -73,12 +73,12 @@ const styles = StyleSheet.create({
   },
   item: {
     paddingBottom: 12,
-    borderBottomColor: Color.Blue,
+    borderBottomColor: Color.primary,
     borderBottomWidth: 0,
     flex: 1
   },
   title: {
-    color: Color.NightRider,
+    color: Color.mediumGrey,
     fontSize: 16,
     fontWeight: "700",
     textAlign: "center"
