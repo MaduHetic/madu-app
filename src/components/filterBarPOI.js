@@ -50,6 +50,7 @@ export default function FilterBarPOI() {
     <SafeAreaView style={styles.container}>
       {DATA.map(item => (
         <Item
+          key={item.id}
           title={item.title}
           selected={selected === item.id}
           onSelect={() => setSelected(item.id)}
