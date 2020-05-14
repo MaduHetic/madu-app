@@ -10,7 +10,6 @@ import { getCredsFromStorage } from "../middlewares/saveCredentials";
 moment.locale("fr");
 
 import { Color } from "@glossy/colors";
-import Input from "@components/input";
 
 const styles = StyleSheet.create({
   container: {
@@ -28,7 +27,7 @@ const styles = StyleSheet.create({
   },
   date: {
     fontSize: 13,
-    color: Color.nightRider,
+    color: Color.mediumGrey,
   },
 });
 
@@ -72,7 +71,6 @@ const Home = () => {
           ultrices.
         </Text>
       </Card>
-      <Input />
       <Button title="signout" onPress={() => signOut()} />
     </View>
   );
