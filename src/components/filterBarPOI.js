@@ -2,7 +2,6 @@ import React from 'react';
 import {
   SafeAreaView,
   TouchableOpacity,
-  FlatList,
   StyleSheet,
   Text,
 } from 'react-native';
@@ -49,20 +48,13 @@ export default function FilterBarPOI() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <FlatList
-        data={DATA}
-        contentContainerStyle={styles.list}
-        numColumns={3}
-        renderItem={({ item }) => (
-          <Item
-            title={item.title}
-            selected={selected === item.id}
-            onSelect={() => setSelected(item.id)}
-          />
-        )}
-        keyExtractor={item => item.id}
-        extraData={selected}
-      />
+      {DATA.map(item => (
+        <Item
+          title={item.title}
+          selected={selected === item.id}
+          onSelect={() => setSelected(item.id)}
+        />
+      ))}
     </SafeAreaView>
   );
 }
@@ -72,17 +64,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF",
     zIndex: 1,
     position: "absolute",
-    width: "100%"
-  },
-  list: {
-    width: "90%",
-    marginLeft: "5%",
-    marginTop: 16,
+    width: "100%",
+    flexDirection: "row",
+    paddingLeft: "5%",
+    paddingRight: "5%",
+    paddingTop: 8
   },
   item: {
     paddingBottom: 12,
     borderBottomColor: Color.Blue,
-    borderBottomWidth: 4,
+    borderBottomWidth: 0,
     flex: 1
   },
   title: {
