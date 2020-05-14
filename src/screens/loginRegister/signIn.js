@@ -3,12 +3,13 @@ import { View, StyleSheet, Button } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import Input from "@components/input";
-import { User } from "../core/user";
+import { User } from "@core/user";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "flex-start",
+    flexDirection: "column",
   },
   bodyContainer: {
     marginVertical: 20,
