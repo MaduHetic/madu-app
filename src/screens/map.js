@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import Map from "@components/map";
+import FilterBarPOI from "@components/filterBarPOI";
 
 import { Poi } from "@core/poi";
 
@@ -8,7 +9,12 @@ const MapScreen = () => {
   useEffect(() => {
     getPoi();
   }, []);
-  return <Map />;
+  return (
+    <>
+      <FilterBarPOI />
+      <Map />
+    </>
+  );
 };
 
 export default MapScreen;
