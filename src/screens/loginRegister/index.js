@@ -1,33 +1,83 @@
 import React from "react";
-import { View, StyleSheet, Button, ImageBackground } from "react-native";
+import { SafeAreaView, View, StyleSheet, Image, ImageBackground, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
+import { Button } from "@components/button";
+
 import background from "@assets/images/background.png";
+import logo from "@assets/images/Mini-Logo.png";
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "flex-start",
-    flexDirection: "column",
-  },
   image: {
-    flex: 1,
+    width: "100%",
+    height: "100%",
     resizeMode: "cover",
-    justifyContent: "flex-end",
-    paddingBottom: 100,
   },
+  container: {
+    marginHorizontal: 32,
+    flex: 1,
+    justifyContent: "flex-end",
+    alignItems: "center"
+  },
+  content: {
+    marginBottom: 160,
+    display: "flex",
+    alignItems: "center"
+  },
+  logo: {
+    marginBottom: 30,
+    width: 48,
+    height: 34
+  },
+  text: {
+    fontSize: 17,
+    lineHeight: 28,
+    textAlign: "center"
+  },
+  groupBtn: {
+    paddingBottom: 20,
+    width: "100%"
+  }
 });
 
 const LogInRegister = () => {
   const navigation = useNavigation();
 
   return (
-    <View style={styles.container}>
-      <ImageBackground source={background} style={styles.image}>
-        <Button title="S’inscrire" onPress={() => navigation.navigate("signIn")} />
-        <Button title="SE CONNECTER" onPress={() => navigation.navigate("signIn")} />
-      </ImageBackground>
-    </View>
+    <ImageBackground source={background} style={styles.image}>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.content}>
+          <Image
+            style={styles.logo}
+            source={logo}
+          />
+          <Text
+            style={styles.text}
+          >
+            Bonjour je m’appelle madu 👋
+          </Text>
+          <Text
+            style={styles.text}
+          >
+            Quel plaisir de vous rencontrez !
+          </Text>
+        </View>
+        <View style={styles.groupBtn}>
+          <Button
+            onPress={() => navigation.navigate("signIn")}
+            color="blue"
+          >
+            S'inscrire
+          </Button>
+          <Button
+            onPress={() => navigation.navigate("signIn")}
+            outline
+          >
+            Se connecter
+          </Button>
+        </View>
+      </SafeAreaView>
+    </ImageBackground>
   );
 };
 
