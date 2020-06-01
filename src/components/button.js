@@ -22,6 +22,9 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         borderColor: 'transparent'
     },
+    buttonDisabled: {
+        opacity: 0.4
+    },
     buttonPrimary: {
         backgroundColor: Color.primary,
         borderColor: Color.primary
@@ -52,13 +55,18 @@ export const Button = ({
     children = "",
     color = "",
     underlayColor = "#B8B8C9",
-    outline = false
+    outline = false,
+    disabled = false
 }) => {
     const buttonStyles = [styles.button];
     const textStyles = [styles.text];
 
     if (outline) {
         buttonStyles.push(styles.buttonOutline);
+    }
+
+    if (disabled) {
+        buttonStyles.push(styles.buttonDisabled);
     }
 
     if (color == "blue") {
@@ -85,6 +93,7 @@ export const Button = ({
             color={color}
             underlayColor={underlayColor}
             onPress={onPress}
+            disabled={disabled}
         >
             <Text style={textStyles}>{children}</Text>
         </TouchableHighlight>

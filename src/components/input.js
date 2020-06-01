@@ -1,70 +1,69 @@
-import React, { useState, Dispatch, SetStateAction } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  ViewStyle,
-  KeyboardTypeOptions,
-} from "react-native";
+import React from "react";
+import { View, Text, TextInput, StyleSheet } from "react-native";
+import { Color } from "@glossy/colors";
 
 const styles = StyleSheet.create({
+  container: {
+    position: "relative",
+    marginBottom: 16
+  },
+  label: {
+    position: "absolute",
+    top: 20,
+    left: 16,
+    fontSize: 16,
+    color: Color.darkGrey
+  },
   input: {
-    height: 60,
-    padding: 8,
-    fontSize: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: "#bebebe",
+    paddingTop: 28,
+    paddingBottom: 12,
+    paddingHorizontal: 16,
+    borderWidth: 1,
+    borderRadius: 4,
+    borderColor: Color.mediumGrey,
+    fontSize: 14,
+    lineHeight: 16,
+    color: Color.dark
   },
-  isFocused: {
-    height: 60,
-    padding: 8,
-    fontSize: 16,
-    borderBottomWidth: 2,
-    borderBottomColor: "#1e629f",
+  inputOnFocus: {
+
   },
+  labelOnFocus: {
+    top: 12,
+    fontSize: 10,
+    color: Color.mediumGrey
+  }
 });
 
-const Input = ({
+export const Input = ({
   label,
-  type,
-  setValue,
   value,
-  onFocus,
-  onBlur,
-  additionalStyle,
-  keyboardType,
-  clearTextOnFocus,
+  setValue,
   placeholder,
+  type,
   disabled,
 }) => {
-  const [isFocused, setOnFocus] = useState(false);
+  const inputStyle = [styles.input];
+  const labelStyle = [styles.label];
+
+  handleFocus = () => {
+    // inputStyle.push(styles.inputOnFocus);
+    // labelStyle.push(styles.labelOnFocus);
+  }
 
   return (
-    <View style={additionalStyle}>
-      {label && <Text>{label}</Text>}
+    <View style={styles.container}>
+      <Text style={labelStyle}>{label}</Text>
       <TextInput
-        style={isFocused ? styles.isFocused : styles.input}
-        autoCorrect={false}
-        onChangeText={(text) => setValue(text)}
+        style={inputStyle}
         value={value}
-        secureTextEntry={type === "password"}
-        autoCapitalize={"none"}
-        onFocus={onFocus ? onFocus : () => setOnFocus(true)}
-        onBlur={onBlur ? onBlur : () => setOnFocus(false)}
-        keyboardType={keyboardType}
-        clearTextOnFocus={clearTextOnFocus}
+        setValue={setValue}
         placeholder={placeholder}
-        editable={!disabled}
+        type={type}
+        onFocus={() => handleFocus()}
+        disabled={disabled}
+        secureTextEntry={type === "password"}
       />
     </View>
   );
 };
-
-Input.defaultProps = {
-  type: "text",
-  keyboardType: "default",
-  clearTextOnFocus: false,
-};
-
-export default Input;
