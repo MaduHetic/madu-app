@@ -28,6 +28,7 @@ import veggies from "../assets/images/veggies.jpg";
 import { User } from "@core/user";
 import { KnowIt } from "@core/knowIt";
 import { getCredsFromStorage } from "../middlewares/saveCredentials";
+import HeaderTitle from "@components/headerTitle";
 
 moment.locale("fr");
 
@@ -38,26 +39,12 @@ const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: Color.white,
   },
-  headerContainer: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    flexDirection: "row",
-    padding: 16,
-    borderBottomWidth: 1,
-    backgroundColor: Color.white,
-    borderBottomColor: Color.lightGrey,
-  },
   section: {
     marginVertical: 20,
   },
   title: {
     fontSize: 25,
     padding: 14,
-  },
-  date: {
-    fontSize: 13,
-    color: Color.mediumGrey,
   },
   dots: {
     width: 8,
@@ -179,10 +166,7 @@ export const Home = () => {
   return (
     <SafeAreaView>
       <ScrollView>
-        <View style={styles.headerContainer}>
-          <Text style={styles.title}>{`Hello ${name}`}</Text>
-          <Text>{moment().format("dddd DD MMMM")}</Text>
-        </View>
+        <HeaderTitle title={`Hello ${name}`} subTitle={moment().format("dddd DD MMMM")} />
         <View style={styles.container}>
           <View>
             <Carousel

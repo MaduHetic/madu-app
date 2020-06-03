@@ -64,6 +64,7 @@
     "metro-react-native-babel-preset": "^0.59.0",
     "module-resolver": "^1.0.0",
     "prettier": "^2.0.4",
+    "react-devtools": "^4.7.0",
     "react-test-renderer": "16.11.0",
     "typescript": "^3.8.3"
   },
