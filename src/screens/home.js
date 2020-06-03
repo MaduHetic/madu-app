@@ -21,6 +21,9 @@ import oranges from "../assets/images/oranges.jpg";
 import eagle from "../assets/images/eagle.jpg";
 import veggies from "../assets/images/veggies.jpg";
 
+import { User } from "@core/user";
+import { getCredsFromStorage } from "../middlewares/saveCredentials";
+
 moment.locale("fr");
 
 import { Color } from "@glossy/colors";
