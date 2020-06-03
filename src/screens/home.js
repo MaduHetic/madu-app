@@ -3,7 +3,6 @@ import { Text, View, StyleSheet, Button, SafeAreaView } from "react-native";
 import moment from "moment";
 import "moment/locale/fr";
 import Card from "@components/card";
-
 import { User } from "@core/user";
 import { getCredsFromStorage } from "../middlewares/saveCredentials";
 
