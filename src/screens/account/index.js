@@ -68,7 +68,7 @@ export const Account = () => {
   const [date] = useState("07-01-2020");
 
   const rewards = [
-    { name: "Vegan", type: "Bronze" },
+    { name: "Vegan", type: "Gold" },
     { name: "ShortCircus", type: "Bronze" },
     { name: "Adventure", type: "Bronze" },
     { name: "Walker", type: "Bronze" },
@@ -86,7 +86,7 @@ export const Account = () => {
               </View>
               <Icon name="gear" size={20} />
             </View>
-            <Image source={staticImage} />
+            {staticImage && <Image source={staticImage} />}
             <Text>{email}</Text>
             <Text>{`Inscrit depuis ${moment(date).format("MMMM YYYY")}`}</Text>
           </View>
@@ -124,6 +124,7 @@ export const Account = () => {
 };
 
 const AccountNavigation = () => {
+  const navigation = useNavigation();
   return (
     <Stack.Navigator
       screenOptions={{
@@ -134,7 +135,21 @@ const AccountNavigation = () => {
       <Stack.Screen
         name={"rewards"}
         component={Rewards}
-        screenOptions={{ headerShown: true }}
+        options={{
+          headerShown: true,
+          headerTitle: () => <View />,
+          headerLeft: () => (
+            <View style={styles.row}>
+              <Icon
+                name="arrow-circle-o-left"
+                size={32}
+                onPress={() => navigation.goBack()}
+                style={{ marginLeft: 24, marginRight: 16 }}
+              />
+              <Text style={{ fontSize: 24, lineHeight: 32 }}>Vos trophés</Text>
+            </View>
+          ),
+        }}
       />
     </Stack.Navigator>
   );
