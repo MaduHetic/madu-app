@@ -2,27 +2,22 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-import { HeaderLogin } from "@components//headerLogin";
-import { Input } from "@components/input";
-import { Button } from "@components/button";
+import HeaderLogin from "@components//headerLogin";
+import Button from "@components/button";
+
+import EmailTextField from "@components/emailTextField";
+import PasswordTextField from "@components/passwordTextField";
+
 import { User } from "@core/user";
 import { Color } from "@glossy/colors";
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingVertical: 80,
-    paddingHorizontal: 24,
-    backgroundColor: Color.white
-  }
-});
-
 const SignIn = () => {
+
   const navigation = useNavigation();
   const signIn = User.signIn();
   const loggedIn = User.loggedIn();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   useEffect(() => {
     if (loggedIn) {
@@ -38,27 +33,38 @@ const SignIn = () => {
         title="Connection"
       />
       <View style={styles.container}>
-        <Input
-          label="Entrez votre e-mail"
-          type="email"
-          value={email}
-          setValue={setEmail}
-        />
-        <Input
-          label="Entrez votre mot de passe"
-          type="password"
-          value={password}
-          setValue={setPassword}
-        />
+        <View style={styles.form}>
+          <EmailTextField
+            label={'Entrez votre e-mail'}
+            value={email}
+            onValueChange={(val) => setEmail(val)}
+          />
+          <PasswordTextField
+            label={'Entrez votre mot de passe'}
+            value={password}
+            onValueChange={(val) => setPassword(val)}
+          />
+        </View>
         <Button
+          text={'S\'inscrire'}
           onPress={() => signIn({ username: email, password })}
           color="blue"
-        >
-          S'inscrire
-        </Button>
+        />
       </View>
     </>
   );
 };
 
 export default SignIn;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingVertical: 80,
+    paddingHorizontal: 24,
+    backgroundColor: Color.white
+  },
+  form: {
+    marginBottom: "auto"
+  }
+});
