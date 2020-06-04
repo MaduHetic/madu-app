@@ -9,8 +9,6 @@ import Map from "./map";
 
 const styles = StyleSheet.create({
   navigationContainer: {
-    borderTopEndRadius: 30,
-    borderTopStartRadius: 30,
     flexDirection: "row",
     height: Platform.Os === "ios" ? 150 : 100,
     alignItems: "center",
@@ -29,6 +27,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  tab: {
+    color: Color.mediumGrey,
+    padding: 5,
+  },
+  tabActive: {
+    color: Color.primary,
+    padding: 5,
   },
 });
 
@@ -78,15 +84,10 @@ function MyTabBar({ state, descriptors, navigation }) {
           >
             <Icon
               name={options.tabBarIcon}
-              size={30}
-              style={{
-                color: isFocused ? Color.primary : Color.mediumGrey,
-                padding: 5,
-              }}
+              size={24}
+              style={isFocused ? styles.tabActive : styles.tab}
             />
-            <Text style={{ color: isFocused ? Color.primary : Color.mediumGrey }}>
-              {label}
-            </Text>
+            <Text style={isFocused ? styles.tabActive : styles.tab}>{label}</Text>
           </TouchableOpacity>
         );
       })}

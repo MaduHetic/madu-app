@@ -1,10 +1,10 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 
+// const screenWidth = Dimensions.get("window").width;
+
 const styles = StyleSheet.create({
   container: {
-    minHeight: 100,
-    width: "100%",
     backgroundColor: "#fff",
     borderRadius: 6,
     shadowColor: "#000",
