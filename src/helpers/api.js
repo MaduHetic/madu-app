@@ -3,7 +3,7 @@ import { getCredsFromStorage } from "../middlewares/saveCredentials";
 import apiRoute from "./apiRoutes";
 
 export const client = axios.create({
-  baseURL: "http://90.91.100.54:3000",
+  baseURL: "http://18.130.166.247:3000",
   responseType: "json",
   xsrfCookieName: false,
   headers: {
