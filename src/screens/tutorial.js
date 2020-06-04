@@ -1,7 +1,15 @@
 import React, { useState } from "react";
-import { SafeAreaView, View, Text, StyleSheet, Dimensions } from "react-native";
+import {
+  SafeAreaView,
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  ImageBackground,
+} from "react-native";
 import Carousel, { Pagination } from "react-native-snap-carousel";
 import TutorialCard from "@components/card/tutorial";
+import background from "@assets/images/background.png";
 
 import { Button } from "../components/button";
 import { Color } from "@glossy/colors";
@@ -10,7 +18,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingVertical: 24,
-    backgroundColor: Color.white,
     borderRadius: 4,
     shadowColor: "#000",
     shadowOffset: {
@@ -33,6 +40,11 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginHorizontal: 5,
     backgroundColor: Color.mediumGrey,
+  },
+  image: {
+    width: "100%",
+    height: "100%",
+    resizeMode: "cover",
   },
 });
 
@@ -69,33 +81,35 @@ const Tutorial = () => {
 
   console.log(entries);
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: Color.white }}>
-      <View style={styles.container}>
-        <Carousel
-          renderItem={TutorialCard}
-          data={entries}
-          sliderWidth={screenWidth}
-          itemWidth={screenWidth}
-          onSnapToItem={(index) => setActiveSlide(index)}
-          activeSlideAlignment="center"
-          firstItem={activeSlide}
-        />
-        <View style={{ marginBottom: 30 }} />
-        <Pagination
-          dotsLength={entries.length}
-          activeDotIndex={activeSlide}
-          dotStyle={styles.dots}
-          inactiveDotStyle={styles.inactiveDotStyle}
-          inactiveDotOpacity={1}
-          inactiveDotScale={1}
-        />
-      </View>
-      <View style={{ margin: 20 }}>
-        <Button color="blue" onPress={handleSlider}>
-          <Text>Suivant</Text>
-        </Button>
-      </View>
-    </SafeAreaView>
+    <ImageBackground source={background} style={styles.image}>
+      <SafeAreaView style={{ flex: 1 }}>
+        <View style={styles.container}>
+          <Carousel
+            renderItem={TutorialCard}
+            data={entries}
+            sliderWidth={screenWidth}
+            itemWidth={screenWidth}
+            onSnapToItem={(index) => setActiveSlide(index)}
+            activeSlideAlignment="center"
+            firstItem={activeSlide}
+          />
+          <View style={{ marginBottom: 30 }} />
+          <Pagination
+            dotsLength={entries.length}
+            activeDotIndex={activeSlide}
+            dotStyle={styles.dots}
+            inactiveDotStyle={styles.inactiveDotStyle}
+            inactiveDotOpacity={1}
+            inactiveDotScale={1}
+          />
+        </View>
+        <View style={{ margin: 20 }}>
+          <Button color="blue" onPress={handleSlider}>
+            <Text>Suivant</Text>
+          </Button>
+        </View>
+      </SafeAreaView>
+    </ImageBackground>
   );
 };
 
