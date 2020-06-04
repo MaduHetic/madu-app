@@ -1,7 +1,51 @@
-import React from "react";
-import { TouchableHighlight, Text, StyleSheet } from "react-native";
+import React from "react"
+import { TouchableHighlight, Text, StyleSheet } from "react-native"
 
-import { Color } from "@glossy/colors";
+import { Color } from "@glossy/colors"
+
+const Button = ({ onPress, text, color, underlayColor, outline, disabled }) => {
+
+    const buttonStyles = [styles.button]
+    const textStyles = [styles.text]
+
+    if (outline) {
+        buttonStyles.push(styles.buttonOutline)
+    }
+
+    if (disabled) {
+        buttonStyles.push(styles.buttonDisabled)
+    }
+
+    if (color == "blue") {
+        buttonStyles.push(styles.buttonPrimary)
+        textStyles.push(styles.textWhite)
+        underlayColor = "#6074D4"
+    }
+
+    if (color == "green") {
+        buttonStyles.push(styles.buttonSuccess)
+        textStyles.push(styles.textWhite)
+        underlayColor = ""
+    }
+
+    if (color == "red") {
+        buttonStyles.push(styles.buttonError)
+        textStyles.push(styles.textWhite)
+        underlayColor = ""
+    }
+
+    return (
+        <TouchableHighlight
+            style={buttonStyles}
+            color={color}
+            underlayColor={underlayColor}
+            onPress={onPress}
+            disabled={disabled}
+        >
+            <Text style={textStyles}>{text}</Text>
+        </TouchableHighlight>
+    )
+}
 
 const styles = StyleSheet.create({
     button: {
@@ -48,54 +92,6 @@ const styles = StyleSheet.create({
     textWhite: {
         color: Color.white
     }
-});
+})
 
-export const Button = ({
-    onPress = () => {},
-    children = "",
-    color = "",
-    underlayColor = "#B8B8C9",
-    outline = false,
-    disabled = false
-}) => {
-    const buttonStyles = [styles.button];
-    const textStyles = [styles.text];
-
-    if (outline) {
-        buttonStyles.push(styles.buttonOutline);
-    }
-
-    if (disabled) {
-        buttonStyles.push(styles.buttonDisabled);
-    }
-
-    if (color == "blue") {
-        buttonStyles.push(styles.buttonPrimary);
-        textStyles.push(styles.textWhite);
-        underlayColor = "#6074D4";
-    }
-
-    if (color == "green") {
-        buttonStyles.push(styles.buttonSuccess);
-        textStyles.push(styles.textWhite);
-        underlayColor = "";
-    }
-
-    if (color == "red") {
-        buttonStyles.push(styles.buttonError);
-        textStyles.push(styles.textWhite);
-        underlayColor = "";
-    }
-
-    return (
-        <TouchableHighlight
-            style={buttonStyles}
-            color={color}
-            underlayColor={underlayColor}
-            onPress={onPress}
-            disabled={disabled}
-        >
-            <Text style={textStyles}>{children}</Text>
-        </TouchableHighlight>
-    )
-};
+export default Button
