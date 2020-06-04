@@ -143,7 +143,7 @@ const AccountNavigation = () => {
               <Icon
                 name="arrow-circle-o-left"
                 size={32}
-                onPress={() => navigation.goBack()}
+                onPress={() => navigation.navigate("account")}
                 style={{ marginLeft: 24, marginRight: 16 }}
               />
               <Text style={{ fontSize: 24, lineHeight: 32 }}>Vos trophés</Text>
