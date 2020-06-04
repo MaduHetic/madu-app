@@ -6,6 +6,7 @@ import { Color } from "@glossy/colors";
 
 import Home from "./home";
 import Map from "./map";
+import Tutorial from "./tutorial";
 
 const styles = StyleSheet.create({
   navigationContainer: {

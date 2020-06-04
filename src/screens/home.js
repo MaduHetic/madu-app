@@ -169,7 +169,7 @@ const Home = () => {
               renderItem={item}
               data={knowItItem}
               sliderWidth={screenWidth}
-              itemWidth={screenWidth - 80}
+              itemWidth={screenWidth}
               onSnapToItem={(index) => setActiveSlide(index)}
               activeSlideAlignment="start"
             />
