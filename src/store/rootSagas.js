@@ -1,10 +1,11 @@
 import { all } from "redux-saga/effects";
-import { User } from "../core/user";
-import { Company } from "../core/company";
-import { Poi } from "../core/poi";
-import { Tags } from "../core/tags";
-import { GreenScoreTypes } from "../core/greenScoreTypes";
-import { Stats } from "../core/statsDashboard";
+import { User } from "@core/user";
+import { Company } from "@core/company";
+import { Poi } from "@core/poi";
+import { Tags } from "@core/tags";
+import { GreenScoreTypes } from "@core/greenScoreTypes";
+import { Stats } from "@core/statsDashboard";
+import { KnowIt } from "@core/knowIt";
 
 export default function* rootSaga() {
   yield all([
@@ -14,5 +15,6 @@ export default function* rootSaga() {
     Tags.sagas(),
     GreenScoreTypes.sagas(),
     Stats.sagas(),
+    KnowIt.sagas(),
   ]);
 }
