@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { View, SafeAreaView, Text, StyleSheet } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 import Stepper from "@components/steps/stepper";
-import { Button } from "@components/button";
+import Button from "@components/button";
 import { Color } from "@glossy/colors";
 
 import { Quizz as CoreQuizz } from "@core/quizz";
@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     height: "100%",
+    backgroundColor: Color.white,
   },
   title: {
     fontWeight: "bold",
@@ -26,16 +27,15 @@ const styles = StyleSheet.create({
 });
 
 const Quizz = () => {
+  const { params } = useRoute();
   const navigation = useNavigation();
   const getQuizz = CoreQuizz.getQuizz();
   const questions = CoreQuizz.questions();
   const [activeIndex, setActiveIndex] = useState(0);
   const [answered, setAnswered] = useState(false);
 
-  console.log(questions);
-
   useEffect(() => {
-    getQuizz();
+    getQuizz(params.id);
     return () => {
       setActiveIndex(0);
     };
@@ -63,9 +63,8 @@ const Quizz = () => {
             key={id}
             onPress={handleAnswer}
             color={answered ? (goodAnswer ? "green" : "red") : ""}
-          >
-            {answer}
-          </Button>
+            text={answer}
+          />
         ))}
       </View>
     </SafeAreaView>

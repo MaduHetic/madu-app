@@ -5,9 +5,9 @@ import { Actions, Events } from "./actions";
 function* getQuizz(action) {
   try {
     yield put(Actions.getQuizz.request(true));
-    const request = yield call(Api.getQuizz);
+    const request = yield call(Api.getQuizz, action.payload);
     if (request.status === 200) {
-      yield put(Actions.getQuizz.success(request.data, action.payload));
+      yield put(Actions.getQuizz.success(request.data));
     }
   } catch {
     yield put(Actions.getQuizz.failure(false));

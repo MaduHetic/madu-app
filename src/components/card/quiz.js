@@ -85,7 +85,7 @@ const Quiz = ({ item: { id, imgBackground, reward, theme, duration, participants
               name="arrow-right"
               size={12}
               color={Color.dark}
-              onPress={() => navigation.navigate("questions", { id })}
+              onPress={() => navigation.navigate("quizz", { id })}
             />
           </View>
         </View>
