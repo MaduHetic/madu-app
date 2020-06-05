@@ -12,7 +12,7 @@ moment.locale("fr");
 import HeaderTitle from "@components/headerTitle";
 import Rewards from "./rewards";
 import Svg from "@components/svg";
-import { Button } from "@components/button";
+import Button from "@components/button";
 import { User } from "@core/user";
 
 import staticImage from "@assets/images/fdj.jpg";
@@ -57,6 +57,9 @@ const styles = StyleSheet.create({
   },
   type: {
     textAlign: "center",
+  },
+  buttonContainer: {
+    margin: 40,
   },
 });
 
@@ -113,10 +116,8 @@ export const Account = () => {
             <Text>Vos dernier trophées obtenue</Text>
           </View>
         </View>
-        <View style={styles.section}>
-          <Button onPress={() => signOut()} color="red">
-            <Text>Se déconnecter</Text>
-          </Button>
+        <View style={[styles.section, styles.buttonContainer]}>
+          <Button onPress={() => signOut()} color="red" text="Se déconnecter" />
         </View>
       </ScrollView>
     </SafeAreaView>
