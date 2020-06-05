@@ -23,4 +23,6 @@ export default {
   getGreenScoreTypes: () => `/type-green-score`, // GET
   getStats: () => `/stats`,
   knowIt: () => `/know-it`,
+  quizz: (id) => `/theme-quizz/question/${id}`,
+  themes: () => `/theme-quizz`,
 };

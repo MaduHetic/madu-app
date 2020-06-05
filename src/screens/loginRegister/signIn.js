@@ -12,12 +12,11 @@ import { User } from "@core/user";
 import { Color } from "@glossy/colors";
 
 const SignIn = () => {
-
   const navigation = useNavigation();
   const signIn = User.signIn();
   const loggedIn = User.loggedIn();
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   useEffect(() => {
     if (loggedIn) {
@@ -29,24 +28,22 @@ const SignIn = () => {
 
   return (
     <>
-      <HeaderLogin
-        title="Connection"
-      />
+      <HeaderLogin title="Connection" />
       <View style={styles.container}>
         <View style={styles.form}>
           <EmailTextField
-            label={'Entrez votre e-mail'}
+            label={"Entrez votre e-mail"}
             value={email}
             onValueChange={(val) => setEmail(val)}
           />
           <PasswordTextField
-            label={'Entrez votre mot de passe'}
+            label={"Entrez votre mot de passe"}
             value={password}
             onValueChange={(val) => setPassword(val)}
           />
         </View>
         <Button
-          text={'S\'inscrire'}
+          text={"S'inscrire"}
           onPress={() => signIn({ username: email, password })}
           color="blue"
         />
@@ -62,9 +59,9 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingVertical: 80,
     paddingHorizontal: 24,
-    backgroundColor: Color.white
+    backgroundColor: Color.white,
   },
   form: {
-    marginBottom: "auto"
-  }
+    marginBottom: "auto",
+  },
 });

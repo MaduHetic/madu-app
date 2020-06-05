@@ -18,15 +18,15 @@ import Place from "@components/card/places";
 import Quiz from "@components/card/quiz";
 import Carousel, { Pagination } from "react-native-snap-carousel";
 import Tutorial from "./tutorial";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 import Riccardo from "../assets/images/riccardo-bergamini.jpg";
 import oranges from "../assets/images/oranges.jpg";
 
-import eagle from "../assets/images/eagle.jpg";
-import veggies from "../assets/images/veggies.jpg";
-
 import { User } from "@core/user";
 import { KnowIt } from "@core/knowIt";
+import { Quizz } from "@core/quizz";
+import QuizzScreen from "./quizz";
 import { getCredsFromStorage } from "../middlewares/saveCredentials";
 import HeaderTitle from "@components/headerTitle";
 
@@ -73,6 +73,11 @@ const styles = StyleSheet.create({
     color: Color.darkGrey,
     lineHeight: 20,
   },
+  row: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+  },
 });
 
 export const Home = () => {
@@ -80,8 +85,10 @@ export const Home = () => {
   const navigation = useNavigation();
   const getKnowIt = KnowIt.getKnowIt();
   const knowItItem = KnowIt.data();
+  const getThemes = Quizz.getThemes();
+  const themes = Quizz.themes();
   const screenWidth = Dimensions.get("window").width;
-  const name = "John";
+  const name = User.firstName();
 
   const getTutorialValidation = async () => {
     const res = await AsyncStorage.getItem("tutorial");
@@ -97,6 +104,7 @@ export const Home = () => {
     };
     navigatToTutorial();
     getKnowIt();
+    getThemes();
   }, []);
 
   const item = ({ item }) => (
@@ -145,24 +153,6 @@ export const Home = () => {
     },
   ];
 
-  const QuizItem = [
-    {
-      id: 1,
-      image: eagle,
-      reward: 12,
-      title: "Les animaux d’amerique",
-      duration: 4,
-      participants: "et 8 autres personnes y ont participés",
-    },
-    {
-      id: 2,
-      image: veggies,
-      reward: 12,
-      title: "Les animaux d’amerique",
-      duration: 4,
-      participants: "et 8 autres personnes y ont participés",
-    },
-  ];
   return (
     <SafeAreaView>
       <ScrollView>
@@ -199,7 +189,7 @@ export const Home = () => {
           <View style={styles.section}>
             <Text style={styles.title}>Quiz de la semaine</Text>
             <FlatList
-              data={QuizItem}
+              data={themes}
               renderItem={({ item }) => <Quiz item={item} key={item.key} />}
               keyExtractor={(item) => `${item.id}`}
               horizontal
@@ -215,6 +205,7 @@ export const Home = () => {
 const Stack = createStackNavigator();
 
 const HomeNavigator = () => {
+  const navigation = useNavigation();
   return (
     <Stack.Navigator
       screenOptions={{
@@ -223,6 +214,25 @@ const HomeNavigator = () => {
     >
       <Stack.Screen name={"home"} component={Home} />
       <Stack.Screen name={"tutorial"} component={Tutorial} />
+      <Stack.Screen
+        name={"quizz"}
+        component={QuizzScreen}
+        options={{
+          headerShown: true,
+          headerTitle: () => <View />,
+          headerLeft: () => (
+            <View style={styles.row}>
+              <Icon
+                name="arrow-circle-o-left"
+                size={32}
+                onPress={() => navigation.goBack()}
+                style={{ marginLeft: 24, marginRight: 16 }}
+              />
+              <Text style={{ fontSize: 24, lineHeight: 32 }}>Quiz de la semaine</Text>
+            </View>
+          ),
+        }}
+      />
     </Stack.Navigator>
   );
 };
