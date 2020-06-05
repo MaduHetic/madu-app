@@ -3,6 +3,9 @@ import { View, Image, Text, StyleSheet, Dimensions } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
+import svgs from "@assets/svg/sprite";
+import Svg from "@components/svg";
+
 import { Color } from "@glossy/colors";
 const screenWidth = Dimensions.get("window").width;
 
@@ -46,6 +49,10 @@ const styles = StyleSheet.create({
   },
   greenScore: {
     color: Color.primary,
+    marginHorizontal: 3,
+  },
+  greenScoreNotation: {
+    fontSize: 10,
   },
   description: {
     lineHeight: 20,
@@ -83,8 +90,12 @@ const Places = ({
           <Text style={styles.rating}>{`${starRating} ${rating} (${nbOfRatings})`}</Text>
         </View>
         <View style={[styles.informationContainer, styles.greenScore]}>
-          <Icon style={[styles.icon, styles.greenScore]} name="star" size={15} />
-          <Text style={styles.greenScore}>{`${greenScore}/10`}</Text>
+          {/* <Icon style={[styles.icon, styles.greenScore]} name="star" size={15} /> */}
+          <Svg svgs={svgs} name="score" height={16} width={16} />
+          <Text style={styles.greenScore}>
+            <Text>{greenScore}</Text>
+            <Text style={styles.greenScoreNotation}>/10</Text>
+          </Text>
         </View>
       </View>
       <Text style={styles.description}>{description}</Text>
@@ -94,7 +105,7 @@ const Places = ({
           <Text>{distance}</Text>
         </View>
         <View style={styles.iconContainer}>
-          <Icon style={styles.icon} name="star" size={15} />
+          <Icon style={styles.icon} name="money" size={15} />
           <Text>{`${reward} Emeraudes`}</Text>
         </View>
       </View>

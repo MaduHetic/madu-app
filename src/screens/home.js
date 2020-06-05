@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     borderBottomColor: Color.lightGrey,
   },
   section: {
-    marginBottom: 40,
+    marginVertical: 20,
   },
   title: {
     fontSize: 25,
@@ -184,7 +184,7 @@ export const Home = () => {
           <Text>{moment().format("dddd DD MMMM")}</Text>
         </View>
         <View style={styles.container}>
-          <View style={styles.section}>
+          <View>
             <Carousel
               renderItem={item}
               data={knowItItem}
