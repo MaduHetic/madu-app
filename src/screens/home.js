@@ -8,12 +8,16 @@ import {
   Dimensions,
   FlatList,
 } from "react-native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-community/async-storage";
 import moment from "moment";
 import "moment/locale/fr";
 import Card from "@components/card/card";
 import Place from "@components/card/places";
 import Quiz from "@components/card/quiz";
 import Carousel, { Pagination } from "react-native-snap-carousel";
+import Tutorial from "./tutorial";
 
 import Riccardo from "../assets/images/riccardo-bergamini.jpg";
 import oranges from "../assets/images/oranges.jpg";
@@ -81,14 +85,27 @@ const styles = StyleSheet.create({
   },
 });
 
-const Home = () => {
+export const Home = () => {
   const [activeSlide, setActiveSlide] = useState(0);
+  const navigation = useNavigation();
   const getKnowIt = KnowIt.getKnowIt();
   const knowItItem = KnowIt.data();
   const screenWidth = Dimensions.get("window").width;
   const name = "John";
 
+  const getTutorialValidation = async () => {
+    const res = await AsyncStorage.getItem("tutorial");
+    return JSON.parse(res);
+  };
+
   useEffect(() => {
+    const navigatToTutorial = async () => {
+      const tutorial = await getTutorialValidation();
+      if (!tutorial?.done) {
+        navigation.navigate("tutorial");
+      }
+    };
+    navigatToTutorial();
     getKnowIt();
   }, []);
 
@@ -169,7 +186,7 @@ const Home = () => {
               renderItem={item}
               data={knowItItem}
               sliderWidth={screenWidth}
-              itemWidth={screenWidth - 80}
+              itemWidth={screenWidth}
               onSnapToItem={(index) => setActiveSlide(index)}
               activeSlideAlignment="start"
             />
@@ -208,4 +225,19 @@ const Home = () => {
   );
 };
 
-export default Home;
+const Stack = createStackNavigator();
+
+const HomeNavigator = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen name={"home"} component={Home} />
+      <Stack.Screen name={"tutorial"} component={Tutorial} />
+    </Stack.Navigator>
+  );
+};
+
+export default HomeNavigator;
