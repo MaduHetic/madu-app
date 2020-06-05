@@ -7,6 +7,8 @@ import {
   Dimensions,
   ImageBackground,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-community/async-storage";
 import Carousel, { Pagination } from "react-native-snap-carousel";
 import TutorialCard from "@components/card/tutorial";
 import background from "@assets/images/background.png";
@@ -50,6 +52,7 @@ const styles = StyleSheet.create({
 
 const Tutorial = () => {
   const [activeSlide, setActiveSlide] = useState(0);
+  const navigation = useNavigation();
   const screenWidth = Dimensions.get("window").width;
 
   const entries = [
@@ -71,11 +74,16 @@ const Tutorial = () => {
     },
   ];
 
+  const finishedTutorial = async () => {
+    await AsyncStorage.setItem("tutorial", JSON.stringify({ done: true }));
+    return navigation.navigate("home");
+  };
+
   const handleSlider = () => {
     if (activeSlide !== entries.length - 1) {
       setActiveSlide(activeSlide + 1);
     } else {
-      console.log("finished");
+      finishedTutorial();
     }
   };
 

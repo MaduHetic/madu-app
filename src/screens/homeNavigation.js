@@ -6,7 +6,6 @@ import { Color } from "@glossy/colors";
 
 import Home from "./home";
 import Map from "./map";
-import Tutorial from "./tutorial";
 
 const styles = StyleSheet.create({
   navigationContainer: {
@@ -101,7 +100,6 @@ const Tab = createBottomTabNavigator();
 const HomeNagivation = () => (
   <Tab.Navigator tabBar={(props) => <MyTabBar {...props} />}>
     <Tab.Screen name="Home" component={Home} options={{ tabBarIcon: "home" }} />
-    <Tab.Screen name="Tutorial" component={Tutorial} options={{ tabBarIcon: "home" }} />
     <Tab.Screen name="Carte" component={Map} options={{ tabBarIcon: "map" }} />
     <Tab.Screen name="Liste" component={Home} options={{ tabBarIcon: "list" }} />
     <Tab.Screen name="Compte" component={Home} options={{ tabBarIcon: "user-circle" }} />
