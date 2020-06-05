@@ -14,6 +14,7 @@ import Rewards from "./rewards";
 import Svg from "@components/svg";
 import Button from "@components/button";
 import { User } from "@core/user";
+import TextWithDecorator from "@components/textWithDecorator";
 
 import staticImage from "@assets/images/fdj.jpg";
 import Svgs from "@assets/svg/gems";
@@ -83,10 +84,7 @@ export const Account = () => {
         <View style={styles.container}>
           <View style={styles.section}>
             <View style={styles.titleContainer}>
-              <View style={styles.row}>
-                <View style={styles.titleDecorator} />
-                <Text style={styles.title}>A propos de vous</Text>
-              </View>
+              <TextWithDecorator text="A propos de vous" />
               <Icon name="gear" size={20} />
             </View>
             {staticImage && <Image source={staticImage} />}
@@ -95,10 +93,7 @@ export const Account = () => {
           </View>
           <View style={styles.section}>
             <View style={styles.titleContainer}>
-              <View style={styles.row}>
-                <View style={styles.titleDecorator} />
-                <Text style={styles.title}>Vos trophés</Text>
-              </View>
+              <TextWithDecorator text="Vos trophés" />
               <Icon
                 name="arrow-circle-o-right"
                 size={32}
