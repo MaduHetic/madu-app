@@ -73,6 +73,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     backgroundColor: Color.mediumGrey,
   },
+  item: {
+    height: 127,
+  },
   itemTitle: {
     fontSize: 16,
     color: Color.black,
@@ -110,7 +113,7 @@ export const Home = () => {
   }, []);
 
   const item = ({ item }) => (
-    <Card>
+    <Card style={styles.item}>
       <Text style={styles.itemTitle}>{item.title}</Text>
       <Text style={styles.itemText}>{item.description}</Text>
     </Card>

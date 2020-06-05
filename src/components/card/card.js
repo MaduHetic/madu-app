@@ -21,6 +21,8 @@ const styles = StyleSheet.create({
   },
 });
 
-const Card = ({ children }) => <View style={styles.container}>{children}</View>;
+const Card = ({ style, children }) => (
+  <View style={[styles.container, style]}>{children}</View>
+);
 
 export default Card;
