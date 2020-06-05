@@ -28,7 +28,11 @@ import veggies from "../assets/images/veggies.jpg";
 import { User } from "@core/user";
 import { KnowIt } from "@core/knowIt";
 import { getCredsFromStorage } from "../middlewares/saveCredentials";
+<<<<<<< HEAD
 import HeaderTitle from "@components/headerTitle";
+=======
+import { Quizz } from "@core/quizz";
+>>>>>>> added get call to home
 
 moment.locale("fr");
 
@@ -77,6 +81,7 @@ const styles = StyleSheet.create({
 
 export const Home = () => {
   const [activeSlide, setActiveSlide] = useState(0);
+<<<<<<< HEAD
   const navigation = useNavigation();
   const getKnowIt = KnowIt.getKnowIt();
   const knowItItem = KnowIt.data();
@@ -97,6 +102,15 @@ export const Home = () => {
     };
     navigatToTutorial();
     getKnowIt();
+=======
+  const getThemes = Quizz.getThemes();
+  const themes = Quizz.themes();
+  const screenWidth = Dimensions.get("window").width;
+  const name = "John";
+
+  useEffect(() => {
+    getThemes();
+>>>>>>> added get call to home
   }, []);
 
   const item = ({ item }) => (
@@ -199,7 +213,7 @@ export const Home = () => {
           <View style={styles.section}>
             <Text style={styles.title}>Quiz de la semaine</Text>
             <FlatList
-              data={QuizItem}
+              data={themes}
               renderItem={({ item }) => <Quiz item={item} key={item.key} />}
               keyExtractor={(item) => `${item.id}`}
               horizontal

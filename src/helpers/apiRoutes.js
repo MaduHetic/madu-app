@@ -22,6 +22,6 @@ export default {
   deleteGreenScoreType: (id) => `/type-green-score/${id}`, // DELETE
   getGreenScoreTypes: () => `/type-green-score`, // GET
   getStats: () => `/stats`,
-  knowIt: () => `/know-it`,
-  quizz: () => `/quizz`,
+  quizz: (id) => `/quizz${id}`,
+  themes: () => `/theme-quizz`,
 };
