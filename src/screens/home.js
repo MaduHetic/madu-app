@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Text,
   View,
@@ -22,6 +22,7 @@ import eagle from "../assets/images/eagle.jpg";
 import veggies from "../assets/images/veggies.jpg";
 
 import { User } from "@core/user";
+import { KnowIt } from "@core/knowIt";
 import { getCredsFromStorage } from "../middlewares/saveCredentials";
 
 moment.locale("fr");
@@ -68,41 +69,35 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     backgroundColor: Color.mediumGrey,
   },
+  itemTitle: {
+    fontSize: 16,
+    color: Color.black,
+    marginBottom: 12,
+  },
+  itemText: {
+    fontSize: 12,
+    color: Color.darkGrey,
+    lineHeight: 20,
+  },
 });
 
 const Home = () => {
   const [activeSlide, setActiveSlide] = useState(0);
+  const getKnowIt = KnowIt.getKnowIt();
+  const knowItItem = KnowIt.data();
   const screenWidth = Dimensions.get("window").width;
   const name = "John";
 
+  useEffect(() => {
+    getKnowIt();
+  }, []);
+
   const item = ({ item }) => (
     <Card>
-      <Text style={{ fontSize: 16, color: Color.black, marginBottom: 12 }}>
-        {item.title}
-      </Text>
-      <Text style={{ fontSize: 12, color: Color.darkGrey, lineHeight: 20 }}>
-        {item.text}
-      </Text>
+      <Text style={styles.itemTitle}>{item.title}</Text>
+      <Text style={styles.itemText}>{item.description}</Text>
     </Card>
   );
-
-  const entries = [
-    {
-      title: "Titre de le savais tu",
-      text:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tellus diam, convallis ut nibh vel, volutpat convallis mi. Fusce tellus diam, convallis ut nibh vel, volutp...",
-    },
-    {
-      title: "Titre de le savais tu",
-      text:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tellus diam, convallis ut nibh vel, volutpat convallis mi. Fusce tellus diam, convallis ut nibh vel, volutp...",
-    },
-    {
-      title: "Titre de le savais tu",
-      text:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tellus diam, convallis ut nibh vel, volutpat convallis mi. Fusce tellus diam, convallis ut nibh vel, volutp...",
-    },
-  ];
 
   const restaurants = [
     {
@@ -172,14 +167,14 @@ const Home = () => {
           <View style={styles.section}>
             <Carousel
               renderItem={item}
-              data={entries}
+              data={knowItItem}
               sliderWidth={screenWidth}
               itemWidth={screenWidth - 80}
               onSnapToItem={(index) => setActiveSlide(index)}
               activeSlideAlignment="start"
             />
             <Pagination
-              dotsLength={entries.length}
+              dotsLength={knowItItem.length}
               activeDotIndex={activeSlide}
               dotStyle={styles.dots}
               inactiveDotStyle={styles.inactiveDotStyle}
