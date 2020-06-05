@@ -6,6 +6,7 @@ import { Color } from "@glossy/colors";
 
 import Home from "./home";
 import Map from "./map";
+import AccountNavigation from "./account";
 
 const styles = StyleSheet.create({
   navigationContainer: {
@@ -102,7 +103,11 @@ const HomeNagivation = () => (
     <Tab.Screen name="Home" component={Home} options={{ tabBarIcon: "home" }} />
     <Tab.Screen name="Carte" component={Map} options={{ tabBarIcon: "map" }} />
     <Tab.Screen name="Liste" component={Home} options={{ tabBarIcon: "list" }} />
-    <Tab.Screen name="Compte" component={Home} options={{ tabBarIcon: "user-circle" }} />
+    <Tab.Screen
+      name="Compte"
+      component={AccountNavigation}
+      options={{ tabBarIcon: "user-circle" }}
+    />
   </Tab.Navigator>
 );
 
