@@ -6,14 +6,17 @@ const DATA = [
   {
     id: 0,
     title: "Restaurants",
+    type: "RESTAURANT"
   },
   {
     id: 1,
     title: "Magasins",
+    type: "MAGASIN"
   },
   {
     id: 2,
     title: "Activités",
+    type: "ACTIVITÉ"
   },
 ];
 
@@ -32,17 +35,15 @@ function Item({ title, selected, onSelect }) {
   );
 }
 
-export default function FilterBarPOI() {
-  const [selected, setSelected] = React.useState(0);
-
+export default function FilterBarPOI({selected, setSelected}) {
   return (
     <SafeAreaView style={styles.container}>
       {DATA.map((item) => (
         <Item
           key={item.id}
           title={item.title}
-          selected={selected === item.id}
-          onSelect={() => setSelected(item.id)}
+          selected={selected === item.type}
+          onSelect={() => setSelected(item.type)}
         />
       ))}
     </SafeAreaView>
@@ -53,7 +54,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#FFF",
     zIndex: 1,
-    position: "absolute",
     width: "100%",
     flexDirection: "row",
     paddingLeft: "5%",

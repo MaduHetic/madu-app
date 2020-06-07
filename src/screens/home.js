@@ -91,9 +91,9 @@ export const Home = () => {
   useEffect(() => {
     const navigatToTutorial = async () => {
       const tutorial = await getTutorialValidation();
-      if (!tutorial?.done) {
-        navigation.navigate("tutorial");
-      }
+      // if (!tutorial?.done) {
+      //   navigation.navigate("tutorial");
+      // }
     };
     navigatToTutorial();
     getKnowIt();
