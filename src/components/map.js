@@ -71,18 +71,19 @@ const Map = ({filteredPOIs}) => {
           onDidFailLoadingMap={() => console.log("failed")}
           // onRegionDidChange={(e) => console.log(e)}
         >
-          <MapboxGL.Camera
-            zoomLevel={13.4}
-            centerCoordinate={[2.4182711, 48.8518269]}
-            maxBounds={{
-              ne: [2.4192711, 48.8528269],
-              sw: [2.4172711, 48.8508269],
-            }}
-          />
-          {/* <MapboxGL.UserLocation
+          <MapboxGL.UserLocation
             visible={true}
             showsUserHeadingIndicator={true}
-          /> */}
+          />
+
+          <MapboxGL.Camera
+            defaultSettings={{
+              centerCoordinate: [2.4182711, 48.8518269],
+              zoomLevel: 13.4,
+            }}
+            followUserLocation={true}
+            followUserMode={'normal'}
+          />
 
           {filteredPOIsState && filteredPOIsState.map((poi, i) => (
             <Fragment key={i}>

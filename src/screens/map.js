@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import MapboxGL from '@react-native-mapbox-gl/maps';
 import Map from "@components/map";
 import FilterBarPOI from "@components/filterBarPOI";
 
@@ -44,6 +45,11 @@ const MapScreen = () => {
   useEffect(() => {
     // getPoi();
 
+    // Create a scoped async function in the hook
+    async function requestAndroidLocationPermissions() {
+      await MapboxGL.requestAndroidLocationPermissions()
+    }
+    requestAndroidLocationPermissions()
   }, []);
 
   return (
