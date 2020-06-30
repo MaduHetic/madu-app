@@ -20,17 +20,11 @@ const styles = StyleSheet.create({
     lineHeight: 32,
     borderLeftWidth: 5,
   },
-  orange: {
-    backgroundColor: Color.peich,
-  },
-  cyan: {
-    backgroundColor: Color.swamp,
-  },
 });
 
 const TextWithDecorator = ({ text, color }) => (
   <View style={styles.container}>
-    <View style={[styles.titleDecorator, styles[color]]} />
+    <View style={[styles.titleDecorator, { backgroundColor: color }]} />
     <Text style={styles.title}>{text}</Text>
   </View>
 );
