@@ -38,6 +38,10 @@ const fakeData = [
   },
 ]
 
+const entrepriseFake = {
+  coordinate: [2.425848, 48.8526156]
+}
+
 const MapScreen = () => {
   // const getPoi = Poi.getAllPoi();
   const [selected, setSelected] = React.useState("RESTAURANT");
@@ -55,7 +59,10 @@ const MapScreen = () => {
   return (
     <>
       <FilterBarPOI selected={selected} setSelected={setSelected}/>
-      <Map filteredPOIs={fakeData.filter(poi => poi.type === selected)} />
+      <Map 
+        filteredPOIs={fakeData.filter(poi => poi.type === selected)}
+        entreprise={entrepriseFake}
+      />
     </>
   );
 };

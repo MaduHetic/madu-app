@@ -1,7 +1,8 @@
 import React, { Fragment, useEffect, useRef } from "react";
-import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, Image } from "react-native";
 import MapboxGL from "@react-native-mapbox-gl/maps";
 import { Color } from "@glossy/colors";
+import Building from "@assets/images/Building.png";
 
 MapboxGL.setAccessToken(
   "pk.eyJ1IjoibWV0YWxtYW5pbmZyIiwiYSI6ImNqdjI5bzRsYjBxOXQ0ZXA5dmpsNDNkeGcifQ.luP93CEITntYfy6fZmCLOw",
@@ -33,8 +34,8 @@ const styles = StyleSheet.create({
   },
   markerDot: {
     backgroundColor: Color.primary,
-    width: 10,
-    height: 10,
+    width: 12,
+    height: 12,
     borderRadius: 20,
     marginTop: 20,
     marginBottom: 20
@@ -44,10 +45,35 @@ const styles = StyleSheet.create({
     color: Color.primary,
     position: "absolute",
     bottom: 0
+  },
+  markerEntrepriseContainer: {
+    backgroundColor: "rgba(0, 0, 0, 0)",
+    position: "relative",
+    width: 100,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  markerDotEntreprise: {
+    backgroundColor: Color.black,
+    width: 12,
+    height: 12,
+    borderRadius: 20,
+    marginTop: 20,
+    marginBottom: 20,
+    borderColor: Color.white,
+    borderWidth: 2
+  },
+  buildingEntreprise: {
+    backgroundColor: "rgba(0, 0, 0, 0)",
+    width: 45,
+    height: 45,
+    position: "absolute",
+    right: 0
   }
 });
 
-const Map = ({filteredPOIs}) => {
+const Map = ({filteredPOIs, entreprise}) => {
   const mapEl = useRef(null);
   const [filteredPOIsState, setFilteredPOIsState] = React.useState([])
 
@@ -69,7 +95,6 @@ const Map = ({filteredPOIs}) => {
           styleURL="mapbox://styles/mapbox/streets-v9"
           style={styles.map}
           onDidFailLoadingMap={() => console.log("failed")}
-          // onRegionDidChange={(e) => console.log(e)}
         >
           <MapboxGL.UserLocation
             visible={true}
@@ -82,19 +107,21 @@ const Map = ({filteredPOIs}) => {
               zoomLevel: 13.4,
             }}
             followUserLocation={true}
-            followUserMode={'normal'}
+            followUserMode={"normal"}
           />
 
+          {/* POIS */}
           {filteredPOIsState && filteredPOIsState.map((poi, i) => (
             <Fragment key={i}>
               {/* MarkerView to add onPress event */}
               <MapboxGL.MarkerView coordinate={poi.coordinate}>
                 <TouchableOpacity
-                  onPress={() => console.log("nope: ", poi.name)}
+                  onPress={() => console.log("nope: ", poi)}
                   style={styles.markerView}
                 />
               </MapboxGL.MarkerView>
 
+              {/* PointAnnotation - UI */}
               <MapboxGL.PointAnnotation coordinate={poi.coordinate} id={`PointAnnotation${i}`}>
                 <View style={styles.markerContainer}>
                   <View style={styles.markerDot} />
@@ -103,6 +130,14 @@ const Map = ({filteredPOIs}) => {
               </MapboxGL.PointAnnotation>
             </Fragment>
           ))}
+
+          {/* ENTREPRISE */}
+          <MapboxGL.PointAnnotation coordinate={entreprise.coordinate} id="entreprise">
+            <View style={styles.markerEntrepriseContainer}>
+              <View style={styles.markerDotEntreprise} />
+              <Image source={Building} style={styles.buildingEntreprise} />
+            </View>
+          </MapboxGL.PointAnnotation>
 
         </MapboxGL.MapView>
       </View>
