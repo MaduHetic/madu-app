@@ -29,6 +29,7 @@ import { Quizz } from "@core/quizz";
 import QuizzScreen from "./quizz";
 import { getCredsFromStorage } from "../middlewares/saveCredentials";
 import HeaderTitle from "@components/headerTitle";
+import Title from "@components/title";
 
 moment.locale("fr");
 
@@ -41,10 +42,6 @@ const styles = StyleSheet.create({
   },
   section: {
     marginVertical: 20,
-  },
-  title: {
-    fontSize: 25,
-    padding: 14,
   },
   dots: {
     width: 8,
@@ -77,19 +74,6 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-  },
-  titleContainer: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginBottom: 16,
-  },
-  titleDecorator: {
-    height: 24,
-    width: 2,
-    backgroundColor: Color.black,
-    marginRight: 8,
   },
 });
 
@@ -190,12 +174,7 @@ export const Home = () => {
             />
           </View>
           <View style={styles.section}>
-            <View style={styles.titleContainer}>
-              <View style={styles.row}>
-                <View style={styles.titleDecorator} />
-                <Text style={styles.title}>Offres de la semaine</Text>
-              </View>
-            </View>
+            <Title text="Offres de la semaine" />
             <FlatList
               data={restaurants}
               renderItem={({ item }) => <Place item={item} key={item.key} />}
@@ -205,12 +184,7 @@ export const Home = () => {
             />
           </View>
           <View style={styles.section}>
-            <View style={styles.titleContainer}>
-              <View style={styles.row}>
-                <View style={styles.titleDecorator} />
-                <Text style={styles.title}>Quiz de la semaine</Text>
-              </View>
-            </View>
+            <Title text="Quiz de la semaine" />
             <FlatList
               data={themes}
               renderItem={({ item }) => <Quiz item={item} key={item.key} />}
