@@ -78,6 +78,19 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
+  titleContainer: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 16,
+  },
+  titleDecorator: {
+    height: 24,
+    width: 2,
+    backgroundColor: Color.black,
+    marginRight: 8,
+  },
 });
 
 export const Home = () => {
@@ -177,7 +190,12 @@ export const Home = () => {
             />
           </View>
           <View style={styles.section}>
-            <Text style={styles.title}>Offres de la semaine</Text>
+            <View style={styles.titleContainer}>
+              <View style={styles.row}>
+                <View style={styles.titleDecorator} />
+                <Text style={styles.title}>Offres de la semaine</Text>
+              </View>
+            </View>
             <FlatList
               data={restaurants}
               renderItem={({ item }) => <Place item={item} key={item.key} />}
@@ -187,7 +205,12 @@ export const Home = () => {
             />
           </View>
           <View style={styles.section}>
-            <Text style={styles.title}>Quiz de la semaine</Text>
+            <View style={styles.titleContainer}>
+              <View style={styles.row}>
+                <View style={styles.titleDecorator} />
+                <Text style={styles.title}>Quiz de la semaine</Text>
+              </View>
+            </View>
             <FlatList
               data={themes}
               renderItem={({ item }) => <Quiz item={item} key={item.key} />}
