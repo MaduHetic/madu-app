@@ -3,6 +3,7 @@ import { Text, View, ScrollView, StyleSheet, SafeAreaView, Image } from "react-n
 import { createStackNavigator } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import LineIcon from "react-native-vector-icons/SimpleLineIcons";
 import moment from "moment";
 import "moment/locale/fr";
 
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     lineHeight: 32,
-    borderLeftWidth: 5,
+    borderLeftWidth: 0,
   },
   section: {
     marginBottom: 40,
@@ -99,8 +100,8 @@ export const Account = () => {
                 <View style={styles.titleDecorator} />
                 <Text style={styles.title}>Vos trophés</Text>
               </View>
-              <Icon
-                name="arrow-circle-o-right"
+              <LineIcon
+                name="arrow-right-circle"
                 size={32}
                 onPress={() => navigation.navigate("rewards")}
               />
@@ -141,8 +142,8 @@ const AccountNavigation = () => {
           headerTitle: () => <View />,
           headerLeft: () => (
             <View style={styles.row}>
-              <Icon
-                name="arrow-circle-o-left"
+              <LineIcon
+                name="arrow-left-circle"
                 size={32}
                 onPress={() => navigation.navigate("account")}
                 style={{ marginLeft: 24, marginRight: 16 }}
