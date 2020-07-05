@@ -27,6 +27,7 @@ import { User } from "@core/user";
 import { KnowIt } from "@core/knowIt";
 import { Quizz } from "@core/quizz";
 import QuizzScreen from "./quizz";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { getCredsFromStorage } from "../middlewares/saveCredentials";
 import HeaderTitle from "@components/headerTitle";
 import Title from "@components/title";
