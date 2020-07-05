@@ -3,6 +3,9 @@ import { View, StyleSheet, Text, TouchableOpacity, Image } from "react-native";
 import MapboxGL from "@react-native-mapbox-gl/maps";
 import { Color } from "@glossy/colors";
 import Building from "@assets/images/Building.png";
+import cross from "@assets/images/cross.png";
+import BottomSheet from 'reanimated-bottom-sheet'
+import { Colors } from "react-native/Libraries/NewAppScreen";
 
 MapboxGL.setAccessToken(
   "pk.eyJ1IjoibWV0YWxtYW5pbmZyIiwiYSI6ImNqdjI5bzRsYjBxOXQ0ZXA5dmpsNDNkeGcifQ.luP93CEITntYfy6fZmCLOw",
@@ -21,7 +24,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   markerView: {
-    backgroundColor: "rgba(0, 0, 0, .1)",
+    // backgroundColor: "rgba(0, 0, 0, .1)",
     height: 40,
     width: 40
   },
@@ -75,7 +78,10 @@ const styles = StyleSheet.create({
 
 const Map = ({filteredPOIs, entreprise}) => {
   const mapEl = useRef(null);
+  const bottomSheetRef = useRef(null);
+  const annotationRef = useRef(null);
   const [filteredPOIsState, setFilteredPOIsState] = React.useState([])
+  const [currPOI, setCurrPOI] = React.useState(null)
 
   useEffect(() => {
     MapboxGL.setTelemetryEnabled(false);
@@ -87,7 +93,13 @@ const Map = ({filteredPOIs, entreprise}) => {
     }, 1)
   }, [filteredPOIs]);
 
+  handleClickPOI = poi => {
+    setCurrPOI(poi)
+    bottomSheetRef.current.snapTo(1)
+  }
+
   return (
+    <>
     <View style={styles.page}>
       <View style={styles.container}>
         <MapboxGL.MapView
@@ -116,7 +128,7 @@ const Map = ({filteredPOIs, entreprise}) => {
               {/* MarkerView to add onPress event */}
               <MapboxGL.MarkerView coordinate={poi.coordinate}>
                 <TouchableOpacity
-                  onPress={() => console.log("nope: ", poi)}
+                  onPress={() => handleClickPOI(poi)}
                   style={styles.markerView}
                 />
               </MapboxGL.MarkerView>
@@ -132,16 +144,87 @@ const Map = ({filteredPOIs, entreprise}) => {
           ))}
 
           {/* ENTREPRISE */}
-          <MapboxGL.PointAnnotation coordinate={entreprise.coordinate} id="entreprise">
+          <MapboxGL.PointAnnotation title="entreprisetite" coordinate={entreprise.coordinate} id="entreprise" ref={annotationRef}>
             <View style={styles.markerEntrepriseContainer}>
               <View style={styles.markerDotEntreprise} />
-              <Image source={Building} style={styles.buildingEntreprise} />
+              <Image source={Building} style={styles.buildingEntreprise} onLoad={() => annotationRef.current.refresh()} />
             </View>
           </MapboxGL.PointAnnotation>
 
         </MapboxGL.MapView>
+
       </View>
     </View>
+      <BottomSheet
+        ref={bottomSheetRef}
+        snapPoints={["87%", 220, 0]}
+        initialSnap={2}
+        renderContent={() => (
+          <View style={{backgroundColor: Colors.white, position: "relative"}}>
+            <TouchableOpacity
+              onPress={() => bottomSheetRef.current.snapTo(2)}
+              style={{width: "95%", display: "flex", alignItems: "flex-end"}}
+            >
+              <View style={{width: 40, height: 40, backgroundColor: "#F5F5FA", borderRadius: 50, display: "flex", justifyContent: "center", alignItems: "center"}}>
+                <Image source={cross} />
+              </View>
+            </TouchableOpacity>
+            
+            <Text style={{fontSize: 26, margin: 10}}>{currPOI?.name}</Text>
+            
+            <Text style={{margin: 10}}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+              ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+              laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+              voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat 
+              non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </Text>
+            <Text style={{margin: 10}}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+              ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+              laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+              voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat 
+              non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </Text>
+            <Text style={{margin: 10}}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+              ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+              laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+              voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat 
+              non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </Text>
+            <Text style={{margin: 10}}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+              ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+              laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+              voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat 
+              non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </Text>
+            <Text style={{margin: 10}}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+              ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+              laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+              voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat 
+              non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </Text>
+            <Text style={{margin: 10}}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+              ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+              laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+              voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat 
+              non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </Text>
+
+            <Text style={{margin: 10}}>FIN</Text>
+          </View>
+        )}
+        renderHeader={() => (
+          <View
+            style={{width: "100%", height: 20, backgroundColor: "white"}}
+          />
+        )}
+      />
+    </>
   );
 };
 
