@@ -1,5 +1,6 @@
 import React from "react";
 import { View, ImageBackground, Text, StyleSheet, Dimensions } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 import { Color } from "@glossy/colors";
@@ -65,21 +66,27 @@ const styles = StyleSheet.create({
   },
 });
 
-const Quiz = ({ item: { image, reward, title, duration, participants } }) => {
+const Quiz = ({ item: { id, imgBackground, reward, theme, duration, participants } }) => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <ImageBackground source={image} style={styles.image}>
+      <ImageBackground source={{ uri: imgBackground }} style={styles.image}>
         <View style={styles.iconContainer}>
           <Icon style={styles.icon} name="star" size={15} />
           <Text>{`${reward} Saphires`}</Text>
         </View>
         <View style={styles.bottomContainer}>
           <View>
-            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.title}>{theme}</Text>
             <Text style={styles.time}>{`Temps moyen : ${duration} minutes`}</Text>
           </View>
           <View style={styles.arrow}>
-            <Icon name="arrow-right" size={12} color={Color.dark} />
+            <Icon
+              name="arrow-right"
+              size={12}
+              color={Color.dark}
+              onPress={() => navigation.navigate("quizz", { id })}
+            />
           </View>
         </View>
       </ImageBackground>

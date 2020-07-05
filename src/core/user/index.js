@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { rootSagas } from "./sagas";
 import { Events, Actions } from "./actions";
 import { userReducer } from "./reducer";
-import { isLoading, user, errors, loggedIn } from "./selectors";
+import { isLoading, user, errors, loggedIn, firstName } from "./selectors";
 import { removeCredsFromStorage } from "../../middlewares/saveCredentials";
 
 function useSignOut() {
@@ -30,6 +30,10 @@ function useSignUp() {
   return () => dispatch(Events.signUp());
 }
 
+function useFirstName() {
+  return useSelector(firstName);
+}
+
 function useUser() {
   return useSelector(user);
 }
@@ -50,6 +54,7 @@ export const User = {
   signOut: useSignOut,
   signIn: useSignIn,
   signUp: useSignUp,
+  firstName: useFirstName,
   user: useUser,
   errors: useError,
   loggedIn: useLoggedIn,

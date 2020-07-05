@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   SafeAreaView,
   View,
-  Text,
   StyleSheet,
   Dimensions,
   ImageBackground,
@@ -13,7 +12,7 @@ import Carousel, { Pagination } from "react-native-snap-carousel";
 import TutorialCard from "@components/card/tutorial";
 import background from "@assets/images/background.png";
 
-import { Button } from "../components/button";
+import Button from "../components/button";
 import { Color } from "@glossy/colors";
 
 const styles = StyleSheet.create({
@@ -112,9 +111,7 @@ const Tutorial = () => {
           />
         </View>
         <View style={{ margin: 20 }}>
-          <Button color="blue" onPress={handleSlider}>
-            <Text>Suivant</Text>
-          </Button>
+          <Button color="blue" onPress={handleSlider} text="Suivant" />
         </View>
       </SafeAreaView>
     </ImageBackground>

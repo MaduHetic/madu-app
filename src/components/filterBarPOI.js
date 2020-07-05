@@ -20,6 +20,31 @@ const DATA = [
   },
 ];
 
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "#FFF",
+    zIndex: 1,
+    position: "absolute",
+    width: "100%",
+    flexDirection: "row",
+    paddingLeft: "5%",
+    paddingRight: "5%",
+    paddingTop: 8,
+  },
+  item: {
+    paddingBottom: 12,
+    borderBottomColor: Color.primary,
+    borderBottomWidth: 0,
+    flex: 1,
+  },
+  title: {
+    color: Color.mediumGrey,
+    fontSize: 16,
+    fontWeight: "700",
+    textAlign: "center",
+  },
+});
+
 function Item({ title, selected, onSelect }) {
   return (
     <TouchableOpacity
@@ -49,27 +74,3 @@ export default function FilterBarPOI({selected, setSelected}) {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "#FFF",
-    zIndex: 1,
-    width: "100%",
-    flexDirection: "row",
-    paddingLeft: "5%",
-    paddingRight: "5%",
-    paddingTop: 8,
-  },
-  item: {
-    paddingBottom: 12,
-    borderBottomColor: Color.primary,
-    borderBottomWidth: 0,
-    flex: 1,
-  },
-  title: {
-    color: Color.mediumGrey,
-    fontSize: 16,
-    fontWeight: "700",
-    textAlign: "center",
-  },
-});
