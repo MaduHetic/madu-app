@@ -6,6 +6,7 @@ import { User } from "@core/user";
 import HeaderLogin from "@components//headerLogin";
 import Button from "@components/button";
 
+import InputTextField from "@components//inputTextField";
 import EmailTextField from "@components/emailTextField";
 import PasswordTextField from "@components/passwordTextField";
 
@@ -24,8 +25,26 @@ const SignUp = () => {
       <HeaderLogin title="Inscription" />
       <View style={styles.container}>
         <View style={styles.form}>
-          <EmailTextField label={"Entrez votre e-mail"} />
-          <PasswordTextField label={"Entrez votre mot de passe"} />
+          <InputTextField
+            label={"Entrez votre Prenom"}
+            value={firstName}
+            onValueChange={(val) => setFirstName(val)}
+          />
+          <InputTextField
+            label={"Entrez votre Nom"}
+            value={lastName}
+            onValueChange={(val) => setLastName(val)}
+          />
+          <EmailTextField
+            label={"Entrez votre e-mail"}
+            value={email}
+            onValueChange={(val) => setEmail(val)}
+          />
+          <PasswordTextField
+            label={"Entrez votre mot de passe"}
+            value={password}
+            onValueChange={(val) => setPassword(val)}
+          />
         </View>
         <Button
           onPress={() => signUp(email, password)}
