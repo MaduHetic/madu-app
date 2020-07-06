@@ -15,6 +15,7 @@ import Rewards from "./rewards";
 import Svg from "@components/svg";
 import Button from "@components/button";
 import { User } from "@core/user";
+import TextWithDecorator from "@components/textWithDecorator";
 
 import staticImage from "@assets/images/fdj.jpg";
 import Svgs from "@assets/svg/gems";
@@ -74,6 +75,7 @@ export const Account = () => {
             <Text>{`Inscrit depuis ${moment(date).format("MMMM YYYY")}`}</Text>
           </View>
           <View style={styles.section}>
+            <TextWithDecorator text="Vos trophés" color={Color.primary} />
             <Title text="Vos trophés">
               <LineIcon
                 name="arrow-right-circle"
