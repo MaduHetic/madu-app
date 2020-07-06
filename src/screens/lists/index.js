@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ScrollView, SafeAreaView, View, Text, StyleSheet, FlatList } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
@@ -21,6 +21,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     marginBottom: 16,
+  },
+  row: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
   },
 });
 
@@ -95,12 +100,13 @@ const Lists = [
 ];
 
 export const List = () => {
+  const [type, setType] = useState();
   const navigation = useNavigation();
   return (
     <SafeAreaView>
       <ScrollView>
         <View style={{ paddingVertical: 24, position: "relative" }}>
-          <FilterBarPOI />
+          <FilterBarPOI setSelected={(item) => setType(item)} />
           {Lists.slice(0, 2).map((list, index) => (
             <View style={{ padding: 24 }} key={index}>
               <View style={styles.titleContainer}>
@@ -206,6 +212,7 @@ export const List = () => {
 const Stack = createStackNavigator();
 
 const ListNavigator = () => {
+  const navigation = useNavigation();
   return (
     <Stack.Navigator
       screenOptions={{
@@ -214,7 +221,29 @@ const ListNavigator = () => {
     >
       <Stack.Screen name={"list"} component={List} />
       <Stack.Screen name={"poi"} component={Poi} />
-      <Stack.Screen name={"bestOfList"} component={BestOfList} />
+      <Stack.Screen
+        name={"bestOfList"}
+        component={BestOfList}
+        options={{
+          headerShown: true,
+          headerTitle: () => <View />,
+          headerLeft: () => (
+            <View style={styles.row}>
+              <Icon
+                name="arrow-circle-left"
+                size={28}
+                onPress={() => navigation.navigate("list")}
+                style={{ marginLeft: 24, marginRight: 16 }}
+                color={Color.white}
+              />
+              <Text style={{ fontSize: 24, lineHeight: 32, color: Color.white }}>
+                Au plus proche de vous
+              </Text>
+            </View>
+          ),
+          headerStyle: { backgroundColor: Color.peich },
+        }}
+      />
     </Stack.Navigator>
   );
 };
