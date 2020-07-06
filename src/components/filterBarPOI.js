@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#FFF",
     zIndex: 1,
-    position: "absolute",
+    position: "relative",
     width: "100%",
     flexDirection: "row",
     paddingLeft: "5%",

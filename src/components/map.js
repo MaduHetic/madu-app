@@ -144,13 +144,12 @@ const Map = ({filteredPOIs, entreprise}) => {
           ))}
 
           {/* ENTREPRISE */}
-          <MapboxGL.PointAnnotation title="entreprisetite" coordinate={entreprise.coordinate} id="entreprise" ref={annotationRef}>
-            <View style={styles.markerEntrepriseContainer}>
-              <View style={styles.markerDotEntreprise} />
-              <Image source={Building} style={styles.buildingEntreprise} onLoad={() => annotationRef.current.refresh()} />
-            </View>
-          </MapboxGL.PointAnnotation>
-
+            <MapboxGL.PointAnnotation title="entreprisetite" coordinate={entreprise.coordinate} id="entreprise" ref={annotationRef}>
+              <View style={styles.markerEntrepriseContainer}>
+                <View style={styles.markerDotEntreprise} />
+                <Image source={Building} style={styles.buildingEntreprise} onLoad={() => annotationRef.current.refresh()} />
+              </View>
+            </MapboxGL.PointAnnotation>
         </MapboxGL.MapView>
 
       </View>
