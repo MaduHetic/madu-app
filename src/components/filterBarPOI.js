@@ -6,48 +6,19 @@ const DATA = [
   {
     id: 0,
     title: "Restaurants",
+    type: "RESTAURANT"
   },
   {
     id: 1,
     title: "Magasins",
+    type: "MAGASIN"
   },
   {
     id: 2,
     title: "Activités",
+    type: "ACTIVITÉ"
   },
 ];
-
-function Item({ title, selected, onSelect }) {
-  return (
-    <TouchableOpacity
-      onPress={onSelect}
-      style={[styles.item, { borderBottomWidth: selected ? 4 : 0 }]}
-    >
-      <Text
-        style={[styles.title, { color: selected ? Color.primary : Color.mediumGrey }]}
-      >
-        {title}
-      </Text>
-    </TouchableOpacity>
-  );
-}
-
-export default function FilterBarPOI() {
-  const [selected, setSelected] = React.useState(0);
-
-  return (
-    <SafeAreaView style={styles.container}>
-      {DATA.map((item) => (
-        <Item
-          key={item.id}
-          title={item.title}
-          selected={selected === item.id}
-          onSelect={() => setSelected(item.id)}
-        />
-      ))}
-    </SafeAreaView>
-  );
-}
 
 const styles = StyleSheet.create({
   container: {
@@ -73,3 +44,33 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 });
+
+function Item({ title, selected, onSelect }) {
+  return (
+    <TouchableOpacity
+      onPress={onSelect}
+      style={[styles.item, { borderBottomWidth: selected ? 4 : 0 }]}
+    >
+      <Text
+        style={[styles.title, { color: selected ? Color.primary : Color.mediumGrey }]}
+      >
+        {title}
+      </Text>
+    </TouchableOpacity>
+  );
+}
+
+export default function FilterBarPOI({selected, setSelected}) {
+  return (
+    <SafeAreaView style={styles.container}>
+      {DATA.map((item) => (
+        <Item
+          key={item.id}
+          title={item.title}
+          selected={selected === item.type}
+          onSelect={() => setSelected(item.type)}
+        />
+      ))}
+    </SafeAreaView>
+  );
+}

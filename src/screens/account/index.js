@@ -3,6 +3,7 @@ import { Text, View, ScrollView, StyleSheet, SafeAreaView, Image } from "react-n
 import { createStackNavigator } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import LineIcon from "react-native-vector-icons/SimpleLineIcons";
 import moment from "moment";
 import "moment/locale/fr";
 
@@ -20,29 +21,12 @@ import staticImage from "@assets/images/fdj.jpg";
 import Svgs from "@assets/svg/gems";
 
 import { Color } from "@glossy/colors";
+import Title from "@components/title";
 
 const styles = StyleSheet.create({
   container: {
     padding: 24,
     backgroundColor: Color.white,
-  },
-  titleContainer: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginBottom: 16,
-  },
-  titleDecorator: {
-    height: 24,
-    width: 2,
-    backgroundColor: Color.black,
-    marginRight: 8,
-  },
-  title: {
-    fontSize: 24,
-    lineHeight: 32,
-    borderLeftWidth: 5,
   },
   section: {
     marginBottom: 40,
@@ -83,23 +67,23 @@ export const Account = () => {
         <HeaderTitle title="Votre compte" subTitle={"8 trophées"} />
         <View style={styles.container}>
           <View style={styles.section}>
-            <View style={styles.titleContainer}>
-              <TextWithDecorator text="A propos de vous" />
+            <Title text="Vos trophés">
               <Icon name="gear" size={20} />
-            </View>
+            </Title>
             {staticImage && <Image source={staticImage} />}
             <Text>{email}</Text>
             <Text>{`Inscrit depuis ${moment(date).format("MMMM YYYY")}`}</Text>
           </View>
           <View style={styles.section}>
-            <View style={styles.titleContainer}>
-              <TextWithDecorator text="Vos trophés" />
-              <Icon
-                name="arrow-circle-o-right"
+            <TextWithDecorator text="Vos trophés" color={Color.primary} />
+            <Title text="Vos trophés">
+              <LineIcon
+                name="arrow-right-circle"
                 size={32}
                 onPress={() => navigation.navigate("rewards")}
               />
-            </View>
+            </Title>
+
             <View style={[styles.row, styles.rewardContainer]}>
               {rewards.slice(0, 4).map(({ name, type }, index) => (
                 <View key={index}>
@@ -136,8 +120,8 @@ const AccountNavigation = () => {
           headerTitle: () => <View />,
           headerLeft: () => (
             <View style={styles.row}>
-              <Icon
-                name="arrow-circle-o-left"
+              <LineIcon
+                name="arrow-left-circle"
                 size={32}
                 onPress={() => navigation.navigate("account")}
                 style={{ marginLeft: 24, marginRight: 16 }}
