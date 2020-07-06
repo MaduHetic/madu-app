@@ -27,7 +27,7 @@ const LogInRegister = () => {
         <View style={styles.groupBtn}>
           <Button
             text={"S'inscrire"}
-            onPress={() => navigation.navigate("signIn")}
+            onPress={() => navigation.navigate("signUp")}
             color="blue"
           />
           <Button

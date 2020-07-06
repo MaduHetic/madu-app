@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-import HeaderLogin from "@components//headerLogin";
+import HeaderLogin from "@components/headerLogin";
 import Button from "@components/button";
 
 import EmailTextField from "@components/emailTextField";
@@ -22,7 +22,7 @@ const SignIn = () => {
     if (loggedIn) {
       navigation.navigate("home");
     } else {
-      navigation.navigate("login");
+      navigation.navigate("signIn");
     }
   }, [loggedIn, navigation]);
 
@@ -43,7 +43,7 @@ const SignIn = () => {
           />
         </View>
         <Button
-          text={"S'inscrire"}
+          text={"Se connecter"}
           onPress={() => signIn({ username: email, password })}
           color="blue"
         />
