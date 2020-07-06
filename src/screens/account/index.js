@@ -53,7 +53,7 @@ export const Account = () => {
   const signOut = User.signOut();
 
   const [email] = useState("mail@mail.com");
-  const [date] = useState("07-01-2020");
+  const [date, setDate] = useState("07-01-2020");
 
   const rewards = [
     { name: "Vegan", type: "Gold" },
