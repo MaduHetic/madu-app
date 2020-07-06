@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     lineHeight: 32,
-    borderLeftWidth: 5,
   },
 });
 

@@ -16,6 +16,7 @@ import "moment/locale/fr";
 import Card from "@components/card/card";
 import Place from "@components/card/places";
 import Quiz from "@components/card/quiz";
+import Poi from "./lists/poi";
 import Carousel, { Pagination } from "react-native-snap-carousel";
 import Tutorial from "./tutorial";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -212,6 +213,7 @@ const HomeNavigator = () => {
     >
       <Stack.Screen name={"home"} component={Home} />
       <Stack.Screen name={"tutorial"} component={Tutorial} />
+      <Stack.Screen name={"poi"} component={Poi} />
       <Stack.Screen
         name={"quizz"}
         component={QuizzScreen}

@@ -19,6 +19,7 @@ const StackOptions = ({ height = 0, ...otherProps } = {}) => ({
   headerStyle: {
     height,
   },
+  cardStyle: { backgroundColor: "#FFFFFF" },
   ...otherProps,
 });
 

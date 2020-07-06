@@ -53,7 +53,7 @@ export const Account = () => {
   const signOut = User.signOut();
 
   const [email] = useState("mail@mail.com");
-  const [date] = useState("07-01-2020");
+  const [date, setDate] = useState("07-01-2020");
 
   const rewards = [
     { name: "Vegan", type: "Gold" },
@@ -67,22 +67,23 @@ export const Account = () => {
         <HeaderTitle title="Votre compte" subTitle={"8 trophées"} />
         <View style={styles.container}>
           <View style={styles.section}>
-            <Title text="Vos trophés">
+            <View style={[styles.row, styles.rewardContainer]}>
+              <TextWithDecorator text="A propos de vous" color={Color.black} />
               <Icon name="gear" size={20} />
-            </Title>
+            </View>
             {staticImage && <Image source={staticImage} />}
             <Text>{email}</Text>
             <Text>{`Inscrit depuis ${moment(date).format("MMMM YYYY")}`}</Text>
           </View>
           <View style={styles.section}>
-            <TextWithDecorator text="Vos trophés" color={Color.primary} />
-            <Title text="Vos trophés">
+            <View style={[styles.row, styles.rewardContainer]}>
+              <TextWithDecorator text="Vos trophés" color={Color.black} />
               <LineIcon
                 name="arrow-right-circle"
                 size={32}
                 onPress={() => navigation.navigate("rewards")}
               />
-            </Title>
+            </View>
 
             <View style={[styles.row, styles.rewardContainer]}>
               {rewards.slice(0, 4).map(({ name, type }, index) => (
