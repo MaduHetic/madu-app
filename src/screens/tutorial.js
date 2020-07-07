@@ -56,20 +56,19 @@ const Tutorial = () => {
 
   const entries = [
     {
-      title: "Collecter des gems",
+      title: "Collecter des graines",
       svg: "Money",
-      explination:
-        "Ruby, saphire et emeraudes sont des reconpense que vous pouvez collecter",
+      explination: "Les graines sont des récompenses que vous pouvez collecter.",
     },
     {
       title: "Débloquer des badges",
       svg: "Board",
-      explination: "Collectez les badges et partagez les avec vos collegues",
+      explination: "Collectez les badges et partagez-les avec vos collègues.",
     },
     {
       title: "Les quiz",
       svg: "Quiz",
-      explination: "En faisant des quiz vous pouvez collecter des gems",
+      explination: "En faisant des quiz vous pouvez collecter des graines.",
     },
   ];
 
