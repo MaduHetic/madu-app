@@ -27,7 +27,15 @@ function useGetCurrentUser() {
 
 function useSignUp() {
   const dispatch = useDispatch();
-  return () => dispatch(Events.signUp());
+  return (firstName, lastName, mail, password) =>
+    dispatch(
+      Events.signUp({
+        firstName,
+        lastName,
+        mail,
+        password,
+      }),
+    );
 }
 
 function useFirstName() {

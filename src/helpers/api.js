@@ -17,7 +17,7 @@ export const client = axios.create({
 
 client.interceptors.request.use(
   async (config) => {
-    if (config.url === apiRoute.signIn()) {
+    if (config.url === apiRoute.signIn() || config.url === apiRoute.signUp()) {
       return config;
     }
 

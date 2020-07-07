@@ -47,7 +47,7 @@ const SignUp = () => {
           />
         </View>
         <Button
-          onPress={() => signUp(email, password)}
+          onPress={() => signUp(firstName, lastName, email, password)}
           text={"S'inscrire"}
           color="blue"
         />
