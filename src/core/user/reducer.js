@@ -3,8 +3,8 @@ import produce from "immer";
 import { Actions } from "./actions";
 
 const initialState: UserState = {
-  loggedIn: true,
-  errors: [],
+  loggedIn: false,
+  error: null,
   isLoading: false,
 };
 
@@ -29,12 +29,14 @@ export const userReducer = (state = initialState, action: UserAction) => {
         break;
       case getType(Actions.signUp.request):
         draft.isLoading = action.payload;
+        draft.error = null;
         break;
       case getType(Actions.signUp.success):
         draft.isLoading = action.payload;
         break;
       case getType(Actions.signUp.failure):
-        draft.isLoading = action.payload;
+        draft.error = action.payload;
+        draft.isLoading = false;
         break;
       case getType(Actions.signOut):
         draft.isLoading = false;

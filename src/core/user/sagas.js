@@ -33,15 +33,12 @@ function* signIn(action) {
 function* signUp(action) {
   try {
     yield put(Actions.signUp.request(true));
-    const request = yield call(Api.signOut, action.payload);
-    console.log(request);
-
+    const request = yield call(Api.signUp, action.payload);
     if (request.status === 201) {
-      yield put(Actions.signUp.success(request));
-      console.log(request);
+      yield put(Actions.signUp.success(request.data));
     }
-  } catch {
-    yield put(Actions.signUp.failure(false));
+  } catch (error) {
+    yield put(Actions.signUp.failure(error.response.data.message));
   }
 }
 

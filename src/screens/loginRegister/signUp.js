@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, View, Alert } from "react-native";
 
 import { User } from "@core/user";
 
@@ -14,11 +14,26 @@ import { Color } from "@glossy/colors";
 
 const SignUp = () => {
   const signUp = User.signUp();
+  const error = User.errors();
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    if (error) {
+      Alert.alert("Erreur", error);
+    }
+  }, [error]);
+
+  const submitIsValid = () => {
+    if (!firstName || !lastName || !email || !password) {
+      Alert.alert("Erreur", "Merci de remplir tous les champs.");
+    } else {
+      signUp(firstName, lastName, email, password);
+    }
+  };
 
   return (
     <>
@@ -46,11 +61,7 @@ const SignUp = () => {
             onValueChange={(val) => setPassword(val)}
           />
         </View>
-        <Button
-          onPress={() => signUp(firstName, lastName, email, password)}
-          text={"S'inscrire"}
-          color="blue"
-        />
+        <Button onPress={submitIsValid} text={"S'inscrire"} color="blue" />
       </View>
     </>
   );
