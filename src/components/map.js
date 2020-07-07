@@ -82,6 +82,7 @@ const Map = ({ filteredPOIs, entreprise }) => {
   const annotationRef = useRef(null);
   const [filteredPOIsState, setFilteredPOIsState] = React.useState([]);
   const [currPOI, setCurrPOI] = React.useState(null);
+  const [isZoomAbove15, setIsZoomAbove15] = React.useState(true);
 
   useEffect(() => {
     MapboxGL.setTelemetryEnabled(false);
@@ -93,10 +94,17 @@ const Map = ({ filteredPOIs, entreprise }) => {
     }, 1);
   }, [filteredPOIs]);
 
+  useEffect(() => {
+  }, [isZoomAbove15]);
+
   const handleClickPOI = (poi) => {
     setCurrPOI(poi);
     bottomSheetRef.current.snapTo(1);
   };
+
+  const handleZoomChanged = e => {
+    setIsZoomAbove15(e > 15)
+  }
 
   return (
     <>
@@ -107,6 +115,7 @@ const Map = ({ filteredPOIs, entreprise }) => {
             styleURL="mapbox://styles/mapbox/streets-v9"
             style={styles.map}
             onDidFailLoadingMap={() => console.log("failed")}
+            onTouchMove={() => mapEl.current.getZoom().then(e => handleZoomChanged(e))}
           >
             <MapboxGL.UserLocation visible={true} showsUserHeadingIndicator={true} />
 
@@ -138,7 +147,7 @@ const Map = ({ filteredPOIs, entreprise }) => {
                   >
                     <View style={styles.markerContainer}>
                       <View style={styles.markerDot} />
-                      <Text style={styles.markerText}>{poi.name}</Text>
+                        <Text style={isZoomAbove15 ? styles.markerText : {}}>{isZoomAbove15 ? poi.name : ""}</Text>
                     </View>
                   </MapboxGL.PointAnnotation>
                 </Fragment>
