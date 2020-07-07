@@ -220,7 +220,6 @@ const ListNavigator = () => {
       }}
     >
       <Stack.Screen name={"list"} component={List} />
-      <Stack.Screen name={"poi"} component={Poi} />
       <Stack.Screen
         name={"bestOfList"}
         component={BestOfList}

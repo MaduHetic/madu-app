@@ -9,10 +9,10 @@ export default {
   deleteCompany: (id) => `company/${id}`, // DELETE
   getAllCompanies: () => `/company`, // GET
   registerPoi: () => `/poi`, // POST
-  getPoi: (id) => `/poi/one/${id}`, // GET
+  getPoi: (id) => `/poi/nearby/${id}`, // GET
   updatePoi: (id) => `poi/${id}`, // PUT
   deletePoi: (id) => `poi/${id}`, // DELETE
-  getAllPoi: () => `/poi`, // GET
+  getAllPoi: () => `/poi/nearby`, // GET
   getTag: (id) => `/tags/one/${id}`, // GET
   createTag: () => `/tags`, // POST
   deleteTag: (id) => `/tags/${id}`, // DELETE

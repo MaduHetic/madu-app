@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     borderTopRightRadius: 6,
     borderTopLeftRadius: 6,
+    backgroundColor: Color.lightGrey,
   },
   iconContainer: {
     display: "flex",
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
 const Places = ({
   item: {
     id,
-    image,
+    mainImg,
     title,
     starRating,
     nbOfRatings,
@@ -107,16 +108,20 @@ const Places = ({
       style={styles.container}
       onPress={() => navigation.navigate("poi", { id })}
     >
-      <Image style={styles.image} source={image} />
+      {mainImg ? (
+        <Image style={styles.image} source={{ uri: mainImg }} />
+      ) : (
+        <View style={styles.image} />
+      )}
       <View style={{ paddingHorizontal: 10 }}>
         <Text style={styles.title}>{title}</Text>
         <View style={styles.informationContainer}>
-          <View style={[styles.informationContainer, styles.rating]}>
+          {/* <View style={[styles.informationContainer, styles.rating]}>
             <Icon style={[styles.icon, styles.rating]} name="star" size={15} />
             <Text
               style={styles.rating}
             >{`${starRating} ${rating} (${nbOfRatings})`}</Text>
-          </View>
+          </View> */}
           <View style={[styles.informationContainer, styles.greenScore]}>
             {/* <Icon style={[styles.icon, styles.greenScore]} name="star" size={15} /> */}
             <Svg svgs={svgs} name="score" height={16} width={16} />
@@ -130,11 +135,11 @@ const Places = ({
         <View style={styles.informationContainer}>
           <View style={styles.iconContainer}>
             <MaterialCommunityIcons style={styles.icon} name="walk" size={15} />
-            <Text>{distance}</Text>
+            <Text>{distance}m</Text>
           </View>
           <View style={styles.iconContainer}>
-            <Icon style={styles.icon} name="money" size={15} />
-            <Text>{`${reward} Emeraudes`}</Text>
+            <MaterialCommunityIcons style={styles.icon} name="seed-outline" size={20} />
+            <Text>{`${reward}`}</Text>
           </View>
         </View>
       </View>

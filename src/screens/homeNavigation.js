@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Platform } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createStackNavigator } from "@react-navigation/stack";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Color } from "@glossy/colors";
 
@@ -8,6 +9,7 @@ import Home from "./home";
 import Map from "./map";
 import AccountNavigation from "./account";
 import ListNavigator from "./lists";
+import Poi from "./lists/poi";
 
 const styles = StyleSheet.create({
   navigationContainer: {
@@ -98,18 +100,30 @@ function MyTabBar({ state, descriptors, navigation }) {
 }
 
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
 const HomeNagivation = () => (
-  <Tab.Navigator tabBar={(props) => <MyTabBar {...props} />}>
-    <Tab.Screen name="Home" component={Home} options={{ tabBarIcon: "home" }} />
-    <Tab.Screen name="Carte" component={Map} options={{ tabBarIcon: "map" }} />
-    <Tab.Screen name="Liste" component={ListNavigator} options={{ tabBarIcon: "list" }} />
-    <Tab.Screen
-      name="Compte"
-      component={AccountNavigation}
-      options={{ tabBarIcon: "user-circle" }}
-    />
-  </Tab.Navigator>
+  <Stack.Navigator headerMode="none">
+    <Stack.Screen name={"Home"}>
+      {() => (
+        <Tab.Navigator tabBar={(props) => <MyTabBar {...props} />}>
+          <Tab.Screen name="Home" component={Home} options={{ tabBarIcon: "home" }} />
+          <Tab.Screen name="Carte" component={Map} options={{ tabBarIcon: "map" }} />
+          <Tab.Screen
+            name="Liste"
+            component={ListNavigator}
+            options={{ tabBarIcon: "list" }}
+          />
+          <Tab.Screen
+            name="Compte"
+            component={AccountNavigation}
+            options={{ tabBarIcon: "user-circle" }}
+          />
+        </Tab.Navigator>
+      )}
+    </Stack.Screen>
+    <Stack.Screen name={"poi"} component={Poi} />
+  </Stack.Navigator>
 );
 
 export default HomeNagivation;

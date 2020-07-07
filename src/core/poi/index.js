@@ -16,7 +16,6 @@ function useGetPoi() {
   const dispatch = useDispatch();
   return (id) => {
     dispatch(Events.getPoi(id));
-    dispatch(Actions.getPoi.request());
   };
 }
 
