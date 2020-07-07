@@ -10,6 +10,7 @@ import {
   Image,
   ScrollView,
   RefreshControl,
+  Linking,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import AntDesign from "react-native-vector-icons/AntDesign";
@@ -207,7 +208,15 @@ const Poi = () => {
         </SafeAreaView>
       </ScrollView>
       <View style={{ position: "absolute", bottom: 20, left: 24, right: 24 }}>
-        <Button text="Y aller 👍" onPress={() => {}} color="blue" />
+        <Button
+          text="Y aller 👍"
+          onPress={() => {
+            Linking.openURL(
+              `https://www.google.com/maps/search/?api=1&query=${place.lat},${place.long}`,
+            );
+          }}
+          color="blue"
+        />
       </View>
     </View>
   );
