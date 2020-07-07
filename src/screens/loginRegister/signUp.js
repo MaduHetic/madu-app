@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Alert } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import { User } from "@core/user";
 
@@ -13,6 +14,9 @@ import PasswordTextField from "@components/passwordTextField";
 import { Color } from "@glossy/colors";
 
 const SignUp = () => {
+  const navigation = useNavigation();
+  const loggedIn = User.loggedIn();
+
   const signUp = User.signUp();
   const error = User.errors();
 
@@ -26,6 +30,14 @@ const SignUp = () => {
       Alert.alert("Erreur", error);
     }
   }, [error]);
+
+  useEffect(() => {
+    if (loggedIn) {
+      navigation.navigate("home");
+    } else {
+      navigation.navigate("signUp");
+    }
+  }, [loggedIn, navigation]);
 
   const submitIsValid = () => {
     if (!firstName || !lastName || !email || !password) {
