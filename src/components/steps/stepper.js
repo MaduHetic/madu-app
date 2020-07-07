@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Dimensions } from "react-native";
 import { Color } from "@glossy/colors";
 
 const styles = StyleSheet.create({
@@ -12,7 +12,6 @@ const styles = StyleSheet.create({
     backgroundColor: Color.white,
   },
   indercator: {
-    width: 32,
     height: 4,
     backgroundColor: Color.mediumGrey,
     borderRadius: 2,
@@ -24,12 +23,18 @@ const styles = StyleSheet.create({
 });
 
 const Stepper = ({ activeIndex, entries }) => {
+  const screenWidth = Math.round(Dimensions.get("window").width);
+
   return (
     <View style={styles.container}>
       {entries.map((entry, index) => (
         <View
           key={index}
-          style={[styles.indercator, index === activeIndex && styles.active]}
+          style={[
+            styles.indercator,
+            index === activeIndex && styles.active,
+            { width: screenWidth / entries.length - 10 },
+          ]}
         />
       ))}
     </View>

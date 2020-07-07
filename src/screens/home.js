@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   Dimensions,
   FlatList,
+  RefreshControl,
 } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
@@ -32,6 +33,8 @@ import QuizzScreen from "./quizz";
 import { getCredsFromStorage } from "../middlewares/saveCredentials";
 import HeaderTitle from "@components/headerTitle";
 import Title from "@components/title";
+
+import { Poi as PointOfIntress } from "@core/poi";
 
 moment.locale("fr");
 
@@ -81,6 +84,7 @@ const styles = StyleSheet.create({
 
 export const Home = () => {
   const [activeSlide, setActiveSlide] = useState(0);
+  const [refreshing, setRefreshing] = useState(false);
   const navigation = useNavigation();
   const getKnowIt = KnowIt.getKnowIt();
   const knowItItem = KnowIt.data();
@@ -94,17 +98,29 @@ export const Home = () => {
     return JSON.parse(res);
   };
 
+  const getAllPoi = PointOfIntress.getAllPoi();
+  const allPoi = PointOfIntress.allPoi();
+
   useEffect(() => {
     const navigatToTutorial = async () => {
       const tutorial = await getTutorialValidation();
-      // if (!tutorial?.done) {
-      //   navigation.navigate("tutorial");
-      // }
+      if (!tutorial?.done) {
+        navigation.navigate("tutorial");
+      }
     };
     navigatToTutorial();
     getKnowIt();
     getThemes();
+    getAllPoi();
   }, []);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    getKnowIt();
+    getThemes();
+    getAllPoi();
+    setRefreshing(false);
+  }, [refreshing]);
 
   const item = ({ item }) => (
     <Card style={styles.item}>
@@ -154,7 +170,9 @@ export const Home = () => {
 
   return (
     <SafeAreaView>
-      <ScrollView>
+      <ScrollView
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+      >
         <HeaderTitle title={`Hello ${name}`} subTitle={moment().format("dddd DD MMMM")} />
         <View style={styles.container}>
           <View>
@@ -178,7 +196,7 @@ export const Home = () => {
           <View style={styles.section}>
             <Title text="Offres de la semaine" />
             <FlatList
-              data={restaurants}
+              data={allPoi}
               renderItem={({ item }) => <Place item={item} key={item.key} />}
               keyExtractor={(item) => `${item.id}`}
               horizontal
@@ -205,6 +223,7 @@ const Stack = createStackNavigator();
 
 const HomeNavigator = () => {
   const navigation = useNavigation();
+
   return (
     <Stack.Navigator
       screenOptions={{
@@ -213,7 +232,7 @@ const HomeNavigator = () => {
     >
       <Stack.Screen name={"home"} component={Home} />
       <Stack.Screen name={"tutorial"} component={Tutorial} />
-      <Stack.Screen name={"poi"} component={Poi} />
+      {/* <Stack.Screen name={"poi"} component={Poi} /> */}
       <Stack.Screen
         name={"quizz"}
         component={QuizzScreen}

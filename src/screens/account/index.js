@@ -21,7 +21,6 @@ import staticImage from "@assets/images/fdj.jpg";
 import Svgs from "@assets/svg/gems";
 
 import { Color } from "@glossy/colors";
-import Title from "@components/title";
 
 const styles = StyleSheet.create({
   container: {
@@ -53,7 +52,7 @@ export const Account = () => {
   const signOut = User.signOut();
 
   const [email] = useState("mail@mail.com");
-  const [date, setDate] = useState("07-01-2020");
+  const [date] = useState("07-01-2020");
 
   const rewards = [
     { name: "Vegan", type: "Gold" },
