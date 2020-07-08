@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   SafeAreaView,
   View,
@@ -13,8 +13,26 @@ import background from "@assets/images/background.png";
 import logo from "@assets/images/Mini-Logo.png";
 import Button from "@components/button";
 
+import { User } from "@core/user";
+
 const LogInRegister = () => {
   const navigation = useNavigation();
+  const loggedIn = User.loggedIn();
+  const isLoading = User.isLoading();
+  const clearError = User.clearError();
+  const error = User.errors();
+
+  useEffect(() => {
+    if (loggedIn) {
+      navigation.navigate("home");
+    } else {
+      navigation.navigate("login");
+    }
+  }, [loggedIn, navigation, isLoading]);
+
+  useEffect(() => {
+    clearError();
+  }, [error]);
 
   return (
     <ImageBackground source={background} style={styles.image}>

@@ -33,7 +33,7 @@ const Navigation = () => {
   }, []);
 
   useEffect(() => {
-    if (isLoading) {
+    if (!isLoading) {
       SplashScreen.hide();
     }
   }, [isLoading]);
@@ -53,11 +53,7 @@ const Navigation = () => {
             }
           />
         ) : (
-          <Stack.Screen
-            name="login"
-            component={LoginRegisterNavigator}
-            options={({ navigation }) => StackOptions({ height: 0, navigation })}
-          />
+          <Stack.Screen name="login" component={LoginRegisterNavigator} />
         )}
       </Stack.Navigator>
     </NavigationContainer>
