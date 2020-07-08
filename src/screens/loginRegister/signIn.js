@@ -15,8 +15,8 @@ const SignIn = () => {
   const navigation = useNavigation();
   const signIn = User.signIn();
   const loggedIn = User.loggedIn();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("alex.lenglish@rosebeef.net");
+  const [password, setPassword] = useState("admin");
 
   useEffect(() => {
     if (loggedIn) {

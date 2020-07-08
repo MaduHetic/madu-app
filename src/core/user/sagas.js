@@ -4,12 +4,25 @@ import { Actions, Events } from "./actions";
 
 import { saveCredentialsInStorage } from "../../middlewares/saveCredentials";
 
+function* getCurrentUser() {
+  try {
+    yield put(Actions.getCurrentUser.request(true));
+    const request = yield call(Api.getCurrentUser);
+    if (request.status === 200) {
+      yield put(Actions.getCurrentUser.success(request.data));
+    }
+  } catch {
+    yield put(Actions.getCurrentUser.failure(false));
+  }
+}
+
 function* signIn(action) {
   try {
     yield put(Actions.signIn.request(true));
     const request = yield call(Api.signIn, action.payload);
     if (request.status === 201) {
       yield call(saveCredentialsInStorage, request.data.access_token);
+      yield call(getCurrentUser);
       yield put(Actions.signIn.success(request.data.access_token));
     }
   } catch {
@@ -26,18 +39,6 @@ function* signUp() {
     }
   } catch {
     yield put(Actions.signUp.failure(false));
-  }
-}
-
-function* getCurrentUser() {
-  try {
-    yield put(Actions.getCurrentUser.request(true));
-    const request = yield call(Api.getCurrentUser);
-    if (request.status === 200) {
-      yield put(Actions.getCurrentUser.success(request.data));
-    }
-  } catch {
-    yield put(Actions.getCurrentUser.failure(false));
   }
 }
 

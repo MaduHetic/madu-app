@@ -9,13 +9,12 @@ import { point } from '@turf/helpers';
 import {lineString as makeLineString} from '@turf/helpers';
 import MapboxDirectionsFactory from '@mapbox/mapbox-sdk/services/directions';
 import Geolocation from '@react-native-community/geolocation';
+import { MAP_KEY } from "react-native-dotenv";
 
-const clientOptions = {accessToken: "pk.eyJ1IjoibWV0YWxtYW5pbmZyIiwiYSI6ImNqdjI5bzRsYjBxOXQ0ZXA5dmpsNDNkeGcifQ.luP93CEITntYfy6fZmCLOw"};
+const clientOptions = {accessToken: MAP_KEY};
 const directionsClient = MapboxDirectionsFactory(clientOptions);
 
-MapboxGL.setAccessToken(
-  "pk.eyJ1IjoibWV0YWxtYW5pbmZyIiwiYSI6ImNqdjI5bzRsYjBxOXQ0ZXA5dmpsNDNkeGcifQ.luP93CEITntYfy6fZmCLOw",
-);
+MapboxGL.setAccessToken(MAP_KEY);
 
 const layerStyles = {
   route: {

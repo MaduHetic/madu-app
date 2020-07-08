@@ -129,45 +129,6 @@ export const Home = () => {
     </Card>
   );
 
-  const restaurants = [
-    {
-      id: 1,
-      image: Riccardo,
-      title: "Nom du restaurant",
-      starRating: 4.4,
-      nbOfRatings: 50,
-      greenScore: 8.5,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis id justo id est ultrices maximus sed nec",
-      distance: 800,
-      reward: 4,
-    },
-    {
-      id: 2,
-      image: oranges,
-      title: "Nom du restaurant",
-      starRating: 4.4,
-      nbOfRatings: 50,
-      greenScore: 8.5,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis id justo id est ultrices maximus sed nec",
-      distance: 800,
-      reward: 4,
-    },
-    {
-      id: 3,
-      image: oranges,
-      title: "Nom du restaurant",
-      starRating: 4.4,
-      nbOfRatings: 50,
-      greenScore: 8.5,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis id justo id est ultrices maximus sed nec",
-      distance: 800,
-      reward: 4,
-    },
-  ];
-
   return (
     <SafeAreaView>
       <ScrollView
