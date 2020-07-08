@@ -44,13 +44,14 @@ const styles = StyleSheet.create({
 
 const Quizz = () => {
   const { params } = useRoute();
-  const [nbCorrect, setNbCorrect] = useState(0);
   const navigation = useNavigation();
   const getQuizz = CoreQuizz.getQuizz();
   const questions = CoreQuizz.questions();
   const sendQuizzForm = CoreQuizz.sendQuizzForm();
+  const quizzResponse = CoreQuizz.quizzResponse();
   const [activeIndex, setActiveIndex] = useState(0);
   const [answered, setAnswered] = useState(false);
+  const [answers, setAnswers] = useState([]);
 
   useEffect(() => {
     getQuizz(params.id);
@@ -59,14 +60,23 @@ const Quizz = () => {
     };
   }, []);
 
-  const handleAnswer = (answer, goodAnswer) => {
-    if (answer === goodAnswer) {
-      setNbCorrect(nbCorrect + 1);
-    }
+  const handleSubmit = () => {
+    sendQuizzForm({ idThemeQuizz: params.id, answers: answers });
+  };
+
+  const handleAnswer = (goodAnswer, questionId, answerId) => {
     setAnswered(true);
+    setAnswers([
+      ...answers,
+      {
+        idQuizz: questionId,
+        idAnswer: answerId,
+      },
+    ]);
     setTimeout(() => {
       if (activeIndex === questions.length - 1) {
-        navigation.navigate("quizzEnd", { nbCorrect, nbQuestions: questions.length });
+        handleSubmit();
+        navigation.navigate("quizzEnd", { nbQuestions: questions.length });
       } else {
         setActiveIndex(activeIndex + 1);
         setAnswered(false);
@@ -74,12 +84,7 @@ const Quizz = () => {
     }, 3000);
   };
 
-  const handleSubmit = () => {
-    // sendQuizzForm();
-    navigation.navigate("Home");
-  };
-
-  if (params.nbQuestions && params.nbCorrect >= 0) {
+  if (params.nbQuestions) {
     return (
       <ImageBackground source={background} style={styles.background}>
         <View />
@@ -90,16 +95,21 @@ const Quizz = () => {
           <Text style={{ textAlign: "center" }}>
             Vous avez obtenu{" "}
             <Text style={styles.blueText}>
-              {`${params.nbCorrect} bonnes réponses sur ${params.nbQuestions}`}
+              {`${quizzResponse.goodAnswer} bonnes réponses sur ${quizzResponse.totalAnswer}`}
             </Text>
           </Text>
         </View>
         <View>
-          <Button onPress={handleSubmit} text="Retour a l’accueil" color="blue" />
+          <Button
+            onPress={() => navigation.navigate("Home")}
+            text="Retour a l’accueil"
+            color="blue"
+          />
         </View>
       </ImageBackground>
     );
   }
+
   return (
     <SafeAreaView>
       <Stepper entries={questions} activeIndex={activeIndex} />
@@ -108,7 +118,7 @@ const Quizz = () => {
         {questions[activeIndex]?.answer.map(({ id, answer, goodAnswer }) => (
           <Button
             key={id}
-            onPress={() => handleAnswer(answer, goodAnswer)}
+            onPress={() => handleAnswer(goodAnswer, questions[activeIndex].id, id)}
             color={answered ? (goodAnswer ? "green" : "red") : ""}
             text={answer}
           />

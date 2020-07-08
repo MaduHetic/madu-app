@@ -3,7 +3,7 @@ import { createAction, createAsyncAction } from "typesafe-actions";
 export const Events = {
   getQuizz: createAction("quizz/get")(),
   getThemes: createAction("theme/get")(),
-  sendQuizzForm: createAction("theme/get")(),
+  sendQuizzForm: createAction("quizz/send")(),
 };
 
 export const Actions = {
@@ -18,8 +18,9 @@ export const Actions = {
     "theme/get/failure",
   )(),
   sendQuizzForm: createAsyncAction(
-    "theme/get/request",
-    "theme/get/success",
-    "theme/get/failure",
+    "quizz/send/request",
+    "quizz/send/success",
+    "quizz/send/failure",
   )(),
+  clearQuizzResponse: createAction("clear/quizz/response")(),
 };

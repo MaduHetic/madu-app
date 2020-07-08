@@ -53,7 +53,11 @@ const Navigation = () => {
             }
           />
         ) : (
-          <Stack.Screen name="login" component={LoginRegisterNavigator} />
+          <Stack.Screen
+            name="login"
+            component={LoginRegisterNavigator}
+            options={({ navigation }) => StackOptions({ height: 0, navigation })}
+          />
         )}
       </Stack.Navigator>
     </NavigationContainer>
