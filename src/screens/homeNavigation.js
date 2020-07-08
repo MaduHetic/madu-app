@@ -10,6 +10,7 @@ import Map from "./map";
 import AccountNavigation from "./account";
 import ListNavigator from "./lists";
 import Poi from "./lists/poi";
+import Quizz from "./quizz";
 
 const styles = StyleSheet.create({
   navigationContainer: {
@@ -123,6 +124,7 @@ const HomeNagivation = () => (
       )}
     </Stack.Screen>
     <Stack.Screen name={"poi"} component={Poi} />
+    <Stack.Screen name={"quizzEnd"} component={Quizz} />
   </Stack.Navigator>
 );
 

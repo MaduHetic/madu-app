@@ -18,6 +18,13 @@ function useGetThemes() {
   };
 }
 
+function useSendQuizz() {
+  const dispatch = useDispatch();
+  return (data) => {
+    dispatch(Events.sendQuizzForm(data));
+  };
+}
+
 function useQuestions() {
   return useSelector(questions);
 }
@@ -33,6 +40,7 @@ function useIsLoading() {
 export const Quizz = {
   getQuizz: useGetQuizz,
   getThemes: useGetThemes,
+  sendQuizzForm: useSendQuizz,
   questions: useQuestions,
   themes: useThemes,
   isLoading: useIsLoading,
