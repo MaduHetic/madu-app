@@ -130,9 +130,10 @@ export const Home = () => {
   );
 
   return (
-    <SafeAreaView>
+    <View style={{ flex: 1, backgroundColor: Color.white, paddingTop: 20 }}>
       <ScrollView
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+        showsVerticalScrollIndicator={false}
       >
         <HeaderTitle title={`Hello ${name}`} subTitle={moment().format("dddd DD MMMM")} />
         <View style={styles.container}>
@@ -176,7 +177,7 @@ export const Home = () => {
           </View>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 

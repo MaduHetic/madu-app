@@ -85,7 +85,7 @@ const Places = ({
   item: {
     id,
     mainImg,
-    title,
+    name,
     starRating,
     nbOfRatings,
     greenScore,
@@ -114,7 +114,7 @@ const Places = ({
         <View style={styles.image} />
       )}
       <View style={{ paddingHorizontal: 10 }}>
-        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.title}>{name}</Text>
         <View style={styles.informationContainer}>
           {/* <View style={[styles.informationContainer, styles.rating]}>
             <Icon style={[styles.icon, styles.rating]} name="star" size={15} />
