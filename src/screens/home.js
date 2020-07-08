@@ -133,6 +133,7 @@ export const Home = () => {
     <SafeAreaView>
       <ScrollView
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+        showsVerticalScrollIndicator={false}
       >
         <HeaderTitle title={`Hello ${name}`} subTitle={moment().format("dddd DD MMMM")} />
         <View style={styles.container}>
