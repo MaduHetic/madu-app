@@ -18,14 +18,14 @@ export const userReducer = (state = initialState, action: UserAction) => {
     switch (action.type) {
       case getType(Actions.signIn.request):
         draft.isLoading = action.payload;
+        draft.error = null;
         break;
       case getType(Actions.signIn.success):
-        draft.isLoading = false;
         draft.loggedIn = true;
-        draft.errors = [];
         break;
       case getType(Actions.signIn.failure):
-        draft.isLoading = action.payload;
+        draft.error = action.payload;
+        draft.isLoading = false;
         break;
       case getType(Actions.signUp.request):
         draft.isLoading = action.payload;
