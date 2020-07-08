@@ -130,7 +130,7 @@ export const Home = () => {
   );
 
   return (
-    <SafeAreaView>
+    <View style={{ flex: 1, backgroundColor: Color.white, marginTop: 20 }}>
       <ScrollView
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
         showsVerticalScrollIndicator={false}
@@ -177,7 +177,7 @@ export const Home = () => {
           </View>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 
