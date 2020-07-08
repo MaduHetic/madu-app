@@ -6,17 +6,17 @@ const DATA = [
   {
     id: 0,
     title: "Restaurants",
-    type: "RESTAURANT"
+    type: "Food",
   },
   {
     id: 1,
     title: "Magasins",
-    type: "MAGASIN"
+    type: "MAGASIN",
   },
   {
     id: 2,
     title: "Activités",
-    type: "ACTIVITÉ"
+    type: "ACTIVITÉ",
   },
 ];
 
@@ -60,7 +60,7 @@ function Item({ title, selected, onSelect }) {
   );
 }
 
-export default function FilterBarPOI({selected, setSelected}) {
+export default function FilterBarPOI({ selected, setSelected }) {
   return (
     <SafeAreaView style={styles.container}>
       {DATA.map((item) => (
