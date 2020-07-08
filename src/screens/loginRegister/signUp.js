@@ -3,6 +3,7 @@ import { StyleSheet, View, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { User } from "@core/user";
+import { Color } from "@glossy/colors";
 
 import HeaderLogin from "@components//headerLogin";
 import Button from "@components/button";
@@ -10,8 +11,6 @@ import Button from "@components/button";
 import InputTextField from "@components//inputTextField";
 import EmailTextField from "@components/emailTextField";
 import PasswordTextField from "@components/passwordTextField";
-
-import { Color } from "@glossy/colors";
 
 const SignUp = () => {
   const navigation = useNavigation();

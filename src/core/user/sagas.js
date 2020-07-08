@@ -23,10 +23,9 @@ function* signIn(action) {
     if (request.status === 201) {
       yield call(saveCredentialsInStorage, request.data.access_token);
       yield call(getCurrentUser);
-      yield put(Actions.signIn.success(request.data.access_token));
     }
-  } catch {
-    yield put(Actions.signIn.failure(false));
+  } catch (error) {
+    yield put(Actions.signIn.failure(error.response.data.message));
   }
 }
 
