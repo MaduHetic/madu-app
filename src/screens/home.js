@@ -130,7 +130,7 @@ export const Home = () => {
   );
 
   return (
-    <View style={{ flex: 1, backgroundColor: Color.white, marginTop: 20 }}>
+    <View style={{ flex: 1, backgroundColor: Color.white, paddingTop: 20 }}>
       <ScrollView
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
         showsVerticalScrollIndicator={false}
