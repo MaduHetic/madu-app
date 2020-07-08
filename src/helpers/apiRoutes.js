@@ -1,6 +1,6 @@
 export default {
   signIn: () => `/auth/login`, // POST
-  signUp: () => `/user`, // POST
+  signUp: () => `/user/app/register`, // POST
   signOut: () => `/auth/sign_out`,
   getProfile: () => `/profile`, // GET
   registerCompany: () => `/company`, // POST

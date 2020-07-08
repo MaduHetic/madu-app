@@ -10,10 +10,11 @@ function signIn(data) {
   });
 }
 
-function signUp() {
+function signUp(data) {
   return client.request({
     method: "post",
     url: apiRoutes.signUp(),
+    data,
   });
 }
 

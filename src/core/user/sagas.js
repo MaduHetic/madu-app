@@ -23,22 +23,23 @@ function* signIn(action) {
     if (request.status === 201) {
       yield call(saveCredentialsInStorage, request.data.access_token);
       yield call(getCurrentUser);
-      yield put(Actions.signIn.success(request.data.access_token));
     }
-  } catch {
-    yield put(Actions.signIn.failure(false));
+  } catch (error) {
+    yield put(Actions.signIn.failure(error.response.data.message));
   }
 }
 
-function* signUp() {
+function* signUp(action) {
   try {
     yield put(Actions.signUp.request(true));
-    const request = yield call(Api.signOut);
-    if (request.status === 200) {
-      yield put(Actions.signUp.success(request.data.data));
+    const request = yield call(Api.signUp, action.payload);
+    if (request.status === 201) {
+      console.log(request);
+      yield call(saveCredentialsInStorage, request.data.access_token);
+      yield call(getCurrentUser);
     }
-  } catch {
-    yield put(Actions.signUp.failure(false));
+  } catch (error) {
+    yield put(Actions.signUp.failure(error.response.data.message));
   }
 }
 

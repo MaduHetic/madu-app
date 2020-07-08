@@ -5,19 +5,22 @@ import { useNavigation } from "@react-navigation/native";
 import { User } from "@core/user";
 import { Color } from "@glossy/colors";
 
-import HeaderLogin from "@components/headerLogin";
+import HeaderLogin from "@components//headerLogin";
 import Button from "@components/button";
 
+import InputTextField from "@components//inputTextField";
 import EmailTextField from "@components/emailTextField";
 import PasswordTextField from "@components/passwordTextField";
 
-const SignIn = () => {
+const SignUp = () => {
   const navigation = useNavigation();
   const loggedIn = User.loggedIn();
 
-  const signIn = User.signIn();
+  const signUp = User.signUp();
   const error = User.errors();
 
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -31,23 +34,33 @@ const SignIn = () => {
     if (loggedIn) {
       navigation.navigate("home");
     } else {
-      navigation.navigate("signIn");
+      navigation.navigate("signUp");
     }
   }, [loggedIn, navigation]);
 
   const submitIsValid = () => {
-    if (!email || !password) {
+    if (!firstName || !lastName || !email || !password) {
       Alert.alert("Erreur", "Merci de remplir tous les champs.");
     } else {
-      signIn(email, password);
+      signUp(firstName, lastName, email, password);
     }
   };
 
   return (
     <>
-      <HeaderLogin title="Connection" />
+      <HeaderLogin title="Inscription" />
       <View style={styles.container}>
         <View style={styles.form}>
+          <InputTextField
+            label={"Entrez votre Prenom"}
+            value={firstName}
+            onValueChange={(val) => setFirstName(val)}
+          />
+          <InputTextField
+            label={"Entrez votre Nom"}
+            value={lastName}
+            onValueChange={(val) => setLastName(val)}
+          />
           <EmailTextField
             label={"Entrez votre e-mail"}
             value={email}
@@ -59,13 +72,13 @@ const SignIn = () => {
             onValueChange={(val) => setPassword(val)}
           />
         </View>
-        <Button text={"Se connecter"} onPress={submitIsValid} color="blue" />
+        <Button onPress={submitIsValid} text={"S'inscrire"} color="blue" />
       </View>
     </>
   );
 };
 
-export default SignIn;
+export default SignUp;
 
 const styles = StyleSheet.create({
   container: {
