@@ -2,7 +2,6 @@ import React, { Fragment, useEffect, useRef } from "react";
 import { View, StyleSheet, Text, TouchableOpacity, Image } from "react-native";
 import MapboxGL from "@react-native-mapbox-gl/maps";
 import { Color } from "@glossy/colors";
-import Building from "@assets/images/Building.png";
 import cross from "@assets/images/cross.png";
 import BottomSheet from "reanimated-bottom-sheet";
 import { point } from '@turf/helpers';
@@ -91,6 +90,32 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: 0,
   },
+  pinDistanceContainer: {
+    width: 180,
+    backgroundColor: "rgba(0, 0, 0, 0)",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  distanceContainer: {
+    position: "absolute",
+    left: 0,
+    display: "flex",
+    backgroundColor: Color.primary,
+    borderRadius: 4,
+    padding: 5,
+    flexDirection: "row",
+    alignItems: "center",
+    height: 27,
+  },
+  distanceText: {
+    color: Color.white,
+    fontWeight: "bold",
+    fontSize: 14,
+    lineHeight: 16,
+    letterSpacing: -0.5,
+    marginLeft: 4,
+  }
 });
 
 const Map = ({ filteredPOIs, entreprise }) => {
@@ -100,8 +125,9 @@ const Map = ({ filteredPOIs, entreprise }) => {
 
   const [filteredPOIsState, setFilteredPOIsState] = React.useState([]);
   const [currPOI, setCurrPOI] = React.useState(null);
-  const [isZoomAbove15, setIsZoomAbove15] = React.useState(true);
+  const [isZoomAboveX, setIsZoomAboveX] = React.useState(true);
   const [route, setRoute] = React.useState(null);
+  const [distance, setDistance] = React.useState(0);
 
   // POIs filter
   useEffect(() => {
@@ -155,6 +181,7 @@ const Map = ({ filteredPOIs, entreprise }) => {
       const res = await directionsClient.getDirections(reqOptions).send();
   
       setRoute(makeLineString(res.body.routes[0].geometry.coordinates))
+      setDistance((res.body.routes[0].distance / 1000).toFixed(1))
     })
 
   }
@@ -163,6 +190,7 @@ const Map = ({ filteredPOIs, entreprise }) => {
   const handleClickPOI = (poi) => {
     if (!poi) {
       setRoute(null)
+      setCurrPOI(null)
       bottomSheetRef.current.snapTo(2)
       return null
     }
@@ -174,7 +202,7 @@ const Map = ({ filteredPOIs, entreprise }) => {
 
   // Handle zoom changed
   const handleZoomChanged = e => {
-    setIsZoomAbove15(e > 14.5)
+    setIsZoomAboveX(e > 14.5)
   }
 
   return (
@@ -201,19 +229,28 @@ const Map = ({ filteredPOIs, entreprise }) => {
               followUserMode={"normal"}
             />
 
+            {/* RENDER ROUTE WHEN NEEDED */}
+            {renderOrigin()}
+            {renderRoute()}
+
             {/* POIS */}
             {filteredPOIsState &&
               filteredPOIsState.map((poi, i) => {
-                if (currPOI?.coordinate === poi.coordinate) {
+                if (currPOI?.coordinate === poi.coordinate && distance) {
                   return (
                     <MapboxGL.PointAnnotation
+                      key={i}
                       title="currPOITitle"
                       coordinate={poi.coordinate}
                       id="currPOI"
                       ref={annotationRef}
                     >
-                      <View style={styles.markerEntrepriseContainer}>
+                      <View style={styles.pinDistanceContainer}>
                         <Svg svgs={svgs} name={"pin"} />
+                        <View style={styles.distanceContainer}>
+                          <Svg svgs={svgs} name={"pedestrian"} width={16} />
+                          <Text style={styles.distanceText}>{distance}km</Text>
+                        </View>
                       </View>
                     </MapboxGL.PointAnnotation>
                   )
@@ -235,7 +272,7 @@ const Map = ({ filteredPOIs, entreprise }) => {
                     >
                       <View style={styles.markerContainer}>
                         <View style={styles.markerDot} />
-                        <Text style={isZoomAbove15 ? styles.markerText : {}}>{isZoomAbove15 ? poi.name : ""}</Text>
+                        <Text style={isZoomAboveX ? styles.markerText : {}}>{isZoomAboveX ? poi.name : ""}</Text>
                       </View>
                     </MapboxGL.PointAnnotation>
                   </Fragment>
@@ -253,10 +290,6 @@ const Map = ({ filteredPOIs, entreprise }) => {
                 <Svg style={styles.buildingEntreprise} svgs={svgs} name={"building"} />
               </View>
             </MapboxGL.PointAnnotation>
-
-            {/* RENDER ROUTE WHEN NEEDED */}
-            {renderOrigin()}
-            {renderRoute()}
 
           </MapboxGL.MapView>
         </View>
