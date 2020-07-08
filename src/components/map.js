@@ -10,6 +10,8 @@ import {lineString as makeLineString} from '@turf/helpers';
 import MapboxDirectionsFactory from '@mapbox/mapbox-sdk/services/directions';
 import Geolocation from '@react-native-community/geolocation';
 import { MAP_KEY } from "react-native-dotenv";
+import svgs from "@assets/svg/sprite";
+import Svg from "@components/svg";
 
 const clientOptions = {accessToken: MAP_KEY};
 const directionsClient = MapboxDirectionsFactory(clientOptions);
@@ -55,6 +57,8 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginTop: 20,
     marginBottom: 20,
+    borderColor: Color.white,
+    borderWidth: 2,
   },
   markerText: {
     textTransform: "lowercase",
@@ -131,7 +135,7 @@ const Map = ({ filteredPOIs, entreprise }) => {
   const renderOrigin = () => {
     return (
       <MapboxGL.ShapeSource id="origin" shape={point([0, 0])}>
-        <MapboxGL.Animated.CircleLayer id="originInnerCircle" />
+        <MapboxGL.Animated.CircleLayer id="originInnerCircle" style={{circleColor: "rgba(0, 0, 0, 0)"}} />
       </MapboxGL.ShapeSource>
     );
   }
@@ -170,7 +174,7 @@ const Map = ({ filteredPOIs, entreprise }) => {
 
   // Handle zoom changed
   const handleZoomChanged = e => {
-    setIsZoomAbove15(e > 15)
+    setIsZoomAbove15(e > 14.5)
   }
 
   return (
@@ -199,43 +203,54 @@ const Map = ({ filteredPOIs, entreprise }) => {
 
             {/* POIS */}
             {filteredPOIsState &&
-              filteredPOIsState.map((poi, i) => (
-                <Fragment key={i}>
-                  {/* MarkerView to add onPress event */}
-                  <MapboxGL.MarkerView coordinate={poi.coordinate}>
-                    <TouchableOpacity
-                      onPress={() => handleClickPOI(poi)}
-                      style={styles.markerView}
-                    />
-                  </MapboxGL.MarkerView>
+              filteredPOIsState.map((poi, i) => {
+                if (currPOI?.coordinate === poi.coordinate) {
+                  return (
+                    <MapboxGL.PointAnnotation
+                      title="currPOITitle"
+                      coordinate={poi.coordinate}
+                      id="currPOI"
+                      ref={annotationRef}
+                    >
+                      <View style={styles.markerEntrepriseContainer}>
+                        <Svg svgs={svgs} name={"pin"} />
+                      </View>
+                    </MapboxGL.PointAnnotation>
+                  )
+                }
+                return (
+                  <Fragment key={i}>
+                    {/* MarkerView to add onPress event */}
+                    <MapboxGL.MarkerView coordinate={poi.coordinate}>
+                      <TouchableOpacity
+                        onPress={() => handleClickPOI(poi)}
+                        style={styles.markerView}
+                      />
+                    </MapboxGL.MarkerView>
 
-                  {/* PointAnnotation - UI */}
-                  <MapboxGL.PointAnnotation
-                    coordinate={poi.coordinate}
-                    id={`PointAnnotation_${i}`}
-                  >
-                    <View style={styles.markerContainer}>
-                      <View style={styles.markerDot} />
+                    {/* PointAnnotation - UI */}
+                    <MapboxGL.PointAnnotation
+                      coordinate={poi.coordinate}
+                      id={`PointAnnotation_${i}`}
+                    >
+                      <View style={styles.markerContainer}>
+                        <View style={styles.markerDot} />
                         <Text style={isZoomAbove15 ? styles.markerText : {}}>{isZoomAbove15 ? poi.name : ""}</Text>
-                    </View>
-                  </MapboxGL.PointAnnotation>
-                </Fragment>
-              ))}
+                      </View>
+                    </MapboxGL.PointAnnotation>
+                  </Fragment>
+              )})}
 
             {/* ENTREPRISE */}
             <MapboxGL.PointAnnotation
-              title="entreprisetite"
+              title="entrepriseTitle"
               coordinate={entreprise.coordinate}
               id="entreprise"
               ref={annotationRef}
             >
               <View style={styles.markerEntrepriseContainer}>
                 <View style={styles.markerDotEntreprise} />
-                <Image
-                  source={Building}
-                  style={styles.buildingEntreprise}
-                  onLoad={() => annotationRef.current.refresh()}
-                />
+                <Svg style={styles.buildingEntreprise} svgs={svgs} name={"building"} />
               </View>
             </MapboxGL.PointAnnotation>
 
