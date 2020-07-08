@@ -133,6 +133,8 @@ const Map = ({ filteredPOIs, entreprise }) => {
   useEffect(() => {
     MapboxGL.setTelemetryEnabled(false);
 
+    if (currPOI) handleClickPOI(null)
+
     // To get past a certain bug, need improvment
     setFilteredPOIsState([]);
     setTimeout(() => {

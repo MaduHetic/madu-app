@@ -14,17 +14,17 @@ const fakeData = [
   {
     name: "BIRDIES",
     coordinate: [2.4179543, 48.8510702],
-    type: "RESTAURANT"
+    type: "Food"
   },
   {
     name: "LA FONTAINE",
     coordinate: [2.4183733, 48.85116281],
-    type: "RESTAURANT"
+    type: "Food"
   },
   {
     name: "STREET WOK",
     coordinate: [2.4161846, 48.85116282],
-    type: "RESTAURANT"
+    type: "Food"
   },
   {
     name: "BNP PARIBAS",
@@ -44,7 +44,7 @@ const entrepriseFake = {
 
 const MapScreen = () => {
   // const getPoi = Poi.getAllPoi();
-  const [selected, setSelected] = React.useState("RESTAURANT");
+  const [selected, setSelected] = React.useState("Food");
 
   useEffect(() => {
     // getPoi();
