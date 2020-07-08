@@ -156,7 +156,20 @@ const Poi = () => {
               </TouchableOpacity>
             </View>
             <View
-              style={[styles.row, { position: "absolute", bottom: -60, padding: 24 }]}
+              style={[
+                styles.row,
+                {
+                  position: "absolute",
+                  bottom: -60,
+                  padding: 24,
+                  shadowColor: "#000",
+                  shadowOffset: {
+                    width: 0,
+                    height: 3,
+                  },
+                  shadowOpacity: 0.1,
+                },
+              ]}
             >
               {place.logo ? (
                 <Image style={styles.logo} source={{ uri: place.logo }} />

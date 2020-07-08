@@ -27,47 +27,7 @@ const BestOfList = () => {
 
   useEffect(() => {
     getAllPoi();
-    console.log(allPoi);
   }, []);
-
-  const restaurants = [
-    {
-      id: 1,
-      image: Riccardo,
-      title: "Nom du restaurant",
-      starRating: 4.4,
-      nbOfRatings: 50,
-      greenScore: 8.5,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis id justo id est ultrices maximus sed nec",
-      distance: 800,
-      reward: 4,
-    },
-    {
-      id: 2,
-      image: oranges,
-      title: "Nom du restaurant",
-      starRating: 4.4,
-      nbOfRatings: 50,
-      greenScore: 8.5,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis id justo id est ultrices maximus sed nec",
-      distance: 800,
-      reward: 4,
-    },
-    {
-      id: 3,
-      image: oranges,
-      title: "Nom du restaurant",
-      starRating: 4.4,
-      nbOfRatings: 50,
-      greenScore: 8.5,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis id justo id est ultrices maximus sed nec",
-      distance: 800,
-      reward: 4,
-    },
-  ];
 
   return (
     <ScrollView>
@@ -77,18 +37,20 @@ const BestOfList = () => {
           <View style={styles.container}>
             <Text style={styles.title}>Du salé dans l’assiette</Text>
             <FlatList
-              data={restaurants.slice(0, 4)}
+              data={allPoi.filter((p) => p.type === params.list).slice(0, 4)}
               renderItem={({ item }) => <Place item={item} key={item.key} />}
               keyExtractor={(item) => `${item.id}`}
               horizontal
               showsHorizontalScrollIndicator={false}
             />
           </View>
-          {restaurants.length > 4 && (
+          {allPoi.length > 4 && (
             <View style={styles.container}>
               <Text style={styles.title}>Les douceurs sucrées</Text>
               <FlatList
-                data={restaurants.slice(4, restaurants.length - 1)}
+                data={allPoi
+                  .filter((p) => p.type === params.list)
+                  .slice(4, allPoi.length - 1)}
                 renderItem={({ item }) => <Place item={item} key={item.key} />}
                 keyExtractor={(item) => `${item.id}`}
                 horizontal

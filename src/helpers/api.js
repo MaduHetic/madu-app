@@ -4,7 +4,7 @@ import { API_KEY } from "react-native-dotenv";
 import apiRoute from "./apiRoutes";
 
 export const client = axios.create({
-  baseURL: `http://${API_KEY}`,
+  baseURL: `http://90.91.100.54:3000`,
   responseType: "json",
   xsrfCookieName: false,
   headers: {
@@ -21,7 +21,7 @@ client.interceptors.request.use(
       return config;
     }
 
-    // console.log(API_KEY);
+    console.log(API_KEY);
 
     const credentials = await getCredsFromStorage();
     console.debug(`[authentified request] url: ${config.url}`);
