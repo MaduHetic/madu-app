@@ -6,10 +6,9 @@ import Building from "@assets/images/Building.png";
 import cross from "@assets/images/cross.png";
 import BottomSheet from "reanimated-bottom-sheet";
 import { Colors } from "react-native/Libraries/NewAppScreen";
+import { MAP_KEY } from "react-native-dotenv";
 
-MapboxGL.setAccessToken(
-  "pk.eyJ1IjoibWV0YWxtYW5pbmZyIiwiYSI6ImNqdjI5bzRsYjBxOXQ0ZXA5dmpsNDNkeGcifQ.luP93CEITntYfy6fZmCLOw",
-);
+MapboxGL.setAccessToken(MAP_KEY);
 
 const styles = StyleSheet.create({
   page: {

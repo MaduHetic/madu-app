@@ -1,9 +1,10 @@
 import axios from "axios";
 import { getCredsFromStorage } from "../middlewares/saveCredentials";
+import { API_KEY } from "react-native-dotenv";
 import apiRoute from "./apiRoutes";
 
 export const client = axios.create({
-  baseURL: "http://90.91.100.54:3000",
+  baseURL: `http://${API_KEY}`,
   responseType: "json",
   xsrfCookieName: false,
   headers: {
@@ -19,6 +20,8 @@ client.interceptors.request.use(
     if (config.url === apiRoute.signIn()) {
       return config;
     }
+
+    // console.log(API_KEY);
 
     const credentials = await getCredsFromStorage();
     console.debug(`[authentified request] url: ${config.url}`);
