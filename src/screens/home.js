@@ -19,6 +19,8 @@ import Quiz from "@components/card/quiz";
 import Carousel, { Pagination } from "react-native-snap-carousel";
 import Tutorial from "./tutorial";
 import Icon from "react-native-vector-icons/FontAwesome";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import CustomModal from "@components/modal";
 
 import { User } from "@core/user";
 import { KnowIt } from "@core/knowIt";
@@ -28,6 +30,8 @@ import QuizzScreen from "./quizz";
 import { getCredsFromStorage } from "../middlewares/saveCredentials";
 import HeaderTitle from "@components/headerTitle";
 import Title from "@components/title";
+import { Challenge } from "@core/challenge";
+import Button from "@components/button";
 
 import { Poi as PointOfIntress } from "@core/poi";
 
@@ -80,11 +84,15 @@ const styles = StyleSheet.create({
 export const Home = () => {
   const [activeSlide, setActiveSlide] = useState(0);
   const [refreshing, setRefreshing] = useState(false);
+  const [challengeId, setChallengeId] = useState(0);
   const navigation = useNavigation();
   const getKnowIt = KnowIt.getKnowIt();
   const knowItItem = KnowIt.data();
   const getThemes = Quizz.getThemes();
   const themes = Quizz.themes();
+  const getChallengeCurrent = Challenge.getChallengeCurrent();
+  const validateChallenge = Challenge.validateChallenge();
+  const challengeData = Challenge.data();
   const screenWidth = Dimensions.get("window").width;
   const name = User.firstName();
 
@@ -107,6 +115,7 @@ export const Home = () => {
     getKnowIt();
     getThemes();
     getAllPoi();
+    getChallengeCurrent();
   }, []);
 
   const onRefresh = React.useCallback(() => {
@@ -115,15 +124,33 @@ export const Home = () => {
     getThemes();
     getAllPoi();
     setRefreshing(false);
+    getChallengeCurrent();
   }, [refreshing]);
 
   const item = ({ item }) => (
     <Card style={styles.item}>
       <Text style={styles.itemTitle}>{item.title}</Text>
       <Text style={styles.itemText}>{item.description}</Text>
+      {item.crystalGain && !item.doIt && (
+        <View style={{ width: "50%", alignSelf: "center", marginVertical: 10 }}>
+          <Button
+            small
+            text="Participer"
+            color="blue"
+            onPress={() => setChallengeId(item.id)}
+          />
+        </View>
+      )}
+      {item.doIt && item.crystalGain && (
+        <View style={styles.row}>
+          <MaterialCommunityIcons style={styles.icon} name="seed-outline" size={20} />
+          <Text>{`${item.crystalGain} gagné`}</Text>
+        </View>
+      )}
     </Card>
   );
 
+  const carrouselItems = [...knowItItem, ...challengeData];
   return (
     <View style={{ flex: 1, backgroundColor: Color.white, paddingTop: 20 }}>
       <ScrollView
@@ -135,14 +162,14 @@ export const Home = () => {
           <View>
             <Carousel
               renderItem={item}
-              data={knowItItem}
+              data={carrouselItems}
               sliderWidth={screenWidth}
               itemWidth={screenWidth}
               onSnapToItem={(index) => setActiveSlide(index)}
               activeSlideAlignment="start"
             />
             <Pagination
-              dotsLength={knowItItem.length}
+              dotsLength={carrouselItems.length}
               activeDotIndex={activeSlide}
               dotStyle={styles.dots}
               inactiveDotStyle={styles.inactiveDotStyle}
@@ -171,6 +198,26 @@ export const Home = () => {
             />
           </View>
         </View>
+        {challengeData
+          .filter(({ id }) => id === challengeId)
+          .map(({ id, description }) => (
+            <CustomModal
+              key={id}
+              isVisible={challengeId > 0}
+              closeModal={() => setChallengeId(0)}
+              title={description}
+              groupBtn={
+                <Button
+                  text="J'ai reussi le challenge"
+                  color="blue"
+                  onPress={() => {
+                    validateChallenge(id);
+                    setChallengeId(0);
+                  }}
+                />
+              }
+            />
+          ))}
       </ScrollView>
     </View>
   );

@@ -14,6 +14,16 @@ function useAddChallenge() {
   return (data) => dispatch(Events.addChallenge(data));
 }
 
+function useChallengeCurrent() {
+  const dispatch = useDispatch();
+  return () => dispatch(Events.challengeCurrent());
+}
+
+function useValidateChallenge() {
+  const dispatch = useDispatch();
+  return (id) => dispatch(Events.validateChallenge(id));
+}
+
 function useData() {
   return useSelector(data);
 }
@@ -25,6 +35,8 @@ function useIsLoading() {
 export const Challenge = {
   getChallenge: useGetChallenge,
   addChallenge: useAddChallenge,
+  getChallengeCurrent: useChallengeCurrent,
+  validateChallenge: useValidateChallenge,
   data: useData,
   isLoading: useIsLoading,
   sagas: rootSagas,
