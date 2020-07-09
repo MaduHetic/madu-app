@@ -27,4 +27,6 @@ export default {
   sendQuizzForm: () => `/theme-quizz/submit`, // PUT
   themes: () => `/theme-quizz`,
   challenge: () => `/challenge`,
+  challengeCurrent: () => `/challenge/current`,
+  validateChallenge: (id) => `/challenge/validate/${id}`,
 };
