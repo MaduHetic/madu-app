@@ -128,6 +128,8 @@ const Poi = () => {
     setRefreshing(false);
   }, [refreshing]);
 
+  console.log(place);
+
   if (!place) return null;
   return (
     <View style={{ position: "relative" }}>

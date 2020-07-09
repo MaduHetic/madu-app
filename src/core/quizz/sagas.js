@@ -14,6 +14,20 @@ function* getQuizz(action) {
   }
 }
 
+function* sendQuizzForm(action) {
+  console.log("sagas", action.payload);
+  try {
+    yield put(Actions.sendQuizzForm.request(true));
+    const request = yield call(Api.sendQuizzForm, action.payload);
+    if (request.status === 200 || request.status === 201) {
+      yield put(Actions.sendQuizzForm.success(request.data));
+    }
+  } catch (error) {
+    console.log(console.error);
+    yield put(Actions.sendQuizzForm.failure(false));
+  }
+}
+
 function* getThemes() {
   try {
     yield put(Actions.getThemes.request(true));
@@ -29,4 +43,5 @@ function* getThemes() {
 export function* rootSagas() {
   yield takeLatest(Events.getQuizz, getQuizz);
   yield takeLatest(Events.getThemes, getThemes);
+  yield takeLatest(Events.sendQuizzForm, sendQuizzForm);
 }

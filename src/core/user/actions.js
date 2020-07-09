@@ -23,4 +23,5 @@ export const Actions = {
     "user/get/profile/success",
     "user/get/profile/failure",
   )(),
+  clearError: createAction("user/clear/error")(),
 };

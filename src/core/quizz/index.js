@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { rootSagas } from "./sagas";
-import { Events } from "./actions";
+import { Events, Actions } from "./actions";
 import { quizzReducer } from "./reducer";
-import { isLoading, questions, themes } from "./selectors";
+import { isLoading, questions, themes, quizzResponse } from "./selectors";
 
 function useGetQuizz() {
   const dispatch = useDispatch();
@@ -16,6 +16,24 @@ function useGetThemes() {
   return () => {
     dispatch(Events.getThemes());
   };
+}
+
+function useSendQuizz() {
+  const dispatch = useDispatch();
+  return (data) => {
+    console.log("index", data);
+    dispatch(Events.sendQuizzForm(data));
+  };
+}
+function useClearQuizzResponse() {
+  const dispatch = useDispatch();
+  return () => {
+    dispatch(Actions.clearQuizzResponse());
+  };
+}
+
+function useQuizzResponse() {
+  return useSelector(quizzResponse);
 }
 
 function useQuestions() {
@@ -33,8 +51,11 @@ function useIsLoading() {
 export const Quizz = {
   getQuizz: useGetQuizz,
   getThemes: useGetThemes,
+  sendQuizzForm: useSendQuizz,
+  quizzResponse: useQuizzResponse,
   questions: useQuestions,
   themes: useThemes,
+  clearQuizzResponse: useClearQuizzResponse,
   isLoading: useIsLoading,
   sagas: rootSagas,
   reducer: quizzReducer,
