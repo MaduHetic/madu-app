@@ -198,7 +198,7 @@ const Map = ({ filteredPOIs, entreprise }) => {
     }
 
     setCurrPOI(poi)
-    drawRoute(poi.coordinate)
+    drawRoute([Number(poi.long), Number(poi.lat)])
     bottomSheetRef.current.snapTo(1)
   };
 
@@ -238,12 +238,12 @@ const Map = ({ filteredPOIs, entreprise }) => {
             {/* POIS */}
             {filteredPOIsState &&
               filteredPOIsState.map((poi, i) => {
-                if (currPOI?.coordinate === poi.coordinate && distance) {
+                if (currPOI?.long == poi.long && currPOI?.lat == poi.lat && distance) {
                   return (
                     <MapboxGL.PointAnnotation
                       key={i}
                       title="currPOITitle"
-                      coordinate={poi.coordinate}
+                      coordinate={[Number(poi.long), Number(poi.lat)]}
                       id="currPOI"
                       ref={annotationRef}
                     >
@@ -260,7 +260,7 @@ const Map = ({ filteredPOIs, entreprise }) => {
                 return (
                   <Fragment key={i}>
                     {/* MarkerView to add onPress event */}
-                    <MapboxGL.MarkerView coordinate={poi.coordinate}>
+                    <MapboxGL.MarkerView coordinate={[Number(poi.long), Number(poi.lat)]}>
                       <TouchableOpacity
                         onPress={() => handleClickPOI(poi)}
                         style={styles.markerView}
@@ -269,7 +269,7 @@ const Map = ({ filteredPOIs, entreprise }) => {
 
                     {/* PointAnnotation - UI */}
                     <MapboxGL.PointAnnotation
-                      coordinate={poi.coordinate}
+                      coordinate={[Number(poi.long), Number(poi.lat)]}
                       id={`PointAnnotation_${i}`}
                     >
                       <View style={styles.markerContainer}>

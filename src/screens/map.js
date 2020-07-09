@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import MapboxGL from '@react-native-mapbox-gl/maps';
 import Map from "@components/map";
 import FilterBarPOI from "@components/filterBarPOI";
+import { Poi as PointOfIntress } from "@core/poi";
 
 import { Poi } from "@core/poi";
 
@@ -43,11 +44,12 @@ const entrepriseFake = {
 }
 
 const MapScreen = () => {
-  // const getPoi = Poi.getAllPoi();
   const [selected, setSelected] = React.useState("Food");
+  const allPoi = PointOfIntress.allPoi();
+  const getAllPoi = PointOfIntress.getAllPoi();
 
   useEffect(() => {
-    // getPoi();
+    getAllPoi()
 
     // Create a scoped async function in the hook
     async function requestAndroidLocationPermissions() {
@@ -58,9 +60,9 @@ const MapScreen = () => {
 
   return (
     <>
-      <FilterBarPOI selected={selected} setSelected={setSelected}/>
+      <FilterBarPOI selected={selected} setSelected={setSelected} />
       <Map 
-        filteredPOIs={fakeData.filter(poi => poi.type === selected)}
+        filteredPOIs={allPoi.filter(poi => poi.type === selected)}
         entreprise={entrepriseFake}
       />
     </>
