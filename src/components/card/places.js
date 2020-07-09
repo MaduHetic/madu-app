@@ -7,7 +7,6 @@ import {
   Dimensions,
   TouchableOpacity,
 } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { useNavigation } from "@react-navigation/native";
 
@@ -135,7 +134,11 @@ const Places = ({
         <View style={styles.informationContainer}>
           <View style={styles.iconContainer}>
             <MaterialCommunityIcons style={styles.icon} name="walk" size={15} />
-            <Text>{distance}m</Text>
+            {distance < 999 ? (
+              <Text>{distance}m</Text>
+            ) : (
+              <Text>{(distance / 1000).toFixed(1)}km</Text>
+            )}
           </View>
           <View style={styles.iconContainer}>
             <MaterialCommunityIcons style={styles.icon} name="seed-outline" size={20} />

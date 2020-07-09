@@ -4,7 +4,6 @@ import {
   View,
   ScrollView,
   StyleSheet,
-  SafeAreaView,
   Dimensions,
   FlatList,
   RefreshControl,
@@ -190,7 +189,6 @@ const HomeNavigator = () => {
     >
       <Stack.Screen name={"home"} component={Home} />
       <Stack.Screen name={"tutorial"} component={Tutorial} />
-      {/* <Stack.Screen name={"poi"} component={Poi} /> */}
       <Stack.Screen
         name={"quizz"}
         component={QuizzScreen}
