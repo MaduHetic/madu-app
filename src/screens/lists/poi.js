@@ -257,7 +257,22 @@ const Poi = () => {
         <Text style={{ fontSize: 17, lineHeight: 28, color: Color.darkGrey }}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tellus diam,
           convallis ut nibh vel, volutpat convallis mi. Fusce tellus diam, convallis ut
-          nibh vel, volutp...
+          nibh vel, volutp... Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Fusce tellus diam, convallis ut nibh vel, volutpat convallis mi. Fusce tellus
+          diam, convallis ut nibh vel, volutp... Lorem ipsum dolor sit amet, consectetur
+          adipiscing elit. Fusce tellus diam, convallis ut nibh vel, volutpat convallis
+          mi. Fusce tellus diam, convallis ut nibh vel, volutp... Lorem ipsum dolor sit
+          amet, consectetur adipiscing elit. Fusce tellus diam, convallis ut nibh vel,
+          volutpat convallis mi. Fusce tellus diam, convallis ut nibh vel, volutp... Lorem
+          ipsum dolor sit amet, consectetur adipiscing elit. Fusce tellus diam, convallis
+          ut nibh vel, volutpat convallis mi. Fusce tellus diam, convallis ut nibh vel,
+          volutp... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tellus
+          diam, convallis ut nibh vel, volutpat convallis mi. Fusce tellus diam, convallis
+          ut nibh vel, volutp... Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Fusce tellus diam, convallis ut nibh vel, volutpat convallis mi. Fusce tellus
+          diam, convallis ut nibh vel, volutp... Lorem ipsum dolor sit amet, consectetur
+          adipiscing elit. Fusce tellus diam, convallis ut nibh vel, volutpat convallis
+          mi. Fusce tellus diam, convallis ut nibh vel, volutp...
         </Text>
       </CustomModal>
     </>

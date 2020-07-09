@@ -11,8 +11,11 @@ import {
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Color } from "@glossy/colors";
 
+const height = Math.round(Dimensions.get("window").height);
+
 const styles = StyleSheet.create({
   centeredView: {
+    height: height,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "rgba(0, 0, 0, 0.7)",
@@ -54,10 +57,8 @@ const styles = StyleSheet.create({
   },
 });
 
-const height = Math.round(Dimensions.get("window").height);
-
 const CustomModal = ({ isVisible, closeModal, title, children, groupBtn }) => {
-  const [screenHeight, setScreenHeight] = useState(height);
+  const [screenHeight, setScreenHeight] = useState();
   const [scrollEnabled, setScrollEnabled] = useState(false);
 
   useEffect(() => {
@@ -73,7 +74,7 @@ const CustomModal = ({ isVisible, closeModal, title, children, groupBtn }) => {
     <Modal animationType="fade" transparent={true} visible={isVisible}>
       <View style={styles.centeredView}>
         <ScrollView
-          style={styles.modalView}
+          style={[styles.modalView, { maxHeight: screenHeight }]}
           scrollEnabled={scrollEnabled}
           onContentSizeChange={onContentSizeChange}
         >
