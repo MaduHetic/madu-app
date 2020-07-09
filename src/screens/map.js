@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Platform } from "react-native";
 import MapboxGL from '@react-native-mapbox-gl/maps';
 import Map from "@components/map";
 import FilterBarPOI from "@components/filterBarPOI";
@@ -16,7 +17,8 @@ const MapScreen = () => {
     async function requestAndroidLocationPermissions() {
       await MapboxGL.requestAndroidLocationPermissions()
     }
-    requestAndroidLocationPermissions()
+
+    if (Platform.OS === "android") requestAndroidLocationPermissions()
   }, []);
 
   return (
