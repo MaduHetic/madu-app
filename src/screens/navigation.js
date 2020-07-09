@@ -33,7 +33,7 @@ const Navigation = () => {
   }, []);
 
   useEffect(() => {
-    if (isLoading) {
+    if (!isLoading) {
       SplashScreen.hide();
     }
   }, [isLoading]);

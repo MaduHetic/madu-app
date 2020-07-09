@@ -8,6 +8,13 @@ function getQuizz(id) {
   });
 }
 
+function sendQuizzForm(data) {
+  return client.request({
+    method: "put",
+    url: apiRoutes.sendQuizzForm(),
+    data,
+  });
+}
 function getThemes() {
   return client.request({
     method: "get",
@@ -18,4 +25,5 @@ function getThemes() {
 export const Api = {
   getQuizz,
   getThemes,
+  sendQuizzForm,
 };

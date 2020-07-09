@@ -2,6 +2,7 @@ import React from "react";
 import { View, ImageBackground, Text, StyleSheet, Dimensions } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 import { Color } from "@glossy/colors";
 const screenWidth = Dimensions.get("window").width;
@@ -25,7 +26,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     flexDirection: "row",
-    backgroundColor: Color.dark,
     padding: 16,
   },
   title: {
@@ -66,28 +66,41 @@ const styles = StyleSheet.create({
   },
 });
 
-const Quiz = ({ item: { id, imgBackground, reward, theme, duration, participants } }) => {
+const Quiz = ({
+  item: { id, imgBackground, reward, theme, duration, participants, answered },
+}) => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <ImageBackground source={{ uri: imgBackground }} style={styles.image}>
         <View style={styles.iconContainer}>
-          <Icon style={styles.icon} name="star" size={15} />
-          <Text>{`${reward} Saphires`}</Text>
+          <MaterialCommunityIcons style={styles.icon} name="seed-outline" size={20} />
+          <Text>{`${reward}`}</Text>
         </View>
-        <View style={styles.bottomContainer}>
+        <View
+          style={[
+            styles.bottomContainer,
+            { backgroundColor: answered ? Color.dark : Color.lightGrey },
+          ]}
+        >
           <View>
-            <Text style={styles.title}>{theme}</Text>
+            <Text
+              style={[styles.title, { color: answered ? Color.lightGrey : Color.dark }]}
+            >
+              {theme}
+            </Text>
             <Text style={styles.time}>{`Temps moyen : ${duration} minutes`}</Text>
           </View>
-          <View style={styles.arrow}>
-            <Icon
-              name="arrow-right"
-              size={12}
-              color={Color.dark}
-              onPress={() => navigation.navigate("quizz", { id })}
-            />
-          </View>
+          {!answered && (
+            <View style={styles.arrow}>
+              <Icon
+                name="arrow-right"
+                size={12}
+                color={Color.dark}
+                onPress={() => navigation.navigate("quizz", { id })}
+              />
+            </View>
+          )}
         </View>
       </ImageBackground>
       <View>

@@ -44,6 +44,13 @@ function useSignUp() {
     );
 }
 
+function useClearError() {
+  const dispatch = useDispatch();
+  return () => {
+    dispatch(Actions.clearError());
+  };
+}
+
 function useFirstName() {
   return useSelector(firstName);
 }
@@ -74,6 +81,7 @@ export const User = {
   loggedIn: useLoggedIn,
   isLoading: useIsLoading,
   getCurrentUser: useGetCurrentUser,
+  clearError: useClearError,
   sagas: rootSagas,
   reducer: userReducer,
 };

@@ -11,7 +11,8 @@ const initialState: UserState = {
 export type UserAction =
   | ActionType<typeof Actions.signIn>
   | ActionType<typeof Actions.signUp>
-  | ActionType<typeof Actions.signOut>;
+  | ActionType<typeof Actions.signOut>
+  | ActionType<typeof Actions.clearError>;
 
 export const userReducer = (state = initialState, action: UserAction) => {
   return produce(state, (draft) => {
@@ -52,6 +53,9 @@ export const userReducer = (state = initialState, action: UserAction) => {
         break;
       case getType(Actions.getCurrentUser.failure):
         draft.isLoading = false;
+        break;
+      case getType(Actions.clearError):
+        draft.error = null;
         break;
       default:
         return state;

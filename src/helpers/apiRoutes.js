@@ -24,5 +24,6 @@ export default {
   getStats: () => `/stats`,
   knowIt: () => `/know-it`,
   quizz: (id) => `/theme-quizz/question/${id}`,
+  sendQuizzForm: () => `/theme-quizz/submit`, // PUT
   themes: () => `/theme-quizz`,
 };
