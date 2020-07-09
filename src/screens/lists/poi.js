@@ -209,7 +209,7 @@ const Poi = () => {
                 >
                   <Svg svgs={svgs} name="score" height={16} width={16} />
                   <Text style={styles.greenScore}>
-                    <Text>{place.greenScore}</Text>
+                    <Text>{place.greenScore.toFixed(1)}</Text>
                     <Text style={styles.greenScoreNotation}>/10</Text>
                   </Text>
                 </TouchableOpacity>
