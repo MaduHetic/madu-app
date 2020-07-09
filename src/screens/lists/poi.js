@@ -188,7 +188,11 @@ const Poi = () => {
                 )}
                 <View style={styles.iconContainer}>
                   <MaterialCommunityIcons style={styles.icon} name="walk" size={15} />
-                  <Text>{place.distance}m</Text>
+                  {place.distance < 999 ? (
+                    <Text>{place.distance}m</Text>
+                  ) : (
+                    <Text>{(place.distance / 1000).toFixed(1)}km</Text>
+                  )}
                 </View>
               </View>
             </ImageBackground>
