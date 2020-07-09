@@ -2,7 +2,6 @@ import React, { Fragment, useEffect, useRef } from "react";
 import { View, StyleSheet, Text, TouchableOpacity, Image } from "react-native";
 import MapboxGL from "@react-native-mapbox-gl/maps";
 import { Color } from "@glossy/colors";
-import cross from "@assets/images/cross.png";
 import BottomSheet from "reanimated-bottom-sheet";
 import { point } from '@turf/helpers';
 import {lineString as makeLineString} from '@turf/helpers';
@@ -11,6 +10,7 @@ import Geolocation from '@react-native-community/geolocation';
 import { MAP_KEY } from "react-native-dotenv";
 import svgs from "@assets/svg/sprite";
 import Svg from "@components/svg";
+import BottomSheetContent from "@components/bottomSheetContent";
 
 const clientOptions = {accessToken: MAP_KEY};
 const directionsClient = MapboxDirectionsFactory(clientOptions);
@@ -115,6 +115,28 @@ const styles = StyleSheet.create({
     lineHeight: 16,
     letterSpacing: -0.5,
     marginLeft: 4,
+  },
+  containerLogo: {
+    width: "100%",
+    height: 0,
+    position: "relative",
+  },
+  wrapperLogo: {
+    position: "absolute",
+    top: -24,
+    left: 24,
+    width: 48,
+    height: 48,
+    borderRadius: 48,
+    backgroundColor: Color.white,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  logo: {
+    resizeMode: "contain",
+    width: 38,
+    height: 38,
   }
 });
 
@@ -128,6 +150,7 @@ const Map = ({ filteredPOIs, entreprise }) => {
   const [isZoomAboveX, setIsZoomAboveX] = React.useState(true);
   const [route, setRoute] = React.useState(null);
   const [distance, setDistance] = React.useState(0);
+  const [isLogoHidden, setIsLogoHidden] = React.useState(false);
 
   // POIs filter
   useEffect(() => {
@@ -302,84 +325,19 @@ const Map = ({ filteredPOIs, entreprise }) => {
         ref={bottomSheetRef}
         snapPoints={["87%", 220, 0]}
         initialSnap={2}
-        onCloseEnd={() => handleClickPOI(null)}
+        onOpenEnd={() => setIsLogoHidden(true)}
+        onCloseStart={() => setIsLogoHidden(false)}
         renderContent={() => (
-          <View style={{ backgroundColor: Color.white, position: "relative" }}>
-            <TouchableOpacity
-              onPress={() => handleClickPOI(null)}
-              style={{ width: "95%", display: "flex", alignItems: "flex-end" }}
-            >
-              <View
-                style={{
-                  width: 40,
-                  height: 40,
-                  backgroundColor: "#F5F5FA",
-                  borderRadius: 50,
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Image source={cross} />
-              </View>
-            </TouchableOpacity>
-
-            <Text style={{ fontSize: 26, margin: 10 }}>{currPOI?.name}</Text>
-
-            <Text style={{ margin: 10 }}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-              non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </Text>
-            <Text style={{ margin: 10 }}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-              non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </Text>
-            <Text style={{ margin: 10 }}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-              non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </Text>
-            <Text style={{ margin: 10 }}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-              non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </Text>
-            <Text style={{ margin: 10 }}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-              non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </Text>
-            <Text style={{ margin: 10 }}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-              non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </Text>
-
-            <Text style={{ margin: 10 }}>FIN</Text>
-          </View>
+          <BottomSheetContent poi={currPOI} handleClickPOI={handleClickPOI} />
         )}
         renderHeader={() => (
-          <View style={{ width: "100%", height: 20, backgroundColor: "white" }} />
+          <View style={styles.containerLogo}>
+            {currPOI?.logo && !isLogoHidden && (
+              <View style={styles.wrapperLogo}>
+                <Image style={styles.logo} source={{ uri: currPOI?.logo }} />
+              </View>
+            )}
+          </View>
         )}
       />
     </>

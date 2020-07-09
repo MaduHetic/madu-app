@@ -2,7 +2,6 @@ import { client } from "../../helpers/api";
 import apiRoutes from "../../helpers/apiRoutes";
 
 function registerPoi(data) {
-  console.log(data);
   return client.request({
     method: "post",
     url: apiRoutes.registerPoi(),

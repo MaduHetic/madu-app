@@ -34,7 +34,6 @@ function* signUp(action) {
     yield put(Actions.signUp.request(true));
     const request = yield call(Api.signUp, action.payload);
     if (request.status === 201) {
-      console.log(request);
       yield call(saveCredentialsInStorage, request.data.access_token);
       yield call(getCurrentUser);
     }

@@ -85,7 +85,6 @@ const Tutorial = () => {
     }
   };
 
-  console.log(entries);
   return (
     <ImageBackground source={background} style={styles.image}>
       <SafeAreaView style={{ flex: 1 }}>

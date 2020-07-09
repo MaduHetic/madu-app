@@ -114,7 +114,6 @@ export const List = () => {
         navigationList: selected,
       },
     ]);
-    console.log(Lists);
   }, [allPoi, selected]);
 
   return (

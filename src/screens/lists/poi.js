@@ -129,7 +129,6 @@ const Poi = () => {
   }, [refreshing]);
 
   if (!place) return null;
-  console.log(place.imgs);
   return (
     <View style={{ position: "relative" }}>
       <ScrollView
