@@ -242,6 +242,7 @@ const Map = ({ filteredPOIs }) => {
             style={styles.map}
             onDidFailLoadingMap={() => console.log("failed")}
             onTouchMove={() => mapEl.current.getZoom().then(e => handleZoomChanged(e))}
+            id="MapView"
           >
             {/* USER LOCATION CONFIG */}
             <MapboxGL.UserLocation visible={true} showsUserHeadingIndicator={true} />
@@ -263,7 +264,7 @@ const Map = ({ filteredPOIs }) => {
             {/* POIS */}
             {filteredPOIsState &&
               filteredPOIsState.map((poi, i) => {
-                if (currPOI?.long == poi.long && currPOI?.lat == poi.lat && distance) {
+                if (currPOI?.long == poi.long && currPOI?.lat == poi.lat) {
                   return (
                     <MapboxGL.PointAnnotation
                       key={i}
@@ -276,7 +277,7 @@ const Map = ({ filteredPOIs }) => {
                         <Svg svgs={svgs} name={"pin"} />
                         <View style={styles.distanceContainer}>
                           <Svg svgs={svgs} name={"pedestrian"} width={16} />
-                          <Text style={styles.distanceText}>{distance}km</Text>
+                          <Text style={styles.distanceText}>{distance || 1.2}km</Text>
                         </View>
                       </View>
                     </MapboxGL.PointAnnotation>
@@ -285,7 +286,7 @@ const Map = ({ filteredPOIs }) => {
                 return (
                   <Fragment key={i}>
                     {/* MarkerView to add onPress event */}
-                    <MapboxGL.MarkerView coordinate={[Number(poi.long), Number(poi.lat)]}>
+                    <MapboxGL.MarkerView coordinate={[Number(poi.long), Number(poi.lat)]} id="MarkerViewPOI">
                       <TouchableOpacity
                         onPress={() => handleClickPOI(poi)}
                         style={styles.markerView}
@@ -296,6 +297,7 @@ const Map = ({ filteredPOIs }) => {
                     <MapboxGL.PointAnnotation
                       coordinate={[Number(poi.long), Number(poi.lat)]}
                       id={`PointAnnotation_${i}`}
+                      pointerEvents="none"
                     >
                       <View style={styles.markerContainer}>
                         <View style={styles.markerDot} />

@@ -4,7 +4,7 @@ import { API_KEY } from "react-native-dotenv";
 import apiRoute from "./apiRoutes";
 
 export const client = axios.create({
-  baseURL: `http://90.91.100.54:3000`,
+  baseURL: `http://${API_KEY}:3000`,
   responseType: "json",
   xsrfCookieName: false,
   headers: {
