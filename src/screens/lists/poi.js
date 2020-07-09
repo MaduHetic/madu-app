@@ -248,34 +248,31 @@ const Poi = () => {
       <CustomModal
         isVisible={modalVisible}
         closeModal={() => setModalVisible(false)}
-        title="Madu scoring c'est quoi ?"
+        title="Madu scoring"
         groupBtn={
-          <>
-            <Button text={"J'y participe"} color="blue" />
-            <Button text={"J'ai reussi le challenge"} underlayColor={"#B8B8C9"} outline />
-          </>
+          <Button
+            text={"J'ai Compris"}
+            color="blue"
+            onPress={() => setModalVisible(false)}
+          />
         }
       >
-        <Text style={{ fontSize: 17, lineHeight: 28, color: Color.darkGrey }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tellus diam,
-          convallis ut nibh vel, volutpat convallis mi. Fusce tellus diam, convallis ut
-          nibh vel, volutp... Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Fusce tellus diam, convallis ut nibh vel, volutpat convallis mi. Fusce tellus
-          diam, convallis ut nibh vel, volutp... Lorem ipsum dolor sit amet, consectetur
-          adipiscing elit. Fusce tellus diam, convallis ut nibh vel, volutpat convallis
-          mi. Fusce tellus diam, convallis ut nibh vel, volutp... Lorem ipsum dolor sit
-          amet, consectetur adipiscing elit. Fusce tellus diam, convallis ut nibh vel,
-          volutpat convallis mi. Fusce tellus diam, convallis ut nibh vel, volutp... Lorem
-          ipsum dolor sit amet, consectetur adipiscing elit. Fusce tellus diam, convallis
-          ut nibh vel, volutpat convallis mi. Fusce tellus diam, convallis ut nibh vel,
-          volutp... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tellus
-          diam, convallis ut nibh vel, volutpat convallis mi. Fusce tellus diam, convallis
-          ut nibh vel, volutp... Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Fusce tellus diam, convallis ut nibh vel, volutpat convallis mi. Fusce tellus
-          diam, convallis ut nibh vel, volutp... Lorem ipsum dolor sit amet, consectetur
-          adipiscing elit. Fusce tellus diam, convallis ut nibh vel, volutpat convallis
-          mi. Fusce tellus diam, convallis ut nibh vel, volutp...
-        </Text>
+        {place?.typeGreenScore.map(({ typeGreenScore, mark }, i) => (
+          <View style={styles.row} key={i}>
+            <Text style={{ fontSize: 17, lineHeight: 28, color: Color.darkGrey }}>
+              {`${typeGreenScore.typeGreenScore} : `}
+            </Text>
+            <Text
+              style={{
+                fontSize: 17,
+                lineHeight: 28,
+                color: mark > 5 ? Color.blueOcean : Color.statusAlert,
+              }}
+            >
+              {mark}
+            </Text>
+          </View>
+        ))}
       </CustomModal>
     </>
   );

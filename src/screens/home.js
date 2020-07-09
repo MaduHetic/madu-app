@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
 export const Home = () => {
   const [activeSlide, setActiveSlide] = useState(0);
   const [refreshing, setRefreshing] = useState(false);
-  const [challengeId, setChallengeId] = useState(1);
+  const [challengeId, setChallengeId] = useState(0);
   const navigation = useNavigation();
   const getKnowIt = KnowIt.getKnowIt();
   const knowItItem = KnowIt.data();
