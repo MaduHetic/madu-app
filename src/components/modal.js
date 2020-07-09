@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
     backgroundColor: Color.white,
     borderRadius: 6,
+    elevation: 5,
   },
   modalHeader: {
     padding: 24,
@@ -63,7 +64,12 @@ const CustomModal = ({ title, children, groupBtn }) => {
           {/* <ScrollView> */}
           <View style={styles.modalHeader}>
             <Text style={styles.title}>{title}</Text>
-            <TouchableOpacity style={styles.icon}>
+            <TouchableOpacity
+              style={styles.icon}
+              onPress={() => {
+                setModalVisible(!modalVisible);
+              }}
+            >
               <Icon style={styles.iconClose} name="close" size={22} />
             </TouchableOpacity>
           </View>
