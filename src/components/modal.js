@@ -12,6 +12,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { Color } from "@glossy/colors";
 
 const height = Math.round(Dimensions.get("window").height);
+const windowWidth = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
   centeredView: {
@@ -21,6 +22,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0, 0, 0, 0.7)",
   },
   modalView: {
+    width: windowWidth - 120,
     marginVertical: 120,
     marginHorizontal: 30,
     backgroundColor: Color.white,

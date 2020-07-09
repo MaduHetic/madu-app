@@ -26,7 +26,34 @@ function* addChallenge(action) {
   }
 }
 
+function* challengeCurrent() {
+  try {
+    yield put(Actions.challengeCurrent.request(true));
+    const request = yield call(Api.challengeCurrent);
+    if (request.status === 200) {
+      yield put(Actions.challengeCurrent.success(request.data));
+    }
+  } catch {
+    yield put(Actions.challengeCurrent.failure(false));
+  }
+}
+
+function* validateChallenge(action) {
+  try {
+    yield put(Actions.validateChallenge.request(true));
+    const request = yield call(Api.validateChallenge, action.payload);
+    if (request.status === 201 || request.status === 200) {
+      yield put(Actions.validateChallenge.success(request.data));
+      yield call(challengeCurrent);
+    }
+  } catch {
+    yield put(Actions.validateChallenge.failure(false));
+  }
+}
+
 export function* rootSagas() {
   yield takeLatest(Events.getChallenge, getChallenge);
   yield takeLatest(Events.addChallenge, addChallenge);
+  yield takeLatest(Events.challengeCurrent, challengeCurrent);
+  yield takeLatest(Events.validateChallenge, validateChallenge);
 }

@@ -47,9 +47,12 @@ const styles = StyleSheet.create({
   textWhite: {
     color: Color.white,
   },
+  smallBtn: {
+    paddingVertical: 10,
+  },
 });
 
-const Button = ({ onPress, text, color, underlayColor, outline, disabled }) => {
+const Button = ({ onPress, text, color, underlayColor, outline, disabled, small }) => {
   const buttonStyles = [styles.button];
   const textStyles = [styles.text];
 
@@ -81,7 +84,7 @@ const Button = ({ onPress, text, color, underlayColor, outline, disabled }) => {
 
   return (
     <TouchableHighlight
-      style={buttonStyles}
+      style={[buttonStyles, small && styles.smallBtn]}
       color={color}
       underlayColor={underlayColor}
       onPress={onPress}
