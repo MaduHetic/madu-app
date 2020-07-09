@@ -3,7 +3,7 @@ import produce from "immer";
 import { Actions } from "./actions";
 
 const initialState: UserState = {
-  loggedIn: false,
+  loggedIn: true,
   error: null,
   isLoading: false,
 };
