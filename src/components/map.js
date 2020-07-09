@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const Map = ({ filteredPOIs, entreprise }) => {
+const Map = ({ filteredPOIs }) => {
   const mapEl = useRef(null);
   const bottomSheetRef = useRef(null);
   const annotationRef = useRef(null);
@@ -229,7 +229,7 @@ const Map = ({ filteredPOIs, entreprise }) => {
 
   // Handle zoom changed
   const handleZoomChanged = e => {
-    setIsZoomAboveX(e > 14.5)
+    setIsZoomAboveX(e > 13.5)
   }
 
   return (
