@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, Alert } from "react-native";
+import {
+  Platform,
+  StyleSheet,
+  View,
+  Alert,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { User } from "@core/user";
@@ -47,18 +55,22 @@ const SignIn = () => {
     <>
       <HeaderLogin title="Connection" />
       <View style={styles.container}>
-        <View style={styles.form}>
-          <EmailTextField
-            label={"Entrez votre e-mail"}
-            value={email}
-            onValueChange={(val) => setEmail(val)}
-          />
-          <PasswordTextField
-            label={"Entrez votre mot de passe"}
-            value={password}
-            onValueChange={(val) => setPassword(val)}
-          />
-        </View>
+        <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"}>
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={styles.form}>
+              <EmailTextField
+                label={"Entrez votre e-mail"}
+                value={email}
+                onValueChange={(val) => setEmail(val)}
+              />
+              <PasswordTextField
+                label={"Entrez votre mot de passe"}
+                value={password}
+                onValueChange={(val) => setPassword(val)}
+              />
+            </View>
+          </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
         <Button text={"Se connecter"} onPress={submitIsValid} color="blue" />
       </View>
     </>
@@ -70,11 +82,12 @@ export default SignIn;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingVertical: 80,
+    paddingBottom: 120,
     paddingHorizontal: 24,
     backgroundColor: Color.white,
   },
   form: {
-    marginBottom: "auto",
+    paddingTop: 80,
+    height: "100%",
   },
 });
