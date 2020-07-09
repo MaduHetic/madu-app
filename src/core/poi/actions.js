@@ -6,6 +6,8 @@ export const Events = {
   updatePoi: createAction("poi/update")(),
   deletePoi: createAction("poi/delete")(),
   getAllPoi: createAction("poi/get/all")(),
+  poiValidate: createAction("poi/validate")(),
+  poiHistoric: createAction("poi/history")(),
 };
 
 export const Actions = {
@@ -29,5 +31,15 @@ export const Actions = {
     "poi/get/all/request",
     "poi/get/all/success",
     "poi/get/all/failure",
+  )(),
+  poiValidate: createAsyncAction(
+    "poi/validate/request",
+    "poi/validate/success",
+    "poi/validate/failure",
+  )(),
+  poiHistoric: createAsyncAction(
+    "poi/history/request",
+    "poi/history/success",
+    "poi/history/failure",
   )(),
 };

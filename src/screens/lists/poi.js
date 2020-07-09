@@ -115,6 +115,7 @@ const Poi = () => {
   const navigation = useNavigation();
   const getPoi = PointOfIntress.getPoi();
   const place = PointOfIntress.poi();
+  const poiValidate = PointOfIntress.poiValidate();
 
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -236,6 +237,7 @@ const Poi = () => {
           <Button
             text="Y aller 👍"
             onPress={() => {
+              poiValidate(place.id);
               Linking.openURL(
                 `https://www.google.com/maps/search/?api=1&query=${place.lat},${place.long}`,
               );
@@ -256,22 +258,23 @@ const Poi = () => {
           />
         }
       >
-        {place?.typeGreenScore.map(({ typeGreenScore, mark }, i) => (
-          <View style={styles.row} key={i}>
-            <Text style={{ fontSize: 17, lineHeight: 28, color: Color.darkGrey }}>
-              {`${typeGreenScore.typeGreenScore} : `}
-            </Text>
-            <Text
-              style={{
-                fontSize: 17,
-                lineHeight: 28,
-                color: mark > 5 ? Color.blueOcean : Color.statusAlert,
-              }}
-            >
-              {mark}
-            </Text>
-          </View>
-        ))}
+        {place?.typeGreenScore &&
+          place.typeGreenScore.map(({ typeGreenScore, mark }, i) => (
+            <View style={styles.row} key={i}>
+              <Text style={{ fontSize: 17, lineHeight: 28, color: Color.darkGrey }}>
+                {`${typeGreenScore.typeGreenScore} : `}
+              </Text>
+              <Text
+                style={{
+                  fontSize: 17,
+                  lineHeight: 28,
+                  color: mark > 5 ? Color.blueOcean : Color.statusAlert,
+                }}
+              >
+                {mark}
+              </Text>
+            </View>
+          ))}
       </CustomModal>
     </>
   );

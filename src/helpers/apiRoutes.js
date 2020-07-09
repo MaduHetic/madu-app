@@ -29,4 +29,6 @@ export default {
   challenge: () => `/challenge`,
   challengeCurrent: () => `/challenge/current`,
   validateChallenge: (id) => `/challenge/validate/${id}`,
+  poiValidate: (id) => `/poi/validate/${id}`,
+  poiHistoric: () => `/poi/historic`,
 };

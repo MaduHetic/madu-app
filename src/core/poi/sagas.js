@@ -62,10 +62,36 @@ function* getAllPoi() {
   }
 }
 
+function* poiValidate(action) {
+  try {
+    yield put(Actions.poiValidate.request(true));
+    const request = yield call(Api.poiValidate, action.payload);
+    if (request.status === 200) {
+      yield put(Actions.poiValidate.success(request.data));
+    }
+  } catch {
+    yield put(Actions.getAllPoi.failure(false));
+  }
+}
+
+function* poiHistoric() {
+  try {
+    yield put(Actions.poiHistoric.request(true));
+    const request = yield call(Api.poiHistoric);
+    if (request.status === 200) {
+      yield put(Actions.poiHistoric.success(request.data));
+    }
+  } catch {
+    yield put(Actions.poiHistoric.failure(false));
+  }
+}
+
 export function* rootSagas() {
   yield takeLatest(Events.registerPoi, registerPoi);
   yield takeLatest(Events.getPoi, getPoi);
   yield takeLatest(Events.updatePoi, updatePoi);
   yield takeLatest(Events.deletePoi, deletePoi);
   yield takeLatest(Events.getAllPoi, getAllPoi);
+  yield takeLatest(Events.poiValidate, poiValidate);
+  yield takeLatest(Events.poiHistoric, poiHistoric);
 }
