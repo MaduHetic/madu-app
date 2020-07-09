@@ -327,6 +327,7 @@ const Map = ({ filteredPOIs, entreprise }) => {
         initialSnap={2}
         onOpenEnd={() => setIsLogoHidden(true)}
         onCloseStart={() => setIsLogoHidden(false)}
+        onCloseEnd={() => handleClickPOI(null)}
         renderContent={() => (
           <BottomSheetContent poi={currPOI} handleClickPOI={handleClickPOI} />
         )}
