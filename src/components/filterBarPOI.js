@@ -11,12 +11,12 @@ const DATA = [
   {
     id: 1,
     title: "Magasins",
-    type: "MAGASIN",
+    type: "Shopping",
   },
   {
     id: 2,
     title: "Activités",
-    type: "ACTIVITÉ",
+    type: "Activity",
   },
 ];
 

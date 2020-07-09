@@ -11,6 +11,7 @@ import { MAP_KEY } from "react-native-dotenv";
 import svgs from "@assets/svg/sprite";
 import Svg from "@components/svg";
 import BottomSheetContent from "@components/bottomSheetContent";
+import { User } from "@core/user";
 
 const clientOptions = {accessToken: MAP_KEY};
 const directionsClient = MapboxDirectionsFactory(clientOptions);
@@ -144,6 +145,7 @@ const Map = ({ filteredPOIs, entreprise }) => {
   const mapEl = useRef(null);
   const bottomSheetRef = useRef(null);
   const annotationRef = useRef(null);
+  const user = User.user().user.user;
 
   const [filteredPOIsState, setFilteredPOIsState] = React.useState([]);
   const [currPOI, setCurrPOI] = React.useState(null);
@@ -304,17 +306,19 @@ const Map = ({ filteredPOIs, entreprise }) => {
               )})}
 
             {/* ENTREPRISE */}
-            <MapboxGL.PointAnnotation
-              title="entrepriseTitle"
-              coordinate={entreprise.coordinate}
-              id="entreprise"
-              ref={annotationRef}
-            >
-              <View style={styles.markerEntrepriseContainer}>
-                <View style={styles.markerDotEntreprise} />
-                <Svg style={styles.buildingEntreprise} svgs={svgs} name={"building"} />
-              </View>
-            </MapboxGL.PointAnnotation>
+            {user.company.long && user.company.lat && (
+              <MapboxGL.PointAnnotation
+                title="entrepriseTitle"
+                coordinate={[Number(user.company.long), Number(user.company.lat)]}
+                id="entreprise"
+                ref={annotationRef}
+              >
+                <View style={styles.markerEntrepriseContainer}>
+                  <View style={styles.markerDotEntreprise} />
+                  <Svg style={styles.buildingEntreprise} svgs={svgs} name={"building"} />
+                </View>
+              </MapboxGL.PointAnnotation>
+            )}
 
           </MapboxGL.MapView>
         </View>
