@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   ScrollView,
   View,
@@ -6,13 +6,13 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  Dimensions,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Color } from "@glossy/colors";
 
 const styles = StyleSheet.create({
   centeredView: {
-    flex: 1,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "rgba(0, 0, 0, 0.7)",
@@ -54,22 +54,32 @@ const styles = StyleSheet.create({
   },
 });
 
-const CustomModal = ({ title, children, groupBtn }) => {
-  const [modalVisible, setModalVisible] = useState(true);
+const height = Math.round(Dimensions.get("window").height);
+
+const CustomModal = ({ isVisible, closeModal, title, children, groupBtn }) => {
+  const [screenHeight, setScreenHeight] = useState(height);
+  const [scrollEnabled, setScrollEnabled] = useState(false);
+
+  useEffect(() => {
+    setScrollEnabled(screenHeight > height);
+  }, [screenHeight]);
+
+  const onContentSizeChange = (contentWidth, contentHeight) => {
+    // Save the content height in state
+    setScreenHeight(contentHeight);
+  };
 
   return (
-    <Modal animationType="fade" transparent={true} visible={modalVisible}>
+    <Modal animationType="fade" transparent={true} visible={isVisible}>
       <View style={styles.centeredView}>
-        <View style={styles.modalView}>
-          {/* <ScrollView> */}
+        <ScrollView
+          style={styles.modalView}
+          scrollEnabled={scrollEnabled}
+          onContentSizeChange={onContentSizeChange}
+        >
           <View style={styles.modalHeader}>
             <Text style={styles.title}>{title}</Text>
-            <TouchableOpacity
-              style={styles.icon}
-              onPress={() => {
-                setModalVisible(!modalVisible);
-              }}
-            >
+            <TouchableOpacity style={styles.icon} onPress={closeModal}>
               <Icon style={styles.iconClose} name="close" size={22} />
             </TouchableOpacity>
           </View>
@@ -77,8 +87,7 @@ const CustomModal = ({ title, children, groupBtn }) => {
           <View style={styles.modalBody}>{children}</View>
 
           <View style={styles.modalFooter}>{groupBtn}</View>
-          {/* </ScrollView> */}
-        </View>
+        </ScrollView>
       </View>
     </Modal>
   );

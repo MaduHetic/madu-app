@@ -97,6 +97,8 @@ const Places = ({
   const [rating, setRating] = useState();
   const navigation = useNavigation();
 
+  const [modalVisible, setModalVisible] = useState(false);
+
   useEffect(() => {
     if (starRating > 0) {
       setRating("Tres bon");

@@ -40,9 +40,6 @@ moment.locale("fr");
 
 import { Color } from "@glossy/colors";
 
-import CustomModal from "@components/modal";
-import Button from "@components/button";
-
 const styles = StyleSheet.create({
   container: {
     padding: 16,
@@ -134,22 +131,6 @@ export const Home = () => {
 
   return (
     <View style={{ flex: 1, backgroundColor: Color.white, paddingTop: 20 }}>
-      <CustomModal
-        title="Madu scoring c'est quoi ?"
-        groupBtn={
-          <>
-            <Button text={"J'y participe"} color="blue" />
-            <Button text={"J'ai reussi le challenge"} underlayColor={"#B8B8C9"} outline />
-          </>
-        }
-      >
-        <Text style={{ fontSize: 17, lineHeight: 28, color: Color.darkGrey }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tellus diam,
-          convallis ut nibh vel, volutpat convallis mi. Fusce tellus diam, convallis ut
-          nibh vel, volutp...
-        </Text>
-      </CustomModal>
-
       <ScrollView
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
         showsVerticalScrollIndicator={false}

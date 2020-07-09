@@ -23,6 +23,9 @@ import { Color } from "@glossy/colors";
 
 import svgs from "@assets/svg/sprite";
 import Svg from "@components/svg";
+
+import CustomModal from "@components/modal";
+
 const screenHeight = Math.round(Dimensions.get("window").height);
 const windowWidth = Dimensions.get("window").width;
 
@@ -113,6 +116,8 @@ const Poi = () => {
   const getPoi = PointOfIntress.getPoi();
   const place = PointOfIntress.poi();
 
+  const [modalVisible, setModalVisible] = useState(false);
+
   useEffect(() => {
     getPoi(params.id);
   }, []);
@@ -131,107 +136,131 @@ const Poi = () => {
   if (!place) return null;
   console.log(place.imgs);
   return (
-    <View style={{ position: "relative" }}>
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
-      >
-        {place.mainImg && (
-          <ImageBackground source={{ uri: place.mainImg }} style={styles.image}>
-            <View style={{ width: "30%", marginLeft: 30 }}>
-              <TouchableOpacity
-                style={styles.button}
-                onPress={() => navigation.goBack()}
-                activeOpacity={0.6}
-              >
-                <View style={styles.row}>
-                  <AntDesign
-                    style={styles.icon}
-                    name="arrowleft"
-                    size={20}
-                    color={Color.primary}
-                  />
-                  <Text style={{ color: Color.primary }}>Retour</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-            <View
-              style={[
-                styles.row,
-                {
-                  position: "absolute",
-                  bottom: -60,
-                  padding: 24,
-                  shadowColor: "#000",
-                  shadowOffset: {
-                    width: 0,
-                    height: 3,
+    <>
+      <View style={{ position: "relative" }}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
+        >
+          {place.mainImg && (
+            <ImageBackground source={{ uri: place.mainImg }} style={styles.image}>
+              <View style={{ width: "30%", marginLeft: 30 }}>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={() => navigation.goBack()}
+                  activeOpacity={0.6}
+                >
+                  <View style={styles.row}>
+                    <AntDesign
+                      style={styles.icon}
+                      name="arrowleft"
+                      size={20}
+                      color={Color.primary}
+                    />
+                    <Text style={{ color: Color.primary }}>Retour</Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
+              <View
+                style={[
+                  styles.row,
+                  {
+                    position: "absolute",
+                    bottom: -60,
+                    padding: 24,
+                    shadowColor: "#000",
+                    shadowOffset: {
+                      width: 0,
+                      height: 3,
+                    },
+                    shadowOpacity: 0.1,
                   },
-                  shadowOpacity: 0.1,
-                },
-              ]}
-            >
-              {place.logo ? (
-                <Image style={styles.logo} source={{ uri: place.logo }} />
-              ) : (
-                <View style={styles.logo} />
-              )}
-              <View style={styles.iconContainer}>
-                <MaterialCommunityIcons style={styles.icon} name="walk" size={15} />
-                <Text>{place.distance}m</Text>
+                ]}
+              >
+                {place.logo ? (
+                  <Image style={styles.logo} source={{ uri: place.logo }} />
+                ) : (
+                  <View style={styles.logo} />
+                )}
+                <View style={styles.iconContainer}>
+                  <MaterialCommunityIcons style={styles.icon} name="walk" size={15} />
+                  <Text>{place.distance}m</Text>
+                </View>
               </View>
-            </View>
-          </ImageBackground>
-        )}
+            </ImageBackground>
+          )}
 
-        <SafeAreaView>
-          <View style={{ padding: 24 }}>
-            <Text style={styles.title}>{place.name}</Text>
-            {place.tags && <Tag tags={place.tags} />}
-            <View style={styles.row}>
-              <View style={[styles.informationContainer, styles.greenScore]}>
-                <Svg svgs={svgs} name="score" height={16} width={16} />
-                <Text style={styles.greenScore}>
-                  <Text>{place.greenScore}</Text>
-                  <Text style={styles.greenScoreNotation}>/10</Text>
-                </Text>
-              </View>
-              <View style={styles.iconContainer}>
-                <MaterialCommunityIcons
-                  style={styles.icon}
-                  name="seed-outline"
-                  size={20}
-                />
-                <Text>{`${place.reward}`}</Text>
-              </View>
-            </View>
-            <Text>{place.description}</Text>
-            {place.imgs && (
-              <View style={styles.imageContainer}>
-                {place.imgs.map((img, i) => (
-                  <Image
-                    key={i}
-                    source={{ uri: img }}
-                    style={[styles.img, calculatedSize()]}
+          <SafeAreaView>
+            <View style={{ padding: 24 }}>
+              <Text style={styles.title}>{place.name}</Text>
+              {place.tags && <Tag tags={place.tags} />}
+              <View style={styles.row}>
+                <TouchableOpacity
+                  style={[styles.informationContainer, styles.greenScore]}
+                  onPress={() => setModalVisible(true)}
+                >
+                  <Svg svgs={svgs} name="score" height={16} width={16} />
+                  <Text style={styles.greenScore}>
+                    <Text>{place.greenScore}</Text>
+                    <Text style={styles.greenScoreNotation}>/10</Text>
+                  </Text>
+                </TouchableOpacity>
+                <View style={styles.iconContainer}>
+                  <MaterialCommunityIcons
+                    style={styles.icon}
+                    name="seed-outline"
+                    size={20}
                   />
-                ))}
+                  <Text>{`${place.reward}`}</Text>
+                </View>
               </View>
-            )}
-          </View>
-        </SafeAreaView>
-      </ScrollView>
-      <View style={{ position: "absolute", bottom: 20, left: 24, right: 24 }}>
-        <Button
-          text="Y aller 👍"
-          onPress={() => {
-            Linking.openURL(
-              `https://www.google.com/maps/search/?api=1&query=${place.lat},${place.long}`,
-            );
-          }}
-          color="blue"
-        />
+              <Text>{place.description}</Text>
+              {place.imgs && (
+                <View style={styles.imageContainer}>
+                  {place.imgs.map((img, i) => (
+                    <Image
+                      key={i}
+                      source={{ uri: img }}
+                      style={[styles.img, calculatedSize()]}
+                    />
+                  ))}
+                </View>
+              )}
+            </View>
+          </SafeAreaView>
+        </ScrollView>
+        <View style={{ position: "absolute", bottom: 20, left: 24, right: 24 }}>
+          <Button
+            text="Y aller 👍"
+            onPress={() => {
+              Linking.openURL(
+                `https://www.google.com/maps/search/?api=1&query=${place.lat},${place.long}`,
+              );
+            }}
+            color="blue"
+          />
+        </View>
       </View>
-    </View>
+      <CustomModal
+        isVisible={modalVisible}
+        closeModal={() => setModalVisible(false)}
+        title="Madu scoring c'est quoi ?"
+        groupBtn={
+          <>
+            <Button text={"J'y participe"} color="blue" />
+            <Button text={"J'ai reussi le challenge"} underlayColor={"#B8B8C9"} outline />
+          </>
+        }
+      >
+        <Text style={{ fontSize: 17, lineHeight: 28, color: Color.darkGrey }}>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tellus diam,
+          convallis ut nibh vel, volutpat convallis mi. Fusce tellus diam, convallis ut
+          nibh vel, volutp...
+        </Text>
+      </CustomModal>
+    </>
   );
 };
 
