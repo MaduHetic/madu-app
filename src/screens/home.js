@@ -20,6 +20,7 @@ import Carousel, { Pagination } from "react-native-snap-carousel";
 import Tutorial from "./tutorial";
 import Icon from "react-native-vector-icons/FontAwesome";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import CustomModal from "@components/modal";
 
 import { User } from "@core/user";
 import { KnowIt } from "@core/knowIt";
@@ -196,20 +197,27 @@ export const Home = () => {
               showsHorizontalScrollIndicator={false}
             />
           </View>
-          {challengeId &&
-            challengeData
-              .filter(({ id }) => id === challengeId)
-              .map(({ id, description }) => (
-                <View key={id}>
-                  <Text>{description}</Text>
-                  <Button
-                    color="blue"
-                    text="j’ai reussi le challenge"
-                    onPress={() => validateChallenge(id)}
-                  />
-                </View>
-              ))}
         </View>
+        {challengeData
+          .filter(({ id }) => id === challengeId)
+          .map(({ id, description }) => (
+            <CustomModal
+              key={id}
+              isVisible={challengeId > 0}
+              closeModal={() => setChallengeId(0)}
+              title={description}
+              groupBtn={
+                <Button
+                  text="J'ai reussi le challenge"
+                  color="blue"
+                  onPress={() => {
+                    validateChallenge(id);
+                    setChallengeId(0);
+                  }}
+                />
+              }
+            />
+          ))}
       </ScrollView>
     </View>
   );
