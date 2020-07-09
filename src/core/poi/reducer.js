@@ -7,6 +7,7 @@ const initialState = {
   poi: {},
   errors: [],
   isLoading: false,
+  history: [],
 };
 
 export type PoiAction =
@@ -14,7 +15,9 @@ export type PoiAction =
   | ActionType<typeof Actions.getPoi>
   | ActionType<typeof Actions.updatePoi>
   | ActionType<typeof Actions.deletePoi>
-  | ActionType<typeof Actions.getAllPoi>;
+  | ActionType<typeof Actions.getAllPoi>
+  | ActionType<typeof Actions.poiValidate>
+  | ActionType<typeof Actions.poiHistoric>;
 
 export const poiReducer = (state = initialState, action: PoiAction) => {
   return produce(state, (draft) => {
@@ -64,6 +67,25 @@ export const poiReducer = (state = initialState, action: PoiAction) => {
         draft.isLoading = true;
         break;
       case getType(Actions.getAllPoi.failure):
+        draft.isLoading = true;
+        break;
+      case getType(Actions.poiValidate.request):
+        draft.isLoading = true;
+        break;
+      case getType(Actions.poiValidate.success):
+        draft.isLoading = false;
+        break;
+      case getType(Actions.poiValidate.failure):
+        draft.isLoading = false;
+        break;
+      case getType(Actions.poiHistoric.request):
+        draft.isLoading = true;
+        break;
+      case getType(Actions.poiHistoric.success):
+        draft.history = action.payload;
+        draft.isLoading = false;
+        break;
+      case getType(Actions.poiHistoric.failure):
         draft.isLoading = true;
         break;
       default:

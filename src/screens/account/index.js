@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   Text,
   View,
@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Image,
   RefreshControl,
+  FlatList,
 } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
@@ -15,6 +16,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import LineIcon from "react-native-vector-icons/SimpleLineIcons";
 import moment from "moment";
 import "moment/locale/fr";
+import Place from "@components/card/places";
 
 const Stack = createStackNavigator();
 moment.locale("fr");
@@ -24,6 +26,7 @@ import Rewards from "./rewards";
 import Svg from "@components/svg";
 import Button from "@components/button";
 import { User } from "@core/user";
+import { Poi } from "@core/poi";
 import TextWithDecorator from "@components/textWithDecorator";
 import Svgs from "@assets/svg/gems";
 
@@ -89,10 +92,18 @@ export const Account = () => {
   const signOut = User.signOut();
   const user = User.user().user.user;
   const company = user?.company;
+  const getHistory = Poi.poiHistoric();
+  const history = Poi.history();
+
+  useEffect(() => {
+    getCurrentUser();
+    getHistory();
+  }, []);
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
     getCurrentUser();
+    getHistory();
     setRefreshing(false);
   }, [refreshing]);
 
@@ -146,6 +157,26 @@ export const Account = () => {
             </View>
             <Text>Vos dernier trophées obtenue</Text>
           </View>
+          {history.length > 0 && (
+            <>
+              <View style={[styles.row, styles.rewardContainer]}>
+                <TextWithDecorator text="Historique" color={Color.sunglow} />
+                <LineIcon
+                  name="arrow-right-circle"
+                  size={32}
+                  onPress={() => navigation.navigate("rewards")}
+                  color={Color.sunglow}
+                />
+              </View>
+              <FlatList
+                data={history}
+                renderItem={({ item }) => <Place item={item} key={item.key} />}
+                keyExtractor={(item) => `${item.id}`}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+              />
+            </>
+          )}
         </View>
         <TouchableOpacity
           onPress={() => signOut()}

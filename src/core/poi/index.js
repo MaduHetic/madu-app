@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { rootSagas } from "./sagas";
 import { Events, Actions } from "./actions";
 import { poiReducer } from "./reducer";
-import { allPoi, isLoading, getAllPoiType, getPoi } from "./selectors";
+import { allPoi, isLoading, getAllPoiType, getPoi, history } from "./selectors";
 
 function useRegisterPoi() {
   const dispatch = useDispatch();
@@ -43,6 +43,20 @@ function useGetAllPoi() {
   };
 }
 
+function usePoiValidate() {
+  const dispatch = useDispatch();
+  return (id) => {
+    dispatch(Events.poiValidate(id));
+  };
+}
+
+function usePoiHistoric() {
+  const dispatch = useDispatch();
+  return () => {
+    dispatch(Events.poiHistoric());
+  };
+}
+
 function useIsLoading() {
   return useSelector(isLoading);
 }
@@ -59,12 +73,19 @@ function usePoi() {
   return useSelector(getPoi);
 }
 
+function useHistory() {
+  return useSelector(history);
+}
+
 export const Poi = {
   registerPoi: useRegisterPoi,
   getPoi: useGetPoi,
   updatePoi: useUpdatePoi,
   deletePoi: useDeletePoi,
   getAllPoi: useGetAllPoi,
+  poiValidate: usePoiValidate,
+  poiHistoric: usePoiHistoric,
+  history: useHistory,
   allPoi: useAllPoi,
   poi: usePoi,
   poiTypes: useGetAllPoiType,

@@ -63,10 +63,26 @@ function getAllPoi() {
   });
 }
 
+function poiValidate(id) {
+  return client.request({
+    method: "get",
+    url: apiRoutes.poiValidate(id),
+  });
+}
+
+function poiHistoric() {
+  return client.request({
+    method: "get",
+    url: apiRoutes.poiHistoric(),
+  });
+}
+
 export const Api = {
   registerPoi,
   getPoi,
   updatePoi,
   deletePoi,
   getAllPoi,
+  poiValidate,
+  poiHistoric,
 };
