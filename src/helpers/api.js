@@ -21,8 +21,6 @@ client.interceptors.request.use(
       return config;
     }
 
-    console.log(API_KEY);
-
     const credentials = await getCredsFromStorage();
     console.debug(`[authentified request] url: ${config.url}`);
 

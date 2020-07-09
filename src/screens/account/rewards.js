@@ -55,7 +55,7 @@ const Rewards = () => {
     {
       title: "Pro du circuit-court",
       reason:
-        "Vous avez mangé 10 fois dans des etablissement soutenant les circuits-courts",
+        "Vous avez mangé 10 fois dans des établissements soutenant les circuits-courts",
       badges: [
         { name: "ShortCircus", type: "Bronze", text: "Bronze", rewarded: true },
         { name: "ShortCircus", type: "Silver", text: "Argent", rewarded: false },
@@ -65,7 +65,7 @@ const Rewards = () => {
     },
     {
       title: "L’avanturier",
-      reason: "Vous avez testé 10 restaurants differants",
+      reason: "Vous avez testé 10 restaurants différents",
       badges: [
         { name: "Adventure", type: "Bronze", text: "Bronze", rewarded: true },
         { name: "Adventure", type: "Silver", text: "Argent", rewarded: false },
@@ -75,7 +75,7 @@ const Rewards = () => {
     },
     {
       title: "Le marcheur vert",
-      reason: "vous avez fait plus de 10km pour aller vous chercher a manger",
+      reason: "vous avez fait plus de 10km pour aller vous chercher à manger",
       badges: [
         { name: "Walker", type: "Bronze", text: "Bronze", rewarded: true },
         { name: "Walker", type: "Silver", text: "Argent", rewarded: false },
@@ -95,7 +95,7 @@ const Rewards = () => {
     },
     {
       title: "Le malin du quotidien",
-      reason: "Vous avez accomplie 4 challenge au quotidien",
+      reason: "Vous avez accompli 4 challenges au quotidien",
       badges: [
         { name: "Daily", type: "Bronze", text: "Bronze", rewarded: true },
         { name: "Daily", type: "Silver", text: "Argent", rewarded: false },

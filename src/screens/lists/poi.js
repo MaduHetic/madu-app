@@ -137,7 +137,6 @@ const Poi = () => {
   console.log(place);
 
   if (!place) return null;
-  console.log(place.imgs);
   return (
     <>
       <View style={{ position: "relative" }}>
