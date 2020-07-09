@@ -10,7 +10,7 @@ function getQuizz(id) {
 
 function sendQuizzForm(data) {
   return client.request({
-    method: "post",
+    method: "put",
     url: apiRoutes.sendQuizzForm(),
     data,
   });

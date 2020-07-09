@@ -17,13 +17,9 @@ import "moment/locale/fr";
 import Card from "@components/card/card";
 import Place from "@components/card/places";
 import Quiz from "@components/card/quiz";
-import Poi from "./lists/poi";
 import Carousel, { Pagination } from "react-native-snap-carousel";
 import Tutorial from "./tutorial";
 import Icon from "react-native-vector-icons/FontAwesome";
-
-import Riccardo from "../assets/images/riccardo-bergamini.jpg";
-import oranges from "../assets/images/oranges.jpg";
 
 import { User } from "@core/user";
 import { KnowIt } from "@core/knowIt";
@@ -214,6 +210,7 @@ const HomeNavigator = () => {
           ),
         }}
       />
+      <Stack.Screen name={"quizzEnd"} component={QuizzScreen} />
     </Stack.Navigator>
   );
 };

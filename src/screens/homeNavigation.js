@@ -124,7 +124,6 @@ const HomeNagivation = () => (
       )}
     </Stack.Screen>
     <Stack.Screen name={"poi"} component={Poi} />
-    <Stack.Screen name={"quizzEnd"} component={Quizz} />
   </Stack.Navigator>
 );
 

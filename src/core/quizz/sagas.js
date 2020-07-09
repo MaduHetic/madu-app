@@ -15,13 +15,15 @@ function* getQuizz(action) {
 }
 
 function* sendQuizzForm(action) {
+  console.log("sagas", action.payload);
   try {
-    yield put(Actions.getQuizz.request(true));
+    yield put(Actions.sendQuizzForm.request(true));
     const request = yield call(Api.sendQuizzForm, action.payload);
-    if (request.status === 201) {
+    if (request.status === 200 || request.status === 201) {
       yield put(Actions.sendQuizzForm.success(request.data));
     }
-  } catch {
+  } catch (error) {
+    console.log(console.error);
     yield put(Actions.sendQuizzForm.failure(false));
   }
 }

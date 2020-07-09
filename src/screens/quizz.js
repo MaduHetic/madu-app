@@ -47,24 +47,29 @@ const Quizz = () => {
   const navigation = useNavigation();
   const getQuizz = CoreQuizz.getQuizz();
   const questions = CoreQuizz.questions();
+  const getThemes = CoreQuizz.getThemes();
   const sendQuizzForm = CoreQuizz.sendQuizzForm();
   const quizzResponse = CoreQuizz.quizzResponse();
   const [activeIndex, setActiveIndex] = useState(0);
   const [answered, setAnswered] = useState(false);
   const [answers, setAnswers] = useState([]);
 
+  console.log("quizzResponse", quizzResponse);
+
   useEffect(() => {
-    getQuizz(params.id);
+    if (params.id) getQuizz(params.id);
     return () => {
       setActiveIndex(0);
+      getThemes();
     };
   }, []);
 
-  const handleSubmit = () => {
-    sendQuizzForm({ idThemeQuizz: params.id, answers: answers });
-  };
+  useEffect(() => {
+    if (answers.length === questions.length)
+      sendQuizzForm({ idThemeQuizz: params.id, answers });
+  }, [answers]);
 
-  const handleAnswer = (goodAnswer, questionId, answerId) => {
+  const handleAnswer = (questionId, answerId) => {
     setAnswered(true);
     setAnswers([
       ...answers,
@@ -75,7 +80,6 @@ const Quizz = () => {
     ]);
     setTimeout(() => {
       if (activeIndex === questions.length - 1) {
-        handleSubmit();
         navigation.navigate("quizzEnd", { nbQuestions: questions.length });
       } else {
         setActiveIndex(activeIndex + 1);
@@ -85,29 +89,31 @@ const Quizz = () => {
   };
 
   if (params.nbQuestions) {
-    return (
-      <ImageBackground source={background} style={styles.background}>
-        <View />
-        <View>
-          <Text style={[styles.blueText, styles.bigText]}>
-            {params.nbCorrect} / {params.nbQuestions}
-          </Text>
-          <Text style={{ textAlign: "center" }}>
-            Vous avez obtenu{" "}
-            <Text style={styles.blueText}>
-              {`${quizzResponse.goodAnswer} bonnes réponses sur ${quizzResponse.totalAnswer}`}
+    const { goodAnswer, totalAnswer } = quizzResponse;
+    if (goodAnswer >= 0 && totalAnswer >= 0)
+      return (
+        <ImageBackground source={background} style={styles.background}>
+          <View />
+          <View>
+            <Text style={[styles.blueText, styles.bigText]}>
+              {goodAnswer} / {totalAnswer}
             </Text>
-          </Text>
-        </View>
-        <View>
-          <Button
-            onPress={() => navigation.navigate("Home")}
-            text="Retour a l’accueil"
-            color="blue"
-          />
-        </View>
-      </ImageBackground>
-    );
+            <Text style={{ textAlign: "center" }}>
+              Vous avez obtenu{" "}
+              <Text
+                style={styles.blueText}
+              >{`${goodAnswer} bonnes réponses sur ${totalAnswer}`}</Text>
+            </Text>
+          </View>
+          <View>
+            <Button
+              onPress={() => navigation.navigate("home")}
+              text="Retour a l’accueil"
+              color="blue"
+            />
+          </View>
+        </ImageBackground>
+      );
   }
 
   return (
@@ -118,7 +124,7 @@ const Quizz = () => {
         {questions[activeIndex]?.answer.map(({ id, answer, goodAnswer }) => (
           <Button
             key={id}
-            onPress={() => handleAnswer(goodAnswer, questions[activeIndex].id, id)}
+            onPress={() => handleAnswer(questions[activeIndex].id, id)}
             color={answered ? (goodAnswer ? "green" : "red") : ""}
             text={answer}
           />

@@ -21,6 +21,7 @@ function useGetThemes() {
 function useSendQuizz() {
   const dispatch = useDispatch();
   return (data) => {
+    console.log("index", data);
     dispatch(Events.sendQuizzForm(data));
   };
 }
@@ -54,6 +55,7 @@ export const Quizz = {
   quizzResponse: useQuizzResponse,
   questions: useQuestions,
   themes: useThemes,
+  clearQuizzResponse: useClearQuizzResponse,
   isLoading: useIsLoading,
   sagas: rootSagas,
   reducer: quizzReducer,
