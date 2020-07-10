@@ -44,7 +44,7 @@ const BestOfList = () => {
               showsHorizontalScrollIndicator={false}
             />
           </View>
-          {allPoi.length > 4 && (
+          {allPoi.length < 4 && (
             <View style={styles.container}>
               <Text style={styles.title}>Les douceurs sucrées</Text>
               <FlatList

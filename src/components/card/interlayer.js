@@ -50,7 +50,7 @@ const images = {
 
 const Interlayer = ({ onPress, backgroundColor, text, image }) => (
   <TouchableOpacity
-    onPress={() => onPress}
+    onPress={onPress}
     style={[styles.container, { backgroundColor: backgroundColor }]}
   >
     <View style={styles.imageContainer}>

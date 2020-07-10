@@ -154,7 +154,11 @@ export const List = () => {
           })}
           <View style={{ padding: 24 }}>
             <Interlayer
-              onPress={null}
+              onPress={() =>
+                navigation.navigate("bestOfList", {
+                  list: selected,
+                })
+              }
               text="Nos coups de coeur recommandé"
               backgroundColor={Color.purple}
               image="Heart"
@@ -189,7 +193,11 @@ export const List = () => {
           })}
           <View style={{ padding: 24 }}>
             <Interlayer
-              onPress={null}
+              onPress={() =>
+                navigation.navigate("bestOfList", {
+                  list: selected,
+                })
+              }
               text="Profitez des bonnes affaires du moment"
               backgroundColor={Color.melon}
               image="Percent"
@@ -224,7 +232,11 @@ export const List = () => {
           })}
           <View style={{ padding: 24 }}>
             <Interlayer
-              onPress={null}
+              onPress={() =>
+                navigation.navigate("bestOfList", {
+                  list: selected,
+                })
+              }
               text="Retournez à vos endroits favoris"
               backgroundColor={Color.sunglow}
               image="Star"
