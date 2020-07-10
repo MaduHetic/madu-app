@@ -22,13 +22,13 @@ const LogInRegister = () => {
   const clearError = User.clearError();
   const error = User.errors();
 
-  useEffect(() => {
-    if (loggedIn) {
-      navigation.navigate("home");
-    } else {
-      navigation.navigate("login");
-    }
-  }, [loggedIn, navigation, isLoading]);
+  // useEffect(() => {
+  //   if (loggedIn) {
+  //     navigation.navigate("home");
+  //   } else {
+  //     navigation.navigate("login");
+  //   }
+  // }, [loggedIn, navigation, isLoading]);
 
   useEffect(() => {
     clearError();
