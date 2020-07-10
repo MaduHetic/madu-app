@@ -21,7 +21,6 @@ function useGetThemes() {
 function useSendQuizz() {
   const dispatch = useDispatch();
   return (data) => {
-    console.log("index", data);
     dispatch(Events.sendQuizzForm(data));
   };
 }

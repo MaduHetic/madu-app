@@ -134,8 +134,6 @@ const Poi = () => {
     setRefreshing(false);
   }, [refreshing]);
 
-  console.log(place);
-
   if (!place) return null;
   return (
     <>
@@ -209,7 +207,7 @@ const Poi = () => {
                 >
                   <Svg svgs={svgs} name="score" height={16} width={16} />
                   <Text style={styles.greenScore}>
-                    <Text>{place.greenScore.toFixed(1)}</Text>
+                    <Text>{place.greenScore?.toFixed(1)}</Text>
                     <Text style={styles.greenScoreNotation}>/10</Text>
                   </Text>
                 </TouchableOpacity>
@@ -242,9 +240,13 @@ const Poi = () => {
             text="Y aller 👍"
             onPress={() => {
               poiValidate(place.id);
-              Linking.openURL(
-                `https://www.google.com/maps/search/?api=1&query=${place.lat},${place.long}`,
-              );
+              // Linking.openURL(
+              //   `https://www.google.com/maps/search/?api=1&query=${place.lat},${place.long}`,
+              // );
+              navigation.navigate('Carte', {
+                POIID: place.id,
+                POIType: place.type,
+              });
             }}
             color="blue"
           />
@@ -256,7 +258,7 @@ const Poi = () => {
         title="Madu scoring"
         groupBtn={
           <Button
-            text={"J'ai Compris"}
+            text={"J'ai compris"}
             color="blue"
             onPress={() => setModalVisible(false)}
           />

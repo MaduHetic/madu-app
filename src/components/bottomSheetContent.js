@@ -129,7 +129,7 @@ const BottomSheetContent = ({poi, handleClickPOI}) => {
                     <View style={[styles.informationContainer, styles.greenScore]}>
                         <Svg svgs={svgs} name="score" height={16} width={16} />
                         <Text style={styles.greenScore}>
-                        <Text>{poi?.greenScore}</Text>
+                        <Text>{poi?.greenScore?.toFixed(1)}</Text>
                         <Text style={styles.greenScoreNotation}>/10</Text>
                         </Text>
                     </View>

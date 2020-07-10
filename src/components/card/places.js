@@ -127,7 +127,7 @@ const Places = ({
             {/* <Icon style={[styles.icon, styles.greenScore]} name="star" size={15} /> */}
             <Svg svgs={svgs} name="score" height={16} width={16} />
             <Text style={styles.greenScore}>
-              <Text>{greenScore.toFixed(1)}</Text>
+              <Text>{greenScore?.toFixed(1)}</Text>
               <Text style={styles.greenScoreNotation}>/10</Text>
             </Text>
           </View>

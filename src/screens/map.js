@@ -5,7 +5,7 @@ import Map from "@components/map";
 import FilterBarPOI from "@components/filterBarPOI";
 import { Poi as PointOfIntress } from "@core/poi";
 
-const MapScreen = () => {
+const MapScreen = ({route}) => {
   const [selected, setSelected] = React.useState("Food");
   const allPoi = PointOfIntress.allPoi();
   const getAllPoi = PointOfIntress.getAllPoi();
@@ -21,10 +21,19 @@ const MapScreen = () => {
     if (Platform.OS === "android") requestAndroidLocationPermissions()
   }, []);
 
+  useEffect(() => {
+    if (route?.params?.POIType && route?.params?.POIType !== selected) {
+      setSelected(route?.params?.POIType)
+    }
+  }, [route])
+
   return (
     <>
       <FilterBarPOI selected={selected} setSelected={setSelected} />
-      <Map filteredPOIs={allPoi.filter(poi => poi.type === selected)} />
+      <Map
+        filteredPOIs={allPoi.filter(poi => poi.type === selected)}
+        POIFromList={allPoi.filter(poi => poi.id === route?.params?.POIID)[0]}
+      />
     </>
   );
 };

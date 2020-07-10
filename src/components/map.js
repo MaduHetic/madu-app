@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const Map = ({ filteredPOIs }) => {
+const Map = ({ filteredPOIs, POIFromList }) => {
   const mapEl = useRef(null);
   const bottomSheetRef = useRef(null);
   const annotationRef = useRef(null);
@@ -166,6 +166,14 @@ const Map = ({ filteredPOIs }) => {
       setFilteredPOIsState(filteredPOIs);
     }, 1);
   }, [filteredPOIs]);
+
+  useEffect(() => {
+    if (POIFromList) {
+      setTimeout(() => {
+        handleClickPOI(POIFromList)
+      }, 100)
+    }
+  }, [POIFromList])
 
   // Render route layer
   const renderRoute = () => {

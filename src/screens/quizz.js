@@ -54,8 +54,6 @@ const Quizz = () => {
   const [answered, setAnswered] = useState(false);
   const [answers, setAnswers] = useState([]);
 
-  console.log("quizzResponse", quizzResponse);
-
   useEffect(() => {
     if (params.id) getQuizz(params.id);
     return () => {

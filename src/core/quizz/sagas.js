@@ -15,7 +15,6 @@ function* getQuizz(action) {
 }
 
 function* sendQuizzForm(action) {
-  console.log("sagas", action.payload);
   try {
     yield put(Actions.sendQuizzForm.request(true));
     const request = yield call(Api.sendQuizzForm, action.payload);
