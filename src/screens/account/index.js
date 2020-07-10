@@ -124,7 +124,7 @@ export const Account = () => {
           <View style={styles.section}>
             <View style={[styles.row, styles.rewardContainer]}>
               <TextWithDecorator text="A propos de vous" color={Color.black} />
-              <Icon name="gear" size={20} />
+              {/* <Icon name="gear" size={20} /> */}
             </View>
             {company.logo && (
               <Image source={{ uri: company.logo }} style={styles.image} />
@@ -139,7 +139,7 @@ export const Account = () => {
           </View>
           <View style={styles.section}>
             <View style={[styles.row, styles.rewardContainer]}>
-              <TextWithDecorator text="Vos trophés" color={Color.black} />
+              <TextWithDecorator text="Vos trophées" color={Color.black} />
               <LineIcon
                 name="arrow-right-circle"
                 size={32}
@@ -161,12 +161,12 @@ export const Account = () => {
             <>
               <View style={[styles.row, styles.rewardContainer]}>
                 <TextWithDecorator text="Historique" color={Color.sunglow} />
-                <LineIcon
+                {/* <LineIcon
                   name="arrow-right-circle"
                   size={32}
                   onPress={() => navigation.navigate("rewards")}
                   color={Color.sunglow}
-                />
+                /> */}
               </View>
               <FlatList
                 data={history}
@@ -213,7 +213,7 @@ const AccountNavigation = () => {
                 onPress={() => navigation.navigate("account")}
                 style={{ marginLeft: 24, marginRight: 16 }}
               />
-              <Text style={{ fontSize: 24, lineHeight: 32 }}>Vos trophés</Text>
+              <Text style={{ fontSize: 24, lineHeight: 32 }}>Vos trophées</Text>
             </View>
           ),
         }}

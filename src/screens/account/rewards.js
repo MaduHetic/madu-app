@@ -49,7 +49,7 @@ const Rewards = () => {
         { name: "Vegan", type: "Bronze", text: "Bronze", rewarded: true },
         { name: "Vegan", type: "Silver", text: "Argent", rewarded: true },
         { name: "Vegan", type: "Gold", text: "Or", rewarded: true },
-        { name: "Vegan", type: "Platine", text: "Platine", rewarded: true },
+        { name: "Vegan", type: "Platine", text: "Platine", rewarded: false },
       ],
     },
     {

@@ -23,6 +23,7 @@ client.interceptors.request.use(
 
     const credentials = await getCredsFromStorage();
     console.debug(`[authentified request] url: ${config.url}`);
+    // console.log(API_KEY);
 
     config.headers.Authorization = `Bearer ${credentials}`;
     return config;

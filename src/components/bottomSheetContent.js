@@ -1,5 +1,14 @@
 import React from "react";
-import { View, StyleSheet, Text, TouchableOpacity, Image, Dimensions, SafeAreaView } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  Image,
+  Dimensions,
+  SafeAreaView,
+} from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { Color } from "@glossy/colors";
 import svgs from "@assets/svg/sprite";
@@ -11,12 +20,11 @@ const screenHeight = Math.round(Dimensions.get("window").height);
 const windowWidth = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
-    container: {
-        position: "relative",
-        backgroundColor: Color.white,
-        minHeight: screenHeight,
-
-    },
+  container: {
+    position: "relative",
+    backgroundColor: Color.white,
+    minHeight: screenHeight,
+  },
   title: {
     // fontWeight: "bold",
     fontSize: 18,
@@ -102,74 +110,81 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     position: "relative",
-  }
+  },
 });
 
-const BottomSheetContent = ({poi, handleClickPOI}) => {
+const BottomSheetContent = ({ poi, handleClickPOI }) => {
+  const navigation = useNavigation();
+  const calculatedSize = () => {
+    const size = windowWidth / 2.5;
+    return { width: size, height: size };
+  };
 
-    const calculatedSize = () => {
-        const size = windowWidth / 2.5;
-        return { width: size, height: size };
-    };
-
-    return (
-        <View style={styles.container}>
-            <SafeAreaView>
-                <View style={{ padding: 24 }}>
-                    <View style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-                        <Text style={styles.title}>{poi?.name}</Text>
-                        <TouchableOpacity onPress={() => handleClickPOI(null)}>
-                            <View style={styles.cross}>
-                                <Svg svgs={svgs} name="cross" height={16} width={16} />
-                            </View>
-                        </TouchableOpacity>
-                    </View>
-                    {poi?.tags && <Tag tags={poi?.tags} />}
-                    <View style={styles.row}>
-                    <View style={[styles.informationContainer, styles.greenScore]}>
-                        <Svg svgs={svgs} name="score" height={16} width={16} />
-                        <Text style={styles.greenScore}>
-                        <Text>{poi?.greenScore?.toFixed(1)}</Text>
-                        <Text style={styles.greenScoreNotation}>/10</Text>
-                        </Text>
-                    </View>
-                    <View style={styles.iconContainer}>
-                        <MaterialCommunityIcons
-                        style={styles.icon}
-                        name="seed-outline"
-                        size={20}
-                        />
-                        <Text>{`${poi?.reward}`}</Text>
-                    </View>
-                    </View>
-                    <Text>{poi?.description}</Text>
-                    {poi?.imgs && (
-                    <View style={styles.imageContainer}>
-                        {poi?.imgs.map((img, i) => (
-                        <Image
-                            key={i}
-                            source={{ uri: img }}
-                            style={[styles.img, calculatedSize()]}
-                        />
-                        ))}
-                    </View>
-                    )}
-                </View>
-            </SafeAreaView>
-
-            <View style={{ width: 0.9 * windowWidth, alignSelf: 'center' }}>
-                <Button
-                    text="Y aller 👍"
-                    onPress={() => {
-                        Linking.openURL(
-                        `https://www.google.com/maps/search/?api=1&query=${poi?.lat},${poi?.long}`,
-                    );
-                }}
-                    color="blue"
-                />
+  return (
+    <View style={styles.container}>
+      <SafeAreaView>
+        <View style={{ padding: 24 }}>
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Text style={styles.title}>{poi?.name}</Text>
+            <TouchableOpacity onPress={() => handleClickPOI(null)}>
+              <View style={styles.cross}>
+                <Svg svgs={svgs} name="cross" height={16} width={16} />
+              </View>
+            </TouchableOpacity>
+          </View>
+          {poi?.tags && <Tag tags={poi?.tags} />}
+          <View style={styles.row}>
+            <View style={[styles.informationContainer, styles.greenScore]}>
+              <Svg svgs={svgs} name="score" height={16} width={16} />
+              <Text style={styles.greenScore}>
+                <Text>{poi?.greenScore?.toFixed(1)}</Text>
+                <Text style={styles.greenScoreNotation}>/10</Text>
+              </Text>
             </View>
+            <View style={styles.iconContainer}>
+              <MaterialCommunityIcons style={styles.icon} name="seed-outline" size={20} />
+              <Text>{`${poi?.reward}`}</Text>
+            </View>
+          </View>
+          <Text>{poi?.description}</Text>
+          {poi?.imgs && (
+            <View style={styles.imageContainer}>
+              {poi?.imgs.map((img, i) => (
+                <Image
+                  key={i}
+                  source={{ uri: img }}
+                  style={[styles.img, calculatedSize()]}
+                />
+              ))}
+            </View>
+          )}
         </View>
-    )
-}
+      </SafeAreaView>
+
+      <View style={{ width: 0.9 * windowWidth, alignSelf: "center" }}>
+        <Button
+          text="Y aller 👍"
+          onPress={() => {
+            // Linking.openURL(
+            //   `https://www.google.com/maps/search/?api=1&query=${poi?.lat},${poi?.long}`,
+            // );
+            navigation.navigate("Carte", {
+              POIID: poi?.id,
+              POIType: poi?.type,
+            });
+          }}
+          color="blue"
+        />
+      </View>
+    </View>
+  );
+};
 
 export default BottomSheetContent;
