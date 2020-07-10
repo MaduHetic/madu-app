@@ -134,7 +134,7 @@ export const Account = () => {
               "MMMM YYYY",
             )}`}</Text>
             <Text style={styles.text}>
-              {company.nbWorker} collegue{company.nbWorker === 1 ? "" : "s"}
+              {company.nbWorker} collègue{company.nbWorker === 1 ? "" : "s"}
             </Text>
           </View>
           <View style={styles.section}>
@@ -155,7 +155,7 @@ export const Account = () => {
                 </View>
               ))}
             </View>
-            <Text>Vos dernier trophées obtenue</Text>
+            <Text>Vos derniers trophées obtenues</Text>
           </View>
           {history.length > 0 && (
             <>
