@@ -21,7 +21,7 @@
     "@react-navigation/native": "^5.1.5",
     "@react-navigation/stack": "^5.2.10",
     "@turf/helpers": "^6.1.4",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "immer": "^6.0.3",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
